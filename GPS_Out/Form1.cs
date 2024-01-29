@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Diagnostics;
-using System.Runtime.InteropServices.WindowsRuntime;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace GPS_Out
@@ -161,6 +160,34 @@ namespace GPS_Out
             return Result;
         }
 
+        public void StartSerial()
+        {
+            try
+            {
+                String ID = "_0_";
+                SER.RCportName = Tls.LoadProperty("RCportName" + ID + "0");
+
+                int tmp;
+                if (int.TryParse(Tls.LoadProperty("RCportBaud" + ID + "0"), out tmp))
+                {
+                    SER.RCportBaud = tmp;
+                }
+                else
+                {
+                    SER.RCportBaud = 57600;
+                }
+
+                bool tmp2;
+                bool.TryParse(Tls.LoadProperty("RCportSuccessful" + ID + "0"), out tmp2);
+                if (tmp2) SER.OpenRCport();
+            }
+            catch (Exception ex)
+            {
+                Tls.WriteErrorLog("frmStart/StartSerial: " + ex.Message);
+                Tls.ShowHelp(ex.Message, this.Text, 3000, true);
+            }
+        }
+
         public void UpdateForm()
         {
             lbAge.Text = AGIOdata.Age.ToString("N2");
@@ -173,12 +200,9 @@ namespace GPS_Out
             lbElev.Text = AGIOdata.Altitude.ToString("N1");
             lbAge.Text = AGIOdata.Age.ToString("N1");
 
-            lbVTG.Text = "0";
-            lbDual.Text = "0";
-            lbRoll2.Text = "0";
             lbYawRate.Text = AGIOdata.IMUyawRate.ToString("N0");
-            lbRoll.Text = AGIOdata.IMUroll.ToString("N0");
-            lbPitch.Text = AGIOdata.IMUpitch.ToString("N0");
+            lbRoll.Text = AGIOdata.IMUroll.ToString("N1");
+            lbPitch.Text = AGIOdata.IMUpitch.ToString("N1");
             lbYaw.Text = AGIOdata.IMUheading.ToString("N1");
 
             PortIndicator1.BackColor = Properties.Settings.Default.DayColour;
@@ -255,10 +279,18 @@ namespace GPS_Out
         private void frmStart_Load(object sender, EventArgs e)
         {
             Tls.LoadFormData(this);
-            StartSerial();
+            //StartSerial();
             PandaComm.StartUDPServer();
-            UpdateForm();
             LoadRCbox();
+            timer1.Enabled = true;
+            cboBaud1.SelectedIndex = 4;
+            UpdateForm();
+        }
+
+        private void groupBox1_Paint(object sender, PaintEventArgs e)
+        {
+            GroupBox box = sender as GroupBox;
+            Tls.DrawGroupBox(box, e.Graphics, this.BackColor, Color.Black, Color.Blue);
         }
 
         private void LoadRCbox()
@@ -292,32 +324,11 @@ namespace GPS_Out
             }
         }
 
-        public void StartSerial()
+        private void timer1_Tick(object sender, EventArgs e)
         {
-            try
-            {
-                String ID = "_0_";
-                SER.RCportName = Tls.LoadProperty("RCportName" + ID + "0");
-
-                int tmp;
-                if (int.TryParse(Tls.LoadProperty("RCportBaud" + ID + "0"), out tmp))
-                {
-                    SER.RCportBaud = tmp;
-                }
-                else
-                {
-                    SER.RCportBaud = 38400;
-                }
-
-                bool tmp2;
-                bool.TryParse(Tls.LoadProperty("RCportSuccessful" + ID + "0"), out tmp2);
-                if (tmp2) SER.OpenRCport();
-            }
-            catch (Exception ex)
-            {
-                Tls.WriteErrorLog("frmStart/StartSerial: " + ex.Message);
-                Tls.ShowHelp(ex.Message, this.Text, 3000, true);
-            }
+            timer1.Enabled = false;
+            StartSerial();
+            SetPortButtons1();
         }
     }
 }

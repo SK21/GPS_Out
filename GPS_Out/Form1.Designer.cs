@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmStart));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -37,9 +38,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.label9 = new System.Windows.Forms.Label();
-            this.label10 = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
             this.label12 = new System.Windows.Forms.Label();
             this.label13 = new System.Windows.Forms.Label();
             this.label14 = new System.Windows.Forms.Label();
@@ -52,9 +50,6 @@
             this.lbElev = new System.Windows.Forms.Label();
             this.lbSats = new System.Windows.Forms.Label();
             this.lbHDOP = new System.Windows.Forms.Label();
-            this.lbRoll2 = new System.Windows.Forms.Label();
-            this.lbDual = new System.Windows.Forms.Label();
-            this.lbVTG = new System.Windows.Forms.Label();
             this.lbYawRate = new System.Windows.Forms.Label();
             this.lbPitch = new System.Windows.Forms.Label();
             this.lbRoll = new System.Windows.Forms.Label();
@@ -68,6 +63,9 @@
             this.lbPort = new System.Windows.Forms.Label();
             this.PortIndicator1 = new System.Windows.Forms.Label();
             this.btnRescan = new System.Windows.Forms.Button();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -113,7 +111,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(280, 9);
+            this.label5.Location = new System.Drawing.Point(344, 9);
             this.label5.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(64, 24);
@@ -123,7 +121,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(280, 33);
+            this.label6.Location = new System.Drawing.Point(344, 33);
             this.label6.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(45, 24);
@@ -133,7 +131,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(280, 57);
+            this.label7.Location = new System.Drawing.Point(344, 57);
             this.label7.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(47, 24);
@@ -143,47 +141,17 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(280, 81);
+            this.label8.Location = new System.Drawing.Point(344, 81);
             this.label8.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(45, 24);
             this.label8.TabIndex = 7;
             this.label8.Text = "Age";
             // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(15, 142);
-            this.label9.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(49, 24);
-            this.label9.TabIndex = 8;
-            this.label9.Text = "VTG";
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(15, 166);
-            this.label10.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(48, 24);
-            this.label10.TabIndex = 9;
-            this.label10.Text = "Dual";
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(15, 190);
-            this.label11.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(42, 24);
-            this.label11.TabIndex = 10;
-            this.label11.Text = "Roll";
-            // 
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(280, 142);
+            this.label12.Location = new System.Drawing.Point(15, 129);
             this.label12.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(46, 24);
@@ -193,7 +161,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(280, 166);
+            this.label13.Location = new System.Drawing.Point(344, 129);
             this.label13.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(42, 24);
@@ -203,7 +171,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(280, 190);
+            this.label14.Location = new System.Drawing.Point(344, 153);
             this.label14.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(51, 24);
@@ -213,7 +181,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(280, 214);
+            this.label15.Location = new System.Drawing.Point(15, 153);
             this.label15.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(89, 24);
@@ -268,7 +236,7 @@
             // 
             this.lbAge.AutoSize = true;
             this.lbAge.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbAge.Location = new System.Drawing.Point(381, 81);
+            this.lbAge.Location = new System.Drawing.Point(445, 81);
             this.lbAge.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lbAge.Name = "lbAge";
             this.lbAge.Size = new System.Drawing.Size(126, 24);
@@ -279,7 +247,7 @@
             // 
             this.lbElev.AutoSize = true;
             this.lbElev.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbElev.Location = new System.Drawing.Point(381, 57);
+            this.lbElev.Location = new System.Drawing.Point(445, 57);
             this.lbElev.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lbElev.Name = "lbElev";
             this.lbElev.Size = new System.Drawing.Size(126, 24);
@@ -290,7 +258,7 @@
             // 
             this.lbSats.AutoSize = true;
             this.lbSats.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbSats.Location = new System.Drawing.Point(381, 33);
+            this.lbSats.Location = new System.Drawing.Point(445, 33);
             this.lbSats.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lbSats.Name = "lbSats";
             this.lbSats.Size = new System.Drawing.Size(126, 24);
@@ -301,51 +269,18 @@
             // 
             this.lbHDOP.AutoSize = true;
             this.lbHDOP.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbHDOP.Location = new System.Drawing.Point(381, 9);
+            this.lbHDOP.Location = new System.Drawing.Point(445, 9);
             this.lbHDOP.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lbHDOP.Name = "lbHDOP";
             this.lbHDOP.Size = new System.Drawing.Size(126, 24);
             this.lbHDOP.TabIndex = 19;
             this.lbHDOP.Text = "1234567890.";
             // 
-            // lbRoll2
-            // 
-            this.lbRoll2.AutoSize = true;
-            this.lbRoll2.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbRoll2.Location = new System.Drawing.Point(106, 190);
-            this.lbRoll2.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.lbRoll2.Name = "lbRoll2";
-            this.lbRoll2.Size = new System.Drawing.Size(126, 24);
-            this.lbRoll2.TabIndex = 25;
-            this.lbRoll2.Text = "1234567890.";
-            // 
-            // lbDual
-            // 
-            this.lbDual.AutoSize = true;
-            this.lbDual.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbDual.Location = new System.Drawing.Point(106, 166);
-            this.lbDual.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.lbDual.Name = "lbDual";
-            this.lbDual.Size = new System.Drawing.Size(126, 24);
-            this.lbDual.TabIndex = 24;
-            this.lbDual.Text = "1234567890.";
-            // 
-            // lbVTG
-            // 
-            this.lbVTG.AutoSize = true;
-            this.lbVTG.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbVTG.Location = new System.Drawing.Point(106, 142);
-            this.lbVTG.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.lbVTG.Name = "lbVTG";
-            this.lbVTG.Size = new System.Drawing.Size(126, 24);
-            this.lbVTG.TabIndex = 23;
-            this.lbVTG.Text = "1234567890.";
-            // 
             // lbYawRate
             // 
             this.lbYawRate.AutoSize = true;
             this.lbYawRate.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbYawRate.Location = new System.Drawing.Point(381, 214);
+            this.lbYawRate.Location = new System.Drawing.Point(116, 153);
             this.lbYawRate.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lbYawRate.Name = "lbYawRate";
             this.lbYawRate.Size = new System.Drawing.Size(126, 24);
@@ -356,7 +291,7 @@
             // 
             this.lbPitch.AutoSize = true;
             this.lbPitch.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbPitch.Location = new System.Drawing.Point(381, 190);
+            this.lbPitch.Location = new System.Drawing.Point(445, 153);
             this.lbPitch.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lbPitch.Name = "lbPitch";
             this.lbPitch.Size = new System.Drawing.Size(126, 24);
@@ -367,7 +302,7 @@
             // 
             this.lbRoll.AutoSize = true;
             this.lbRoll.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbRoll.Location = new System.Drawing.Point(381, 166);
+            this.lbRoll.Location = new System.Drawing.Point(445, 129);
             this.lbRoll.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lbRoll.Name = "lbRoll";
             this.lbRoll.Size = new System.Drawing.Size(126, 24);
@@ -378,7 +313,7 @@
             // 
             this.lbYaw.AutoSize = true;
             this.lbYaw.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbYaw.Location = new System.Drawing.Point(381, 142);
+            this.lbYaw.Location = new System.Drawing.Point(116, 129);
             this.lbYaw.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lbYaw.Name = "lbYaw";
             this.lbYaw.Size = new System.Drawing.Size(126, 24);
@@ -387,22 +322,24 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(7, 393);
+            this.button1.Location = new System.Drawing.Point(249, 18);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(86, 39);
             this.button1.TabIndex = 30;
             this.button1.Text = "GGA";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Visible = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // button2
             // 
-            this.button2.Location = new System.Drawing.Point(110, 393);
+            this.button2.Location = new System.Drawing.Point(249, 66);
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(86, 39);
             this.button2.TabIndex = 31;
             this.button2.Text = "VTG";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Visible = false;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // btnConnect1
@@ -410,7 +347,7 @@
             this.btnConnect1.BackColor = System.Drawing.SystemColors.ControlLight;
             this.btnConnect1.FlatStyle = System.Windows.Forms.FlatStyle.System;
             this.btnConnect1.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnConnect1.Location = new System.Drawing.Point(12, 303);
+            this.btnConnect1.Location = new System.Drawing.Point(16, 47);
             this.btnConnect1.Name = "btnConnect1";
             this.btnConnect1.Size = new System.Drawing.Size(127, 37);
             this.btnConnect1.TabIndex = 128;
@@ -423,7 +360,7 @@
             this.cboPort1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboPort1.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold);
             this.cboPort1.FormattingEnabled = true;
-            this.cboPort1.Location = new System.Drawing.Point(145, 303);
+            this.cboPort1.Location = new System.Drawing.Point(149, 47);
             this.cboPort1.Name = "cboPort1";
             this.cboPort1.Size = new System.Drawing.Size(127, 37);
             this.cboPort1.TabIndex = 127;
@@ -432,7 +369,7 @@
             // lbBaud
             // 
             this.lbBaud.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbBaud.Location = new System.Drawing.Point(278, 276);
+            this.lbBaud.Location = new System.Drawing.Point(282, 20);
             this.lbBaud.Name = "lbBaud";
             this.lbBaud.Size = new System.Drawing.Size(127, 23);
             this.lbBaud.TabIndex = 131;
@@ -453,7 +390,7 @@
             "38400",
             "57600",
             "115200"});
-            this.cboBaud1.Location = new System.Drawing.Point(278, 303);
+            this.cboBaud1.Location = new System.Drawing.Point(282, 47);
             this.cboBaud1.Name = "cboBaud1";
             this.cboBaud1.Size = new System.Drawing.Size(127, 37);
             this.cboBaud1.TabIndex = 130;
@@ -462,7 +399,7 @@
             // lbPort
             // 
             this.lbPort.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbPort.Location = new System.Drawing.Point(145, 276);
+            this.lbPort.Location = new System.Drawing.Point(149, 20);
             this.lbPort.Name = "lbPort";
             this.lbPort.Size = new System.Drawing.Size(127, 23);
             this.lbPort.TabIndex = 126;
@@ -474,7 +411,7 @@
             this.PortIndicator1.BackColor = System.Drawing.SystemColors.Control;
             this.PortIndicator1.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.PortIndicator1.Image = global::GPS_Out.Properties.Resources.Off;
-            this.PortIndicator1.Location = new System.Drawing.Point(420, 304);
+            this.PortIndicator1.Location = new System.Drawing.Point(424, 48);
             this.PortIndicator1.Name = "PortIndicator1";
             this.PortIndicator1.Size = new System.Drawing.Size(41, 37);
             this.PortIndicator1.TabIndex = 129;
@@ -487,7 +424,7 @@
             this.btnRescan.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRescan.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRescan.Image = global::GPS_Out.Properties.Resources.Update;
-            this.btnRescan.Location = new System.Drawing.Point(272, 360);
+            this.btnRescan.Location = new System.Drawing.Point(471, 28);
             this.btnRescan.Name = "btnRescan";
             this.btnRescan.Size = new System.Drawing.Size(72, 72);
             this.btnRescan.TabIndex = 151;
@@ -495,27 +432,40 @@
             this.btnRescan.UseVisualStyleBackColor = false;
             this.btnRescan.Click += new System.EventHandler(this.btnRescan_Click);
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.PortIndicator1);
+            this.groupBox1.Controls.Add(this.btnRescan);
+            this.groupBox1.Controls.Add(this.lbPort);
+            this.groupBox1.Controls.Add(this.btnConnect1);
+            this.groupBox1.Controls.Add(this.cboBaud1);
+            this.groupBox1.Controls.Add(this.cboPort1);
+            this.groupBox1.Controls.Add(this.lbBaud);
+            this.groupBox1.Location = new System.Drawing.Point(12, 200);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(559, 116);
+            this.groupBox1.TabIndex = 152;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Serial Port";
+            this.groupBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.groupBox1_Paint);
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 5000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // frmStart
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(511, 449);
-            this.Controls.Add(this.btnRescan);
-            this.Controls.Add(this.btnConnect1);
-            this.Controls.Add(this.cboPort1);
-            this.Controls.Add(this.lbBaud);
-            this.Controls.Add(this.cboBaud1);
-            this.Controls.Add(this.lbPort);
-            this.Controls.Add(this.PortIndicator1);
+            this.ClientSize = new System.Drawing.Size(585, 331);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.lbYawRate);
             this.Controls.Add(this.lbPitch);
             this.Controls.Add(this.lbRoll);
             this.Controls.Add(this.lbYaw);
-            this.Controls.Add(this.lbRoll2);
-            this.Controls.Add(this.lbDual);
-            this.Controls.Add(this.lbVTG);
             this.Controls.Add(this.lbAge);
             this.Controls.Add(this.lbElev);
             this.Controls.Add(this.lbSats);
@@ -528,9 +478,6 @@
             this.Controls.Add(this.label14);
             this.Controls.Add(this.label13);
             this.Controls.Add(this.label12);
-            this.Controls.Add(this.label11);
-            this.Controls.Add(this.label10);
-            this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
@@ -542,10 +489,12 @@
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(6);
+            this.MaximizeBox = false;
             this.Name = "frmStart";
             this.Text = "GPS_Out";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmStart_FormClosed);
             this.Load += new System.EventHandler(this.frmStart_Load);
+            this.groupBox1.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -561,9 +510,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.Label label14;
@@ -576,9 +522,6 @@
         private System.Windows.Forms.Label lbElev;
         private System.Windows.Forms.Label lbSats;
         private System.Windows.Forms.Label lbHDOP;
-        private System.Windows.Forms.Label lbRoll2;
-        private System.Windows.Forms.Label lbDual;
-        private System.Windows.Forms.Label lbVTG;
         private System.Windows.Forms.Label lbYawRate;
         private System.Windows.Forms.Label lbPitch;
         private System.Windows.Forms.Label lbRoll;
@@ -592,6 +535,8 @@
         private System.Windows.Forms.Label lbPort;
         private System.Windows.Forms.Label PortIndicator1;
         private System.Windows.Forms.Button btnRescan;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 

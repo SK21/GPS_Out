@@ -77,11 +77,11 @@ namespace GPS_Out
         public float IMUheading
         { get { return cImuHeading; } }
 
-        public short IMUpitch
-        { get { return cImuPitch; } }
+        public float IMUpitch
+        { get { return (float)(cImuPitch/10.0); } }
 
-        public short IMUroll
-        { get { return cImuRoll; } }
+        public float IMUroll
+        { get { return (float)(cImuRoll/10.0); } }
 
         public ushort IMUyawRate
         { get { return cImuYaw; } }

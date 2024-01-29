@@ -182,19 +182,19 @@ namespace GPS_Out
 
         private void RCport_DataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            if (ArduinoPort.IsOpen)
-            {
-                try
-                {
-                    string sentence = ArduinoPort.ReadLine();
-                    mf.BeginInvoke(new NewDataDelegate(ReceiveData), sentence);
-                    if (ArduinoPort.BytesToRead > 150) ArduinoPort.DiscardInBuffer();
-                }
-                catch (Exception ex)
-                {
-                    mf.Tls.WriteErrorLog("SerialComm/RCport_DataReceived: " + ex.Message);
-                }
-            }
+            //if (ArduinoPort.IsOpen)
+            //{
+            //    try
+            //    {
+            //        string sentence = ArduinoPort.ReadLine();
+            //        mf.BeginInvoke(new NewDataDelegate(ReceiveData), sentence);
+            //        if (ArduinoPort.BytesToRead > 150) ArduinoPort.DiscardInBuffer();
+            //    }
+            //    catch (Exception ex)
+            //    {
+            //        mf.Tls.WriteErrorLog("SerialComm/RCport_DataReceived: " + ex.Message);
+            //    }
+            //}
         }
 
         private void ReceiveData(string sentence)
