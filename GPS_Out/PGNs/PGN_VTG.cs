@@ -14,13 +14,12 @@ namespace GPS_Out
         //   010.2,K Ground speed, Kilometers per hour
         //   *48          Checksum
 
-        private string Data;
+        private string cSentence;
         private frmStart mf;
 
         public PGN_VTG(frmStart CalledFrom)
         {
             mf = CalledFrom;
-            //mf.AGIOdata.NewData += AGIOdata_NewData;
         }
 
         public double Heading
@@ -35,29 +34,27 @@ namespace GPS_Out
         public double MagHeading
         { get { return mf.AGIOdata.IMUheading; } }
 
+        public string Sentence
+        { get { return cSentence; } }
+
         public void Send()
         {
-            Data = "$GPVTG";
+            cSentence = "$GPVTG";
 
-            Data += "," + mf.AGIOdata.IMUheading.ToString("N1") + ",T";
+            cSentence += "," + mf.AGIOdata.IMUheading.ToString("N1") + ",T";
 
-            Data += "," + mf.AGIOdata.IMUheading.ToString("N1") + ",M";
+            cSentence += "," + mf.AGIOdata.IMUheading.ToString("N1") + ",M";
 
             double knots = mf.AGIOdata.Speed * 0.5399568;
-            Data += "," + knots.ToString("N1") + ",N";
+            cSentence += "," + knots.ToString("N1") + ",N";
 
-            Data += "," + mf.AGIOdata.Speed.ToString("N1") + ",K";
+            cSentence += "," + mf.AGIOdata.Speed.ToString("N1") + ",K";
 
-            Data += "*";
-            string Hex = mf.CheckSum(Data).ToString("X");
-            Data += Hex;
+            cSentence += "*";
+            string Hex = mf.CheckSum(cSentence).ToString("X");
+            cSentence += Hex;
 
-            mf.SER.SendStringData(Data);
-        }
-
-        private void AGIOdata_NewData(object sender, EventArgs e)
-        {
-            Send();
+            mf.SER.SendStringData(cSentence);
         }
     }
 }

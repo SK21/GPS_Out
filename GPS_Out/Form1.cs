@@ -190,23 +190,23 @@ namespace GPS_Out
 
         public void UpdateForm()
         {
-            lbAge.Text = AGIOdata.Age.ToString("N2");
-            lbLon.Text = AGIOdata.Longitude.ToString("N7");
-            lbLat.Text = AGIOdata.Latitude.ToString("N7");
-            lbSpeed.Text = AGIOdata.Speed.ToString("N1");
-            lbQuality.Text = FixQuality(AGIOdata.FixQuality);
-            lbHDOP.Text = AGIOdata.HDOP.ToString("N2");
-            lbSats.Text = AGIOdata.Satellites.ToString("");
-            lbElev.Text = AGIOdata.Altitude.ToString("N1");
-            lbAge.Text = AGIOdata.Age.ToString("N1");
+            if (this.WindowState != FormWindowState.Minimized)
+            {
+                lbAge.Text = AGIOdata.Age.ToString("N2");
+                lbLon.Text = AGIOdata.Longitude.ToString("N7");
+                lbLat.Text = AGIOdata.Latitude.ToString("N7");
+                lbSpeed.Text = AGIOdata.Speed.ToString("N1");
+                lbQuality.Text = FixQuality(AGIOdata.FixQuality);
+                lbHDOP.Text = AGIOdata.HDOP.ToString("N2");
+                lbSats.Text = AGIOdata.Satellites.ToString("");
+                lbElev.Text = AGIOdata.Altitude.ToString("N1");
+                lbAge.Text = AGIOdata.Age.ToString("N1");
 
-            lbYawRate.Text = AGIOdata.IMUyawRate.ToString("N0");
-            lbRoll.Text = AGIOdata.IMUroll.ToString("N1");
-            lbPitch.Text = AGIOdata.IMUpitch.ToString("N1");
-            lbYaw.Text = AGIOdata.IMUheading.ToString("N1");
-
-            PortIndicator1.BackColor = Properties.Settings.Default.DayColour;
-            this.BackColor = Properties.Settings.Default.DayColour;
+                lbYawRate.Text = AGIOdata.IMUyawRate.ToString("N0");
+                lbRoll.Text = AGIOdata.IMUroll.ToString("N1");
+                lbPitch.Text = AGIOdata.IMUpitch.ToString("N1");
+                lbYaw.Text = AGIOdata.IMUheading.ToString("N1");
+            }
         }
 
         private void AGIOdata_NewData(object sender, EventArgs e)
@@ -227,37 +227,19 @@ namespace GPS_Out
             SetPortButtons1();
         }
 
+        private void btnGGA_Click(object sender, EventArgs e)
+        {
+            tbGGA.Text = GGA.Sentence;
+        }
+
         private void btnRescan_Click(object sender, EventArgs e)
         {
             LoadRCbox();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnVTG_Click(object sender, EventArgs e)
         {
-            Form fs = Application.OpenForms["frmGGA"];
-            if (fs == null)
-            {
-                Form frm = new frmGGA(this);
-                frm.Show();
-            }
-            else
-            {
-                fs.Focus();
-            }
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-            Form fs = Application.OpenForms["frmVTG"];
-            if (fs == null)
-            {
-                Form frm = new frmVTG(this);
-                frm.Show();
-            }
-            else
-            {
-                fs.Focus();
-            }
+            tbVTG.Text = VTG.Sentence;
         }
 
         private void cboBaud1_SelectedIndexChanged(object sender, EventArgs e)
@@ -300,6 +282,20 @@ namespace GPS_Out
             cboBaud1.SelectedIndex = 4;
             UpdateForm();
             SetCombos();
+            PortIndicator1.BackColor = Properties.Settings.Default.DayColour;
+            this.BackColor = Properties.Settings.Default.DayColour;
+        }
+
+        private void frmStart_Resize(object sender, EventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Minimized)
+            {
+                tmrMinimize.Enabled = false;
+            }
+            else
+            {
+                tmrMinimize.Enabled = true;
+            }
         }
 
         private void groupBox1_Paint(object sender, PaintEventArgs e)
@@ -320,8 +316,8 @@ namespace GPS_Out
 
         private void SetCombos()
         {
-            byte GGAcombo = 0;
-            byte VTGcombo = 0;
+            byte GGAcombo = 1;
+            byte VTGcombo = 1;
 
             if (byte.TryParse(Tls.LoadProperty("cboGGA"), out byte gga)) GGAcombo = gga;
             if (byte.TryParse(Tls.LoadProperty("cboVTG"), out byte vtg)) VTGcombo = vtg;
@@ -354,6 +350,11 @@ namespace GPS_Out
         private void tmrGGA_Tick(object sender, EventArgs e)
         {
             GGA.Send();
+        }
+
+        private void tmrMinimize_Tick(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
         }
 
         private void tmrVTG_Tick(object sender, EventArgs e)

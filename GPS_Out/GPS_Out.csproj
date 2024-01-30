@@ -58,23 +58,11 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmGGA.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmGGA.Designer.cs">
-      <DependentUpon>frmGGA.cs</DependentUpon>
-    </Compile>
     <Compile Include="frmHelp.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="frmHelp.Designer.cs">
       <DependentUpon>frmHelp.cs</DependentUpon>
-    </Compile>
-    <Compile Include="frmVTG.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="frmVTG.Designer.cs">
-      <DependentUpon>frmVTG.cs</DependentUpon>
     </Compile>
     <Compile Include="PGNs\PGN54908.cs" />
     <Compile Include="PGNs\PGN_GGA.cs" />
@@ -85,14 +73,8 @@
       <DependentUpon>Form1.cs</DependentUpon>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmGGA.resx">
-      <DependentUpon>frmGGA.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="frmHelp.resx">
       <DependentUpon>frmHelp.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmVTG.resx">
-      <DependentUpon>frmVTG.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

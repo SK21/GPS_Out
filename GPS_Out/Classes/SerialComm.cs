@@ -16,9 +16,6 @@ namespace GPS_Out
         private string cRCportName;
         private byte HiByte;
         private byte LoByte;
-        private DateTime SBtime;
-        private DateTime Sendtime;
-        private double SendInterval;
 
         // prevent UI lock-up by only sending serial data after verfying connection
         private bool SerialActive = false;
@@ -39,9 +36,6 @@ namespace GPS_Out
         public SerialPort ArduinoPort { get => cArduinoPort; set => cArduinoPort = value; }
         public int RCportBaud { get => cRCportBaud; set => cRCportBaud = value; }
         public string RCportName { get => cRCportName; set => cRCportName = value; }
-
-        public bool SwitchBoxConnected
-        { get { return (DateTime.Now - SBtime).TotalSeconds < 4; } }
 
         public void CloseRCport()
         {
@@ -147,10 +141,6 @@ namespace GPS_Out
             {
                 try
                 {
-                    SendInterval = (DateTime.Now - Sendtime).TotalMilliseconds;
-                    Sendtime = DateTime.Now;
-                    Debug.Print(SendInterval.ToString() + ", " + System.Text.ASCIIEncoding.ASCII.GetByteCount(data).ToString());
-
                     ArduinoPort.WriteLine(data);
                 }
                 catch (Exception ex)

@@ -54,8 +54,6 @@
             this.lbPitch = new System.Windows.Forms.Label();
             this.lbRoll = new System.Windows.Forms.Label();
             this.lbYaw = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
             this.btnConnect1 = new System.Windows.Forms.Button();
             this.cboPort1 = new System.Windows.Forms.ComboBox();
             this.lbBaud = new System.Windows.Forms.Label();
@@ -73,6 +71,11 @@
             this.label16 = new System.Windows.Forms.Label();
             this.cboVTG = new System.Windows.Forms.ComboBox();
             this.tmrVTG = new System.Windows.Forms.Timer(this.components);
+            this.tbGGA = new System.Windows.Forms.TextBox();
+            this.tbVTG = new System.Windows.Forms.TextBox();
+            this.btnGGA = new System.Windows.Forms.Button();
+            this.btnVTG = new System.Windows.Forms.Button();
+            this.tmrMinimize = new System.Windows.Forms.Timer(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -329,28 +332,6 @@
             this.lbYaw.TabIndex = 26;
             this.lbYaw.Text = "1234567890.";
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(249, 18);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(86, 39);
-            this.button1.TabIndex = 30;
-            this.button1.Text = "GGA";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Visible = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // button2
-            // 
-            this.button2.Location = new System.Drawing.Point(249, 66);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(86, 39);
-            this.button2.TabIndex = 31;
-            this.button2.Text = "VTG";
-            this.button2.UseVisualStyleBackColor = true;
-            this.button2.Visible = false;
-            this.button2.Click += new System.EventHandler(this.button2_Click);
-            // 
             // btnConnect1
             // 
             this.btnConnect1.BackColor = System.Drawing.SystemColors.ControlLight;
@@ -553,15 +534,61 @@
             // 
             this.tmrVTG.Tick += new System.EventHandler(this.tmrVTG_Tick);
             // 
+            // tbGGA
+            // 
+            this.tbGGA.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbGGA.Location = new System.Drawing.Point(93, 468);
+            this.tbGGA.Name = "tbGGA";
+            this.tbGGA.ReadOnly = true;
+            this.tbGGA.Size = new System.Drawing.Size(478, 20);
+            this.tbGGA.TabIndex = 156;
+            // 
+            // tbVTG
+            // 
+            this.tbVTG.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbVTG.Location = new System.Drawing.Point(93, 507);
+            this.tbVTG.Name = "tbVTG";
+            this.tbVTG.ReadOnly = true;
+            this.tbVTG.Size = new System.Drawing.Size(478, 20);
+            this.tbVTG.TabIndex = 158;
+            // 
+            // btnGGA
+            // 
+            this.btnGGA.Location = new System.Drawing.Point(12, 459);
+            this.btnGGA.Name = "btnGGA";
+            this.btnGGA.Size = new System.Drawing.Size(75, 33);
+            this.btnGGA.TabIndex = 159;
+            this.btnGGA.Text = "GGA";
+            this.btnGGA.UseVisualStyleBackColor = true;
+            this.btnGGA.Click += new System.EventHandler(this.btnGGA_Click);
+            // 
+            // btnVTG
+            // 
+            this.btnVTG.Location = new System.Drawing.Point(12, 498);
+            this.btnVTG.Name = "btnVTG";
+            this.btnVTG.Size = new System.Drawing.Size(75, 33);
+            this.btnVTG.TabIndex = 160;
+            this.btnVTG.Text = "VTG";
+            this.btnVTG.UseVisualStyleBackColor = true;
+            this.btnVTG.Click += new System.EventHandler(this.btnVTG_Click);
+            // 
+            // tmrMinimize
+            // 
+            this.tmrMinimize.Enabled = true;
+            this.tmrMinimize.Interval = 120000;
+            this.tmrMinimize.Tick += new System.EventHandler(this.tmrMinimize_Tick);
+            // 
             // frmStart
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(585, 467);
+            this.ClientSize = new System.Drawing.Size(585, 539);
+            this.Controls.Add(this.btnVTG);
+            this.Controls.Add(this.btnGGA);
+            this.Controls.Add(this.tbVTG);
+            this.Controls.Add(this.tbGGA);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
             this.Controls.Add(this.lbYawRate);
             this.Controls.Add(this.lbPitch);
             this.Controls.Add(this.lbRoll);
@@ -594,6 +621,7 @@
             this.Text = "GPS_Out";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmStart_FormClosed);
             this.Load += new System.EventHandler(this.frmStart_Load);
+            this.Resize += new System.EventHandler(this.frmStart_Resize);
             this.groupBox1.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
@@ -628,8 +656,6 @@
         private System.Windows.Forms.Label lbPitch;
         private System.Windows.Forms.Label lbRoll;
         private System.Windows.Forms.Label lbYaw;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Button btnConnect1;
         private System.Windows.Forms.ComboBox cboPort1;
         private System.Windows.Forms.Label lbBaud;
@@ -647,6 +673,11 @@
         private System.Windows.Forms.ComboBox cboGGA;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Timer tmrVTG;
+        private System.Windows.Forms.TextBox tbGGA;
+        private System.Windows.Forms.TextBox tbVTG;
+        private System.Windows.Forms.Button btnGGA;
+        private System.Windows.Forms.Button btnVTG;
+        private System.Windows.Forms.Timer tmrMinimize;
     }
 }
 

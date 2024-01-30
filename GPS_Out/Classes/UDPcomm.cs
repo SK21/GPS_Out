@@ -52,22 +52,6 @@ namespace GPS_Out
             }
         }
 
-        public string SubNet
-        { get { return cSubNet; } }
-
-        public bool SwitchBoxConnected
-        { get { return (DateTime.Now - SBtime).TotalSeconds < 4; } }
-
-        public void Close()
-        {
-            recvSocket.Close();
-            sendSocket.Close();
-        }
-
-        public string Log()
-        {
-            return cLog;
-        }
 
         //sends byte array
         public void SendUDPMessage(byte[] byteData)

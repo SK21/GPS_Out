@@ -39,13 +39,12 @@ namespace GPS_Out
         private double cLatitude;
         private double cLongitude;
         private ushort cSatellites;
-        private string Data;
+        private string cSentence;
         private frmStart mf;
 
         public PGN_GGA(frmStart CalledFrom)
         {
             mf = CalledFrom;
-            //mf.AGIOdata.NewData += AGIOdata_NewData;
         }
 
         public float Age
@@ -67,10 +66,13 @@ namespace GPS_Out
         { get { return cLongitude; } }
 
         public string ReceivedGGA
-        { get { return Data; } }
+        { get { return cSentence; } }
 
         public UInt16 Satellites
         { get { return cSatellites; } }
+
+        public string Sentence
+        { get { return cSentence; } }
 
         public void DecodeGGA(string Sentence)
         {
@@ -135,53 +137,48 @@ namespace GPS_Out
 
         public void Send()
         {
-            Data = "$GPGGA";
+            cSentence = "$GPGGA";
 
             string Hour = DateTime.UtcNow.Hour.ToString();
             string Minute = DateTime.UtcNow.Minute.ToString();
             string Second = DateTime.UtcNow.Second.ToString();
-            Data += "," + Hour + Minute + Second;
+            cSentence += "," + Hour + Minute + Second;
 
             double lat = mf.AGIOdata.Latitude;
             string NS = ",N";
             if (lat < 0) NS = ",S";
             lat = Math.Abs(lat);
-            Data += "," + ((int)lat).ToString();
+            cSentence += "," + ((int)lat).ToString();
             double Mins = (double)(lat - (int)lat) * 60.0;
-            Data += Mins.ToString("N6");
-            Data += NS;
+            cSentence += Mins.ToString("N6");
+            cSentence += NS;
 
             double lon = mf.AGIOdata.Longitude;
             string EW = ",E";
             if (lon < 0) EW = ",W";
             lon = Math.Abs(lon);
-            Data += "," + ((int)lon).ToString();
+            cSentence += "," + ((int)lon).ToString();
             Mins = (double)(lon - (int)lon) * 60.0;
-            Data += Mins.ToString("N6");
-            Data += EW;
+            cSentence += Mins.ToString("N6");
+            cSentence += EW;
 
-            Data += "," + mf.AGIOdata.FixQuality.ToString();
+            cSentence += "," + mf.AGIOdata.FixQuality.ToString();
 
-            Data += "," + mf.AGIOdata.Satellites.ToString("00");
+            cSentence += "," + mf.AGIOdata.Satellites.ToString("00");
 
-            Data += "," + mf.AGIOdata.HDOP.ToString("N1");
+            cSentence += "," + mf.AGIOdata.HDOP.ToString("N1");
 
-            Data += "," + mf.AGIOdata.Altitude.ToString("N1") + ",M";
+            cSentence += "," + mf.AGIOdata.Altitude.ToString("N1") + ",M";
 
-            Data += ",0.0,M";
+            cSentence += ",0.0,M";
 
-            Data += "," + mf.AGIOdata.Age.ToString("N1") + ",";
+            cSentence += "," + mf.AGIOdata.Age.ToString("N1") + ",";
 
-            Data += ",*";
-            string Hex = mf.CheckSum(Data).ToString("X");
-            Data += Hex;
+            cSentence += ",*";
+            string Hex = mf.CheckSum(cSentence).ToString("X");
+            cSentence += Hex;
 
-            mf.SER.SendStringData(Data);
-        }
-
-        private void AGIOdata_NewData(object sender, EventArgs e)
-        {
-            Send();
+            mf.SER.SendStringData(cSentence);
         }
     }
 }
