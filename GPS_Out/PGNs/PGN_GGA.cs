@@ -45,7 +45,7 @@ namespace GPS_Out
         public PGN_GGA(frmStart CalledFrom)
         {
             mf = CalledFrom;
-            mf.AGIOdata.NewData += AGIOdata_NewData;
+            //mf.AGIOdata.NewData += AGIOdata_NewData;
         }
 
         public float Age
@@ -133,7 +133,7 @@ namespace GPS_Out
             }
         }
 
-        public void Send_GGA()
+        public void Send()
         {
             Data = "$GPGGA";
 
@@ -181,7 +181,7 @@ namespace GPS_Out
 
         private void AGIOdata_NewData(object sender, EventArgs e)
         {
-            Send_GGA();
+            Send();
         }
     }
 }

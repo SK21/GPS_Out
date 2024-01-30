@@ -20,7 +20,7 @@ namespace GPS_Out
         public PGN_VTG(frmStart CalledFrom)
         {
             mf = CalledFrom;
-            mf.AGIOdata.NewData += AGIOdata_NewData;
+            //mf.AGIOdata.NewData += AGIOdata_NewData;
         }
 
         public double Heading
@@ -35,7 +35,7 @@ namespace GPS_Out
         public double MagHeading
         { get { return mf.AGIOdata.IMUheading; } }
 
-        public void Send_VTG()
+        public void Send()
         {
             Data = "$GPVTG";
 
@@ -57,7 +57,7 @@ namespace GPS_Out
 
         private void AGIOdata_NewData(object sender, EventArgs e)
         {
-            Send_VTG();
+            Send();
         }
     }
 }

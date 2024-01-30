@@ -64,8 +64,17 @@
             this.PortIndicator1 = new System.Windows.Forms.Label();
             this.btnRescan = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.tmrGGA = new System.Windows.Forms.Timer(this.components);
+            this.label9 = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.cboGGA = new System.Windows.Forms.ComboBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.cboVTG = new System.Windows.Forms.ComboBox();
+            this.tmrVTG = new System.Windows.Forms.Timer(this.components);
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -449,16 +458,107 @@
             this.groupBox1.Text = "Serial Port";
             this.groupBox1.Paint += new System.Windows.Forms.PaintEventHandler(this.groupBox1_Paint);
             // 
-            // timer1
+            // tmrGGA
             // 
-            this.timer1.Interval = 5000;
-            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            this.tmrGGA.Interval = 5000;
+            this.tmrGGA.Tick += new System.EventHandler(this.tmrGGA_Tick);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(135, 36);
+            this.label9.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(51, 24);
+            this.label9.TabIndex = 153;
+            this.label9.Text = "GGA";
+            // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.label16);
+            this.groupBox2.Controls.Add(this.cboVTG);
+            this.groupBox2.Controls.Add(this.label11);
+            this.groupBox2.Controls.Add(this.cboGGA);
+            this.groupBox2.Controls.Add(this.label10);
+            this.groupBox2.Controls.Add(this.label9);
+            this.groupBox2.Location = new System.Drawing.Point(12, 322);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(559, 131);
+            this.groupBox2.TabIndex = 154;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Transfer Rate";
+            this.groupBox2.Paint += new System.Windows.Forms.PaintEventHandler(this.groupBox1_Paint);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(135, 79);
+            this.label10.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(49, 24);
+            this.label10.TabIndex = 154;
+            this.label10.Text = "VTG";
+            // 
+            // cboGGA
+            // 
+            this.cboGGA.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboGGA.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold);
+            this.cboGGA.FormattingEnabled = true;
+            this.cboGGA.Items.AddRange(new object[] {
+            "1",
+            "5",
+            "10"});
+            this.cboGGA.Location = new System.Drawing.Point(195, 28);
+            this.cboGGA.Name = "cboGGA";
+            this.cboGGA.Size = new System.Drawing.Size(60, 37);
+            this.cboGGA.TabIndex = 155;
+            this.cboGGA.SelectedIndexChanged += new System.EventHandler(this.cboGGA_SelectedIndexChanged);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(264, 36);
+            this.label11.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(33, 24);
+            this.label11.TabIndex = 156;
+            this.label11.Text = "Hz";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(264, 79);
+            this.label16.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(33, 24);
+            this.label16.TabIndex = 158;
+            this.label16.Text = "Hz";
+            // 
+            // cboVTG
+            // 
+            this.cboVTG.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboVTG.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold);
+            this.cboVTG.FormattingEnabled = true;
+            this.cboVTG.Items.AddRange(new object[] {
+            "1",
+            "5",
+            "10"});
+            this.cboVTG.Location = new System.Drawing.Point(195, 71);
+            this.cboVTG.Name = "cboVTG";
+            this.cboVTG.Size = new System.Drawing.Size(60, 37);
+            this.cboVTG.TabIndex = 157;
+            this.cboVTG.SelectedIndexChanged += new System.EventHandler(this.cboVTG_SelectedIndexChanged);
+            // 
+            // tmrVTG
+            // 
+            this.tmrVTG.Tick += new System.EventHandler(this.tmrVTG_Tick);
             // 
             // frmStart
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(585, 331);
+            this.ClientSize = new System.Drawing.Size(585, 467);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.button1);
@@ -495,6 +595,8 @@
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.frmStart_FormClosed);
             this.Load += new System.EventHandler(this.frmStart_Load);
             this.groupBox1.ResumeLayout(false);
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -536,7 +638,15 @@
         private System.Windows.Forms.Label PortIndicator1;
         private System.Windows.Forms.Button btnRescan;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Timer tmrGGA;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.ComboBox cboVTG;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.ComboBox cboGGA;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Timer tmrVTG;
     }
 }
 

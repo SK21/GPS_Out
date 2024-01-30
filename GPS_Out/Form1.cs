@@ -266,25 +266,40 @@ namespace GPS_Out
             SER.RCportBaud = Convert.ToInt32(cboBaud1.Text);
         }
 
+        private void cboGGA_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            tmrGGA.Interval = 1000 / Convert.ToInt16(cboGGA.Text);
+            tmrGGA.Enabled = true;
+        }
+
         private void cboPort1_SelectedIndexChanged(object sender, EventArgs e)
         {
             SER.RCportName = cboPort1.Text;
         }
 
+        private void cboVTG_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            tmrVTG.Interval = 1000 / Convert.ToInt16(cboVTG.Text);
+            tmrVTG.Enabled = true;
+        }
+
         private void frmStart_FormClosed(object sender, FormClosedEventArgs e)
         {
             Tls.SaveFormData(this);
+            Tls.SaveProperty("cboGGA", cboGGA.SelectedIndex.ToString());
+            Tls.SaveProperty("cboVTG", cboVTG.SelectedIndex.ToString());
         }
 
         private void frmStart_Load(object sender, EventArgs e)
         {
             Tls.LoadFormData(this);
-            //StartSerial();
+            StartSerial();
             PandaComm.StartUDPServer();
             LoadRCbox();
-            timer1.Enabled = true;
+            tmrGGA.Enabled = true;
             cboBaud1.SelectedIndex = 4;
             UpdateForm();
+            SetCombos();
         }
 
         private void groupBox1_Paint(object sender, PaintEventArgs e)
@@ -301,6 +316,18 @@ namespace GPS_Out
                 cboPort1.Items.Add(s);
             }
             SetPortButtons1();
+        }
+
+        private void SetCombos()
+        {
+            byte GGAcombo = 0;
+            byte VTGcombo = 0;
+
+            if (byte.TryParse(Tls.LoadProperty("cboGGA"), out byte gga)) GGAcombo = gga;
+            if (byte.TryParse(Tls.LoadProperty("cboVTG"), out byte vtg)) VTGcombo = vtg;
+
+            cboGGA.SelectedIndex = GGAcombo;
+            cboVTG.SelectedIndex = VTGcombo;
         }
 
         private void SetPortButtons1()
@@ -324,11 +351,14 @@ namespace GPS_Out
             }
         }
 
-        private void timer1_Tick(object sender, EventArgs e)
+        private void tmrGGA_Tick(object sender, EventArgs e)
         {
-            timer1.Enabled = false;
-            StartSerial();
-            SetPortButtons1();
+            GGA.Send();
+        }
+
+        private void tmrVTG_Tick(object sender, EventArgs e)
+        {
+            VTG.Send();
         }
     }
 }

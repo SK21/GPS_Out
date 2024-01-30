@@ -17,6 +17,8 @@ namespace GPS_Out
         private byte HiByte;
         private byte LoByte;
         private DateTime SBtime;
+        private DateTime Sendtime;
+        private double SendInterval;
 
         // prevent UI lock-up by only sending serial data after verfying connection
         private bool SerialActive = false;
@@ -145,6 +147,10 @@ namespace GPS_Out
             {
                 try
                 {
+                    SendInterval = (DateTime.Now - Sendtime).TotalMilliseconds;
+                    Sendtime = DateTime.Now;
+                    Debug.Print(SendInterval.ToString() + ", " + System.Text.ASCIIEncoding.ASCII.GetByteCount(data).ToString());
+
                     ArduinoPort.WriteLine(data);
                 }
                 catch (Exception ex)
