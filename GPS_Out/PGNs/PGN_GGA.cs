@@ -175,7 +175,7 @@ namespace GPS_Out
             cSentence += "," + mf.AGIOdata.Age.ToString("N1") + ",";
 
             cSentence += ",*";
-            string Hex = mf.CheckSum(cSentence).ToString("X");
+            string Hex = mf.CheckSum(cSentence).ToString("X2");
             cSentence += Hex;
 
             mf.SER.SendStringData(cSentence);

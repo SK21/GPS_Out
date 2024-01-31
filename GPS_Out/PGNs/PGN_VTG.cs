@@ -51,7 +51,7 @@ namespace GPS_Out
             cSentence += "," + mf.AGIOdata.Speed.ToString("N1") + ",K";
 
             cSentence += "*";
-            string Hex = mf.CheckSum(cSentence).ToString("X");
+            string Hex = mf.CheckSum(cSentence).ToString("X2");
             cSentence += Hex;
 
             mf.SER.SendStringData(cSentence);

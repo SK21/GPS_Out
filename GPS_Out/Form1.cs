@@ -81,42 +81,16 @@ namespace GPS_Out
 
         public int CheckSum(string Data)
         {
-            char[] buf = Data.ToCharArray();
             int CK = 0;
-            bool StartCharacter = false;
-            bool EndFound = false;
-
-            for (int i = 0; i < buf.Length; i++)
+            int End = Data.IndexOf("*");
+            char[] buf = Data.ToCharArray();
+            if (buf[0] == '$' && End > -1)
             {
-                switch (buf[i])
+                for (int i = 1; i < End; i++)
                 {
-                    case '$':
-                        // start found
-                        StartCharacter = true;
-                        break;
-
-                    case '*':
-                        // end found
-                        i = buf.Length;
-                        EndFound = true;
-                        break;
-
-                    default:
-                        if (StartCharacter)
-                        {
-                            // first value
-                            CK = buf[i];
-                            StartCharacter = false;
-                        }
-                        else
-                        {
-                            CK = CK ^ buf[i];
-                        }
-                        break;
+                    CK ^= buf[i];
                 }
             }
-
-            if (!EndFound) CK = 0;
             return CK;
         }
 
