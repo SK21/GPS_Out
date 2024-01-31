@@ -527,7 +527,7 @@ namespace GPS_Out
                 cSettingsDir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\" + cAppName;
 
                 if (!Directory.Exists(cSettingsDir)) Directory.CreateDirectory(cSettingsDir);
-                if (!File.Exists(cSettingsDir + "\\Example.rcs")) File.WriteAllBytes(cSettingsDir + "\\Example.rcs", Properties.Resources.Example);
+                //if (!File.Exists(cSettingsDir + "\\Example.rcs")) File.WriteAllBytes(cSettingsDir + "\\Example.rcs", Properties.Resources.Example);
 
                 string FilesDir = Properties.Settings.Default.FilesDir;
                 if (!Directory.Exists(FilesDir)) Properties.Settings.Default.FilesDir = cSettingsDir;

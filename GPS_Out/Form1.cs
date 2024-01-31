@@ -279,7 +279,6 @@ namespace GPS_Out
             PandaComm.StartUDPServer();
             LoadRCbox();
             tmrGGA.Enabled = true;
-            cboBaud1.SelectedIndex = 4;
             UpdateForm();
             SetCombos();
             PortIndicator1.BackColor = Properties.Settings.Default.DayColour;
