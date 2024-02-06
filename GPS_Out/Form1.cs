@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -77,6 +78,20 @@ namespace GPS_Out
             GGA = new PGN_GGA(this);
             SER = new SerialComm(this, 0);
             VTG = new PGN_VTG(this);
+            //TestGGA();
+        }
+
+        private void TestGGA()
+        {
+            string test = "$GPGGA,144143,5325.455127,N,2420.67724,E,5,04,4.5,371.6,M,0.0,M,1.0,,*6F";
+            Debug.Print(CheckSum(test).ToString()); 
+
+            GGA.DecodeGGA(test);
+            Debug.Print(GGA.Longitude.ToString("N7") + " : " + GGA.Latitude.ToString("N7"));
+            
+            byte[] Data = { 15,100,174,34,94,235,89,192 };
+            double cLongitude = BitConverter.ToDouble(Data, 0);
+            Debug.Print(cLongitude.ToString("N7"));
         }
 
         public int CheckSum(string Data)
@@ -334,5 +349,8 @@ namespace GPS_Out
         {
             VTG.Send();
         }
+
+
+
     }
 }

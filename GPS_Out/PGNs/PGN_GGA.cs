@@ -124,11 +124,15 @@ namespace GPS_Out
                     words[4] += ".00";
                     decim = words[4].IndexOf(".", StringComparison.Ordinal);
                 }
+                double.TryParse(words[4].Substring(0, 3), NumberStyles.Float, CultureInfo.InvariantCulture, out double Lng);
+                double.TryParse(words[4].Substring(3), NumberStyles.Float, CultureInfo.InvariantCulture, out double Mins);
+                Lng += Mins * 0.0166666666667;
+                double longitude = Lng;
 
-                decim -= 2;
-                double.TryParse(words[4].Substring(0, decim), NumberStyles.Float, CultureInfo.InvariantCulture, out double longitude);
-                double.TryParse(words[4].Substring(decim), NumberStyles.Float, CultureInfo.InvariantCulture, out temp);
-                longitude += temp * 0.0166666666667;
+                //decim -= 2;
+                //double.TryParse(words[4].Substring(0, decim), NumberStyles.Float, CultureInfo.InvariantCulture, out double longitude);
+                //double.TryParse(words[4].Substring(decim), NumberStyles.Float, CultureInfo.InvariantCulture, out temp);
+                //longitude += temp * 0.0166666666667;
 
                 { if (words[5] == "W") longitude *= -1; }
                 cLongitude = longitude;
@@ -148,7 +152,7 @@ namespace GPS_Out
             string NS = ",N";
             if (lat < 0) NS = ",S";
             lat = Math.Abs(lat);
-            cSentence += "," + ((int)lat).ToString();
+            cSentence += "," + ((int)lat).ToString("D2");
             double Mins = (double)(lat - (int)lat) * 60.0;
             cSentence += Mins.ToString("N6");
             cSentence += NS;
@@ -157,7 +161,7 @@ namespace GPS_Out
             string EW = ",E";
             if (lon < 0) EW = ",W";
             lon = Math.Abs(lon);
-            cSentence += "," + ((int)lon).ToString();
+            cSentence += "," + ((int)lon).ToString("D3");
             Mins = (double)(lon - (int)lon) * 60.0;
             cSentence += Mins.ToString("N6");
             cSentence += EW;
