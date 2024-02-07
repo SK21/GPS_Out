@@ -65,17 +65,20 @@
             this.tmrGGA = new System.Windows.Forms.Timer(this.components);
             this.label9 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.cboGGA = new System.Windows.Forms.ComboBox();
-            this.label11 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.cboVTG = new System.Windows.Forms.ComboBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.cboGGA = new System.Windows.Forms.ComboBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.tmrVTG = new System.Windows.Forms.Timer(this.components);
             this.tbGGA = new System.Windows.Forms.TextBox();
             this.tbVTG = new System.Windows.Forms.TextBox();
             this.btnGGA = new System.Windows.Forms.Button();
             this.btnVTG = new System.Windows.Forms.Button();
             this.tmrMinimize = new System.Windows.Forms.Timer(this.components);
+            this.ckSwap = new System.Windows.Forms.CheckBox();
+            this.ckInvert = new System.Windows.Forms.CheckBox();
+            this.ckAutoHide = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -123,7 +126,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(344, 9);
+            this.label5.Location = new System.Drawing.Point(376, 9);
             this.label5.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(64, 24);
@@ -133,7 +136,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(344, 33);
+            this.label6.Location = new System.Drawing.Point(376, 33);
             this.label6.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(45, 24);
@@ -143,7 +146,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(344, 57);
+            this.label7.Location = new System.Drawing.Point(376, 57);
             this.label7.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(47, 24);
@@ -153,7 +156,7 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(344, 81);
+            this.label8.Location = new System.Drawing.Point(376, 81);
             this.label8.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(45, 24);
@@ -163,7 +166,7 @@
             // label12
             // 
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(15, 129);
+            this.label12.Location = new System.Drawing.Point(15, 126);
             this.label12.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(46, 24);
@@ -173,7 +176,7 @@
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(344, 129);
+            this.label13.Location = new System.Drawing.Point(376, 126);
             this.label13.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(42, 24);
@@ -183,7 +186,7 @@
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(344, 153);
+            this.label14.Location = new System.Drawing.Point(376, 165);
             this.label14.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(51, 24);
@@ -193,7 +196,7 @@
             // label15
             // 
             this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(15, 153);
+            this.label15.Location = new System.Drawing.Point(15, 165);
             this.label15.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(89, 24);
@@ -292,7 +295,7 @@
             // 
             this.lbYawRate.AutoSize = true;
             this.lbYawRate.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbYawRate.Location = new System.Drawing.Point(116, 153);
+            this.lbYawRate.Location = new System.Drawing.Point(116, 165);
             this.lbYawRate.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lbYawRate.Name = "lbYawRate";
             this.lbYawRate.Size = new System.Drawing.Size(126, 24);
@@ -303,7 +306,7 @@
             // 
             this.lbPitch.AutoSize = true;
             this.lbPitch.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbPitch.Location = new System.Drawing.Point(445, 153);
+            this.lbPitch.Location = new System.Drawing.Point(445, 165);
             this.lbPitch.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lbPitch.Name = "lbPitch";
             this.lbPitch.Size = new System.Drawing.Size(126, 24);
@@ -314,7 +317,7 @@
             // 
             this.lbRoll.AutoSize = true;
             this.lbRoll.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbRoll.Location = new System.Drawing.Point(445, 129);
+            this.lbRoll.Location = new System.Drawing.Point(445, 126);
             this.lbRoll.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lbRoll.Name = "lbRoll";
             this.lbRoll.Size = new System.Drawing.Size(126, 24);
@@ -325,7 +328,7 @@
             // 
             this.lbYaw.AutoSize = true;
             this.lbYaw.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbYaw.Location = new System.Drawing.Point(116, 129);
+            this.lbYaw.Location = new System.Drawing.Point(116, 126);
             this.lbYaw.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lbYaw.Name = "lbYaw";
             this.lbYaw.Size = new System.Drawing.Size(126, 24);
@@ -447,7 +450,7 @@
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(135, 36);
+            this.label9.Location = new System.Drawing.Point(110, 36);
             this.label9.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(51, 24);
@@ -464,51 +467,16 @@
             this.groupBox2.Controls.Add(this.label9);
             this.groupBox2.Location = new System.Drawing.Point(12, 322);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(559, 131);
+            this.groupBox2.Size = new System.Drawing.Size(396, 131);
             this.groupBox2.TabIndex = 154;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Transfer Rate";
             this.groupBox2.Paint += new System.Windows.Forms.PaintEventHandler(this.groupBox1_Paint);
             // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(135, 79);
-            this.label10.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(49, 24);
-            this.label10.TabIndex = 154;
-            this.label10.Text = "VTG";
-            // 
-            // cboGGA
-            // 
-            this.cboGGA.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboGGA.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold);
-            this.cboGGA.FormattingEnabled = true;
-            this.cboGGA.Items.AddRange(new object[] {
-            "1",
-            "5",
-            "10"});
-            this.cboGGA.Location = new System.Drawing.Point(195, 28);
-            this.cboGGA.Name = "cboGGA";
-            this.cboGGA.Size = new System.Drawing.Size(60, 37);
-            this.cboGGA.TabIndex = 155;
-            this.cboGGA.SelectedIndexChanged += new System.EventHandler(this.cboGGA_SelectedIndexChanged);
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(264, 36);
-            this.label11.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(33, 24);
-            this.label11.TabIndex = 156;
-            this.label11.Text = "Hz";
-            // 
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(264, 79);
+            this.label16.Location = new System.Drawing.Point(239, 79);
             this.label16.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(33, 24);
@@ -524,11 +492,46 @@
             "1",
             "5",
             "10"});
-            this.cboVTG.Location = new System.Drawing.Point(195, 71);
+            this.cboVTG.Location = new System.Drawing.Point(170, 71);
             this.cboVTG.Name = "cboVTG";
             this.cboVTG.Size = new System.Drawing.Size(60, 37);
             this.cboVTG.TabIndex = 157;
             this.cboVTG.SelectedIndexChanged += new System.EventHandler(this.cboVTG_SelectedIndexChanged);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(239, 36);
+            this.label11.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(33, 24);
+            this.label11.TabIndex = 156;
+            this.label11.Text = "Hz";
+            // 
+            // cboGGA
+            // 
+            this.cboGGA.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboGGA.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold);
+            this.cboGGA.FormattingEnabled = true;
+            this.cboGGA.Items.AddRange(new object[] {
+            "1",
+            "5",
+            "10"});
+            this.cboGGA.Location = new System.Drawing.Point(170, 28);
+            this.cboGGA.Name = "cboGGA";
+            this.cboGGA.Size = new System.Drawing.Size(60, 37);
+            this.cboGGA.TabIndex = 155;
+            this.cboGGA.SelectedIndexChanged += new System.EventHandler(this.cboGGA_SelectedIndexChanged);
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(110, 79);
+            this.label10.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(49, 24);
+            this.label10.TabIndex = 154;
+            this.label10.Text = "VTG";
             // 
             // tmrVTG
             // 
@@ -578,11 +581,56 @@
             this.tmrMinimize.Interval = 120000;
             this.tmrMinimize.Tick += new System.EventHandler(this.tmrMinimize_Tick);
             // 
+            // ckSwap
+            // 
+            this.ckSwap.Appearance = System.Windows.Forms.Appearance.Button;
+            this.ckSwap.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.ckSwap.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ckSwap.Location = new System.Drawing.Point(295, 160);
+            this.ckSwap.Name = "ckSwap";
+            this.ckSwap.Size = new System.Drawing.Size(72, 34);
+            this.ckSwap.TabIndex = 302;
+            this.ckSwap.Text = "Swap";
+            this.ckSwap.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.ckSwap.UseVisualStyleBackColor = true;
+            // 
+            // ckInvert
+            // 
+            this.ckInvert.Appearance = System.Windows.Forms.Appearance.Button;
+            this.ckInvert.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.ckInvert.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ckInvert.Location = new System.Drawing.Point(295, 121);
+            this.ckInvert.Name = "ckInvert";
+            this.ckInvert.Size = new System.Drawing.Size(72, 34);
+            this.ckInvert.TabIndex = 301;
+            this.ckInvert.Text = "Invert";
+            this.ckInvert.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.ckInvert.UseVisualStyleBackColor = true;
+            // 
+            // ckAutoHide
+            // 
+            this.ckAutoHide.Appearance = System.Windows.Forms.Appearance.Button;
+            this.ckAutoHide.Checked = true;
+            this.ckAutoHide.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ckAutoHide.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.ckAutoHide.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ckAutoHide.Location = new System.Drawing.Point(430, 380);
+            this.ckAutoHide.Name = "ckAutoHide";
+            this.ckAutoHide.Size = new System.Drawing.Size(141, 34);
+            this.ckAutoHide.TabIndex = 303;
+            this.ckAutoHide.Text = "Auto Hide";
+            this.ckAutoHide.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.ckAutoHide.UseVisualStyleBackColor = true;
+            this.ckAutoHide.CheckedChanged += new System.EventHandler(this.ckAutoHide_CheckedChanged);
+            // 
             // frmStart
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(585, 539);
+            this.Controls.Add(this.ckAutoHide);
+            this.Controls.Add(this.ckSwap);
+            this.Controls.Add(this.ckInvert);
             this.Controls.Add(this.btnVTG);
             this.Controls.Add(this.btnGGA);
             this.Controls.Add(this.tbVTG);
@@ -678,6 +726,9 @@
         private System.Windows.Forms.Button btnGGA;
         private System.Windows.Forms.Button btnVTG;
         private System.Windows.Forms.Timer tmrMinimize;
+        private System.Windows.Forms.CheckBox ckSwap;
+        private System.Windows.Forms.CheckBox ckInvert;
+        private System.Windows.Forms.CheckBox ckAutoHide;
     }
 }
 

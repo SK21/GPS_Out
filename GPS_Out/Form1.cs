@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -78,20 +77,6 @@ namespace GPS_Out
             GGA = new PGN_GGA(this);
             SER = new SerialComm(this, 0);
             VTG = new PGN_VTG(this);
-            //TestGGA();
-        }
-
-        private void TestGGA()
-        {
-            string test = "$GPGGA,144143,5325.455127,N,2420.67724,E,5,04,4.5,371.6,M,0.0,M,1.0,,*6F";
-            Debug.Print(CheckSum(test).ToString()); 
-
-            GGA.DecodeGGA(test);
-            Debug.Print(GGA.Longitude.ToString("N7") + " : " + GGA.Latitude.ToString("N7"));
-            
-            byte[] Data = { 15,100,174,34,94,235,89,192 };
-            double cLongitude = BitConverter.ToDouble(Data, 0);
-            Debug.Print(cLongitude.ToString("N7"));
         }
 
         public int CheckSum(string Data)
@@ -192,9 +177,32 @@ namespace GPS_Out
                 lbAge.Text = AGIOdata.Age.ToString("N1");
 
                 lbYawRate.Text = AGIOdata.IMUyawRate.ToString("N0");
-                lbRoll.Text = AGIOdata.IMUroll.ToString("N1");
-                lbPitch.Text = AGIOdata.IMUpitch.ToString("N1");
                 lbYaw.Text = AGIOdata.IMUheading.ToString("N1");
+
+                if (ckSwap.Checked)
+                {
+                    if (ckInvert.Checked)
+                    {
+                        lbRoll.Text = (AGIOdata.IMUpitch * -1.0).ToString("N1");
+                    }
+                    else
+                    {
+                        lbRoll.Text = AGIOdata.IMUpitch.ToString("N1");
+                    }
+                    lbPitch.Text = AGIOdata.IMUroll.ToString("N1");
+                }
+                else
+                {
+                    if (ckInvert.Checked)
+                    {
+                        lbRoll.Text = (AGIOdata.IMUroll * -1.0).ToString("N1");
+                    }
+                    else
+                    {
+                        lbRoll.Text = AGIOdata.IMUroll.ToString("N1");
+                    }
+                    lbPitch.Text = AGIOdata.IMUpitch.ToString("N1");
+                }
             }
         }
 
@@ -254,11 +262,19 @@ namespace GPS_Out
             tmrVTG.Enabled = true;
         }
 
+        private void ckAutoHide_CheckedChanged(object sender, EventArgs e)
+        {
+            tmrMinimize.Enabled = ckAutoHide.Checked;
+        }
+
         private void frmStart_FormClosed(object sender, FormClosedEventArgs e)
         {
             Tls.SaveFormData(this);
             Tls.SaveProperty("cboGGA", cboGGA.SelectedIndex.ToString());
             Tls.SaveProperty("cboVTG", cboVTG.SelectedIndex.ToString());
+            Tls.SaveProperty("Invert", ckInvert.Checked.ToString());
+            Tls.SaveProperty("Swap", ckSwap.Checked.ToString());
+            Tls.SaveProperty("AutoHide", ckAutoHide.Checked.ToString());
         }
 
         private void frmStart_Load(object sender, EventArgs e)
@@ -272,6 +288,12 @@ namespace GPS_Out
             SetCombos();
             PortIndicator1.BackColor = Properties.Settings.Default.DayColour;
             this.BackColor = Properties.Settings.Default.DayColour;
+
+            if (bool.TryParse(Tls.LoadProperty("Invert"), out bool IV)) ckInvert.Checked = IV;
+            if (bool.TryParse(Tls.LoadProperty("Swap"), out bool SP)) ckSwap.Checked = SP;
+            if (bool.TryParse(Tls.LoadProperty("AutoHide"), out bool HD)) ckAutoHide.Checked = HD;
+
+            tmrMinimize.Enabled = ckAutoHide.Checked;
         }
 
         private void frmStart_Resize(object sender, EventArgs e)
@@ -282,7 +304,7 @@ namespace GPS_Out
             }
             else
             {
-                tmrMinimize.Enabled = true;
+                tmrMinimize.Enabled = ckAutoHide.Checked;
             }
         }
 
@@ -349,8 +371,5 @@ namespace GPS_Out
         {
             VTG.Send();
         }
-
-
-
     }
 }
