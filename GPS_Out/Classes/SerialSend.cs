@@ -15,7 +15,11 @@ namespace GPS_Out
             Sport = new SerialPort("Com1", 57600);
             Sport.WriteTimeout = 500;
             LoadData();
-            if (Successfull) Open();
+
+            if (bool.TryParse(mf.Tls.LoadProperty("AutoConnect"), out bool CN))
+            {
+                if (CN && Successfull) Open();
+            }
         }
 
         public int Baud

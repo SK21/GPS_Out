@@ -80,6 +80,7 @@
             this.ckInvert = new System.Windows.Forms.CheckBox();
             this.ckAutoHide = new System.Windows.Forms.CheckBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.ckAutoConnect = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -615,7 +616,7 @@
             this.ckAutoHide.CheckState = System.Windows.Forms.CheckState.Checked;
             this.ckAutoHide.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.ckAutoHide.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ckAutoHide.Location = new System.Drawing.Point(430, 380);
+            this.ckAutoHide.Location = new System.Drawing.Point(430, 397);
             this.ckAutoHide.Name = "ckAutoHide";
             this.ckAutoHide.Size = new System.Drawing.Size(141, 34);
             this.ckAutoHide.TabIndex = 303;
@@ -629,11 +630,27 @@
             this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
             this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
             // 
+            // ckAutoConnect
+            // 
+            this.ckAutoConnect.Appearance = System.Windows.Forms.Appearance.Button;
+            this.ckAutoConnect.Checked = true;
+            this.ckAutoConnect.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ckAutoConnect.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.ckAutoConnect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ckAutoConnect.Location = new System.Drawing.Point(430, 348);
+            this.ckAutoConnect.Name = "ckAutoConnect";
+            this.ckAutoConnect.Size = new System.Drawing.Size(141, 34);
+            this.ckAutoConnect.TabIndex = 304;
+            this.ckAutoConnect.Text = "Auto Connect";
+            this.ckAutoConnect.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.ckAutoConnect.UseVisualStyleBackColor = true;
+            // 
             // frmStart
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(585, 539);
+            this.Controls.Add(this.ckAutoConnect);
             this.Controls.Add(this.ckAutoHide);
             this.Controls.Add(this.ckSwap);
             this.Controls.Add(this.ckInvert);
@@ -736,6 +753,7 @@
         private System.Windows.Forms.CheckBox ckInvert;
         private System.Windows.Forms.CheckBox ckAutoHide;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.CheckBox ckAutoConnect;
     }
 }
 

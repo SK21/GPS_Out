@@ -1,8 +1,7 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
-using System.ComponentModel;
-using System.Diagnostics;
 
 namespace GPS_Out
 {
@@ -64,11 +63,11 @@ namespace GPS_Out
     {
         public PGN54908 AGIOdata;
         public PGN_GGA GGA;
+        public string GGAsentence = "";
         public UDPComm PandaComm;
         public SerialSend SER;
         public clsTools Tls;
         public PGN_VTG VTG;
-        public string GGAsentence = "";
         public string VTGsentence = "";
         private int Watchdog;
 
@@ -189,6 +188,26 @@ namespace GPS_Out
             UpdateForm();
         }
 
+        private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            BackgroundWorker worker = sender as BackgroundWorker;
+            if (worker.CancellationPending == true)
+            {
+                e.Cancel = true;
+            }
+            else
+            {
+                if (GGAsentence != "") SER.SendStringData(GGAsentence);
+                if (VTGsentence != "") SER.SendStringData(VTGsentence);
+            }
+        }
+
+        private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        {
+            GGAsentence = "";
+            VTGsentence = "";
+        }
+
         private void btnConnect1_Click(object sender, EventArgs e)
         {
             if (btnConnect1.Text == "Connect")
@@ -252,6 +271,7 @@ namespace GPS_Out
             Tls.SaveProperty("Invert", ckInvert.Checked.ToString());
             Tls.SaveProperty("Swap", ckSwap.Checked.ToString());
             Tls.SaveProperty("AutoHide", ckAutoHide.Checked.ToString());
+            Tls.SaveProperty("AutoConnect", ckAutoConnect.Checked.ToString());
             SER.Close();
         }
 
@@ -268,20 +288,29 @@ namespace GPS_Out
 
             if (bool.TryParse(Tls.LoadProperty("Invert"), out bool IV)) ckInvert.Checked = IV;
             if (bool.TryParse(Tls.LoadProperty("Swap"), out bool SP)) ckSwap.Checked = SP;
-            if (bool.TryParse(Tls.LoadProperty("AutoHide"), out bool HD)) ckAutoHide.Checked = HD;
+
+            if (bool.TryParse(Tls.LoadProperty("AutoHide"), out bool HD))
+            {
+                ckAutoHide.Checked = HD;
+            }
+            else
+            {
+                ckAutoHide.Checked = false;
+            }
+
+            if (bool.TryParse(Tls.LoadProperty("AutoConnect"), out bool CN))
+            {
+                ckAutoConnect.Checked = CN;
+            }
+            else
+            {
+                ckAutoConnect.Checked = false;
+            }
 
             tmrMinimize.Enabled = ckAutoHide.Checked;
             this.Text = "GPS_Out [" + Tls.AppVersion() + "]";
         }
 
-        private void Send()
-        {
-            if (backgroundWorker1.IsBusy != true)
-            {
-                // Start the asynchronous operation.
-                backgroundWorker1.RunWorkerAsync();
-            }
-        }
         private void frmStart_Resize(object sender, EventArgs e)
         {
             if (this.WindowState == FormWindowState.Minimized)
@@ -308,6 +337,15 @@ namespace GPS_Out
                 cboPort1.Items.Add(s);
             }
             SetPortButtons1();
+        }
+
+        private void Send()
+        {
+            if (backgroundWorker1.IsBusy != true)
+            {
+                // Start the asynchronous operation.
+                backgroundWorker1.RunWorkerAsync();
+            }
         }
 
         private void SetCombos()
@@ -345,9 +383,6 @@ namespace GPS_Out
 
         private void tmrGGA_Tick(object sender, EventArgs e)
         {
-            Debug.Print(Watchdog.ToString());
-            Debug.Print(GGAsentence);
-
             if (GGAsentence == "")
             {
                 Watchdog = 0;
@@ -357,13 +392,10 @@ namespace GPS_Out
             else
             {
                 Watchdog++;
-                if (Watchdog > 10)
+                if (Watchdog > 10 && backgroundWorker1.WorkerSupportsCancellation == true && !backgroundWorker1.CancellationPending)
                 {
-                    if (backgroundWorker1.WorkerSupportsCancellation == true)
-                    {
-                        // Cancel the asynchronous operation.
-                        backgroundWorker1.CancelAsync();
-                    }
+                    // Cancel the asynchronous operation.
+                    backgroundWorker1.CancelAsync();
                 }
             }
         }
@@ -383,36 +415,12 @@ namespace GPS_Out
             else
             {
                 Watchdog++;
-                if (Watchdog > 10)
+                if (Watchdog > 10 && backgroundWorker1.WorkerSupportsCancellation == true && !backgroundWorker1.CancellationPending)
                 {
-                    if (backgroundWorker1.WorkerSupportsCancellation == true)
-                    {
-                        // Cancel the asynchronous operation.
-                        backgroundWorker1.CancelAsync();
-                    }
+                    // Cancel the asynchronous operation.
+                    backgroundWorker1.CancelAsync();
                 }
             }
-        }
-
-
-        private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
-        {
-            BackgroundWorker worker = sender as BackgroundWorker;
-            if (worker.CancellationPending == true)
-            {
-                e.Cancel = true;
-            }
-            else
-            {
-                if (GGAsentence != "") SER.SendStringData(GGAsentence);
-                if (VTGsentence != "") SER.SendStringData(VTGsentence);
-            }
-        }
-
-        private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
-        {
-            GGAsentence = "";
-            VTGsentence = "";
         }
     }
 }
