@@ -37,7 +37,7 @@ namespace GPS_Out
         public string Sentence
         { get { return cSentence; } }
 
-        public void Send()
+        public string Build()
         {
             cSentence = "$GPVTG";
 
@@ -54,7 +54,7 @@ namespace GPS_Out
             string Hex = mf.CheckSum(cSentence).ToString("X2");
             cSentence += Hex;
 
-            mf.SER.SendStringData(cSentence);
+            return cSentence;
         }
     }
 }

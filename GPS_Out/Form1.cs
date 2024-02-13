@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Drawing;
 using System.Windows.Forms;
+using System.ComponentModel;
+using System.Diagnostics;
 
 namespace GPS_Out
 {
@@ -66,6 +68,9 @@ namespace GPS_Out
         public SerialSend SER;
         public clsTools Tls;
         public PGN_VTG VTG;
+        public string GGAsentence = "";
+        public string VTGsentence = "";
+        private int Watchdog;
 
         public frmStart()
         {
@@ -77,6 +82,7 @@ namespace GPS_Out
             GGA = new PGN_GGA(this);
             VTG = new PGN_VTG(this);
             SER = new SerialSend(this);
+            backgroundWorker1.WorkerSupportsCancellation = true;
         }
 
         public int CheckSum(string Data)
@@ -265,8 +271,17 @@ namespace GPS_Out
             if (bool.TryParse(Tls.LoadProperty("AutoHide"), out bool HD)) ckAutoHide.Checked = HD;
 
             tmrMinimize.Enabled = ckAutoHide.Checked;
+            this.Text = "GPS_Out [" + Tls.AppVersion() + "]";
         }
 
+        private void Send()
+        {
+            if (backgroundWorker1.IsBusy != true)
+            {
+                // Start the asynchronous operation.
+                backgroundWorker1.RunWorkerAsync();
+            }
+        }
         private void frmStart_Resize(object sender, EventArgs e)
         {
             if (this.WindowState == FormWindowState.Minimized)
@@ -330,7 +345,27 @@ namespace GPS_Out
 
         private void tmrGGA_Tick(object sender, EventArgs e)
         {
-            GGA.Send();
+            Debug.Print(Watchdog.ToString());
+            Debug.Print(GGAsentence);
+
+            if (GGAsentence == "")
+            {
+                Watchdog = 0;
+                GGAsentence = GGA.Build();
+                Send();
+            }
+            else
+            {
+                Watchdog++;
+                if (Watchdog > 10)
+                {
+                    if (backgroundWorker1.WorkerSupportsCancellation == true)
+                    {
+                        // Cancel the asynchronous operation.
+                        backgroundWorker1.CancelAsync();
+                    }
+                }
+            }
         }
 
         private void tmrMinimize_Tick(object sender, EventArgs e)
@@ -340,7 +375,44 @@ namespace GPS_Out
 
         private void tmrVTG_Tick(object sender, EventArgs e)
         {
-            VTG.Send();
+            if (VTGsentence == "")
+            {
+                Watchdog = 0;
+                VTGsentence = VTG.Build();
+            }
+            else
+            {
+                Watchdog++;
+                if (Watchdog > 10)
+                {
+                    if (backgroundWorker1.WorkerSupportsCancellation == true)
+                    {
+                        // Cancel the asynchronous operation.
+                        backgroundWorker1.CancelAsync();
+                    }
+                }
+            }
+        }
+
+
+        private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
+        {
+            BackgroundWorker worker = sender as BackgroundWorker;
+            if (worker.CancellationPending == true)
+            {
+                e.Cancel = true;
+            }
+            else
+            {
+                if (GGAsentence != "") SER.SendStringData(GGAsentence);
+                if (VTGsentence != "") SER.SendStringData(VTGsentence);
+            }
+        }
+
+        private void backgroundWorker1_RunWorkerCompleted(object sender, System.ComponentModel.RunWorkerCompletedEventArgs e)
+        {
+            GGAsentence = "";
+            VTGsentence = "";
         }
     }
 }

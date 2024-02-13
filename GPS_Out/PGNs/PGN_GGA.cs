@@ -139,7 +139,7 @@ namespace GPS_Out
             }
         }
 
-        public void Send()
+        public string Build()
         {
             cSentence = "$GPGGA";
 
@@ -182,7 +182,7 @@ namespace GPS_Out
             string Hex = mf.CheckSum(cSentence).ToString("X2");
             cSentence += Hex;
 
-            mf.SER.SendStringData(cSentence);
+            return cSentence;
         }
     }
 }

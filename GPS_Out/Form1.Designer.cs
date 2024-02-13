@@ -79,6 +79,7 @@
             this.ckSwap = new System.Windows.Forms.CheckBox();
             this.ckInvert = new System.Windows.Forms.CheckBox();
             this.ckAutoHide = new System.Windows.Forms.CheckBox();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -623,6 +624,11 @@
             this.ckAutoHide.UseVisualStyleBackColor = true;
             this.ckAutoHide.CheckedChanged += new System.EventHandler(this.ckAutoHide_CheckedChanged);
             // 
+            // backgroundWorker1
+            // 
+            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
+            this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_RunWorkerCompleted);
+            // 
             // frmStart
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
@@ -729,6 +735,7 @@
         private System.Windows.Forms.CheckBox ckSwap;
         private System.Windows.Forms.CheckBox ckInvert;
         private System.Windows.Forms.CheckBox ckAutoHide;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
     }
 }
 
