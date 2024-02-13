@@ -63,7 +63,7 @@ namespace GPS_Out
         public PGN54908 AGIOdata;
         public PGN_GGA GGA;
         public UDPComm PandaComm;
-        public SerialComm SER;
+        public SerialSend SER;
         public clsTools Tls;
         public PGN_VTG VTG;
 
@@ -75,8 +75,8 @@ namespace GPS_Out
             AGIOdata = new PGN54908(this);
             AGIOdata.NewData += AGIOdata_NewData;
             GGA = new PGN_GGA(this);
-            SER = new SerialComm(this, 0);
             VTG = new PGN_VTG(this);
+            SER = new SerialSend(this);
         }
 
         public int CheckSum(string Data)
@@ -134,34 +134,6 @@ namespace GPS_Out
             return Result;
         }
 
-        public void StartSerial()
-        {
-            try
-            {
-                String ID = "_0_";
-                SER.RCportName = Tls.LoadProperty("RCportName" + ID + "0");
-
-                int tmp;
-                if (int.TryParse(Tls.LoadProperty("RCportBaud" + ID + "0"), out tmp))
-                {
-                    SER.RCportBaud = tmp;
-                }
-                else
-                {
-                    SER.RCportBaud = 57600;
-                }
-
-                bool tmp2;
-                bool.TryParse(Tls.LoadProperty("RCportSuccessful" + ID + "0"), out tmp2);
-                if (tmp2) SER.OpenRCport();
-            }
-            catch (Exception ex)
-            {
-                Tls.WriteErrorLog("frmStart/StartSerial: " + ex.Message);
-                Tls.ShowHelp(ex.Message, this.Text, 3000, true);
-            }
-        }
-
         public void UpdateForm()
         {
             if (this.WindowState != FormWindowState.Minimized)
@@ -215,11 +187,11 @@ namespace GPS_Out
         {
             if (btnConnect1.Text == "Connect")
             {
-                SER.OpenRCport();
+                SER.Open();
             }
             else
             {
-                SER.CloseRCport();
+                SER.Close();
             }
             SetPortButtons1();
         }
@@ -241,8 +213,7 @@ namespace GPS_Out
 
         private void cboBaud1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            SER.ArduinoPort.BaudRate = Convert.ToInt32(cboBaud1.Text);
-            SER.RCportBaud = Convert.ToInt32(cboBaud1.Text);
+            SER.Baud = Convert.ToInt32(cboBaud1.Text);
         }
 
         private void cboGGA_SelectedIndexChanged(object sender, EventArgs e)
@@ -253,7 +224,7 @@ namespace GPS_Out
 
         private void cboPort1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            SER.RCportName = cboPort1.Text;
+            SER.PortNm = cboPort1.Text;
         }
 
         private void cboVTG_SelectedIndexChanged(object sender, EventArgs e)
@@ -275,12 +246,12 @@ namespace GPS_Out
             Tls.SaveProperty("Invert", ckInvert.Checked.ToString());
             Tls.SaveProperty("Swap", ckSwap.Checked.ToString());
             Tls.SaveProperty("AutoHide", ckAutoHide.Checked.ToString());
+            SER.Close();
         }
 
         private void frmStart_Load(object sender, EventArgs e)
         {
             Tls.LoadFormData(this);
-            StartSerial();
             PandaComm.StartUDPServer();
             LoadRCbox();
             tmrGGA.Enabled = true;
@@ -338,10 +309,10 @@ namespace GPS_Out
 
         private void SetPortButtons1()
         {
-            cboPort1.SelectedIndex = cboPort1.FindStringExact(SER.RCportName);
-            cboBaud1.SelectedIndex = cboBaud1.FindStringExact(SER.RCportBaud.ToString());
+            cboPort1.SelectedIndex = cboPort1.FindStringExact(SER.PortNm);
+            cboBaud1.SelectedIndex = cboBaud1.FindStringExact(SER.Baud.ToString());
 
-            if (SER.ArduinoPort.IsOpen)
+            if (SER.IsOpen())
             {
                 cboBaud1.Enabled = false;
                 cboPort1.Enabled = false;

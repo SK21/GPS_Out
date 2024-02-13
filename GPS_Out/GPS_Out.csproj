@@ -50,7 +50,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\clsTools.cs" />
-    <Compile Include="Classes\SerialComm.cs" />
+    <Compile Include="Classes\SerialSend.cs" />
     <Compile Include="Classes\UDPcomm.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
