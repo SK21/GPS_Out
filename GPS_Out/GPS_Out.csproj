@@ -65,6 +65,7 @@
       <DependentUpon>frmHelp.cs</DependentUpon>
     </Compile>
     <Compile Include="PGNs\PGN54908.cs" />
+    <Compile Include="PGNs\PGNs_RMC.cs" />
     <Compile Include="PGNs\PGN_GGA.cs" />
     <Compile Include="PGNs\PGN_VTG.cs" />
     <Compile Include="Program.cs" />

@@ -65,6 +65,8 @@ namespace GPS_Out
         public PGN_GGA GGA;
         public string GGAsentence = "";
         public UDPComm PandaComm;
+        public PGNs_RMC RMC;
+        public string RMCsentence = "";
         public SerialSend SER;
         public clsTools Tls;
         public PGN_VTG VTG;
@@ -81,6 +83,7 @@ namespace GPS_Out
             GGA = new PGN_GGA(this);
             VTG = new PGN_VTG(this);
             SER = new SerialSend(this);
+            RMC = new PGNs_RMC(this);
             backgroundWorker1.WorkerSupportsCancellation = true;
         }
 
@@ -199,6 +202,7 @@ namespace GPS_Out
             {
                 if (GGAsentence != "") SER.SendStringData(GGAsentence);
                 if (VTGsentence != "") SER.SendStringData(VTGsentence);
+                if (RMCsentence != "") SER.SendStringData(RMCsentence);
             }
         }
 
@@ -206,6 +210,7 @@ namespace GPS_Out
         {
             GGAsentence = "";
             VTGsentence = "";
+            RMCsentence = "";
         }
 
         private void btnConnect1_Click(object sender, EventArgs e)
@@ -231,6 +236,11 @@ namespace GPS_Out
             LoadRCbox();
         }
 
+        private void btnRMC_Click(object sender, EventArgs e)
+        {
+            tbRMC.Text = RMC.Sentence;
+        }
+
         private void btnVTG_Click(object sender, EventArgs e)
         {
             tbVTG.Text = VTG.Sentence;
@@ -252,6 +262,12 @@ namespace GPS_Out
             SER.PortNm = cboPort1.Text;
         }
 
+        private void cboRMC_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            tmrRMC.Interval = 1000 / Convert.ToInt16(cboRMC.Text);
+            tmrRMC.Enabled = true;
+        }
+
         private void cboVTG_SelectedIndexChanged(object sender, EventArgs e)
         {
             tmrVTG.Interval = 1000 / Convert.ToInt16(cboVTG.Text);
@@ -268,6 +284,7 @@ namespace GPS_Out
             Tls.SaveFormData(this);
             Tls.SaveProperty("cboGGA", cboGGA.SelectedIndex.ToString());
             Tls.SaveProperty("cboVTG", cboVTG.SelectedIndex.ToString());
+            Tls.SaveProperty("cboRMC", cboRMC.SelectedIndex.ToString());
             Tls.SaveProperty("Invert", ckInvert.Checked.ToString());
             Tls.SaveProperty("Swap", ckSwap.Checked.ToString());
             Tls.SaveProperty("AutoHide", ckAutoHide.Checked.ToString());
@@ -352,12 +369,15 @@ namespace GPS_Out
         {
             byte GGAcombo = 1;
             byte VTGcombo = 1;
+            byte RMCcombo = 1;
 
             if (byte.TryParse(Tls.LoadProperty("cboGGA"), out byte gga)) GGAcombo = gga;
             if (byte.TryParse(Tls.LoadProperty("cboVTG"), out byte vtg)) VTGcombo = vtg;
+            if (byte.TryParse(Tls.LoadProperty("cboRMC"), out byte rmc)) RMCcombo = rmc;
 
             cboGGA.SelectedIndex = GGAcombo;
             cboVTG.SelectedIndex = VTGcombo;
+            cboRMC.SelectedIndex = RMCcombo;
         }
 
         private void SetPortButtons1()
@@ -403,6 +423,24 @@ namespace GPS_Out
         private void tmrMinimize_Tick(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void tmrRMC_Tick(object sender, EventArgs e)
+        {
+            if (RMCsentence == "")
+            {
+                Watchdog = 0;
+                RMCsentence = RMC.Build();
+            }
+            else
+            {
+                Watchdog++;
+                if (Watchdog > 10 && backgroundWorker1.WorkerSupportsCancellation == true && !backgroundWorker1.CancellationPending)
+                {
+                    // Cancel the asynchronous operation.
+                    backgroundWorker1.CancelAsync();
+                }
+            }
         }
 
         private void tmrVTG_Tick(object sender, EventArgs e)
