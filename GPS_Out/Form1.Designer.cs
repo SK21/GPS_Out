@@ -65,6 +65,9 @@
             this.tmrGGA = new System.Windows.Forms.Timer(this.components);
             this.label9 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.cboRMC = new System.Windows.Forms.ComboBox();
+            this.label18 = new System.Windows.Forms.Label();
             this.label16 = new System.Windows.Forms.Label();
             this.cboVTG = new System.Windows.Forms.ComboBox();
             this.label11 = new System.Windows.Forms.Label();
@@ -83,9 +86,6 @@
             this.ckAutoConnect = new System.Windows.Forms.CheckBox();
             this.btnRMC = new System.Windows.Forms.Button();
             this.tbRMC = new System.Windows.Forms.TextBox();
-            this.label17 = new System.Windows.Forms.Label();
-            this.cboRMC = new System.Windows.Forms.ComboBox();
-            this.label18 = new System.Windows.Forms.Label();
             this.tmrRMC = new System.Windows.Forms.Timer(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -94,7 +94,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(15, 9);
+            this.label1.Location = new System.Drawing.Point(15, 33);
             this.label1.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(42, 24);
@@ -104,7 +104,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(15, 33);
+            this.label2.Location = new System.Drawing.Point(15, 9);
             this.label2.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(34, 24);
@@ -215,7 +215,7 @@
             // 
             this.lbLon.AutoSize = true;
             this.lbLon.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbLon.Location = new System.Drawing.Point(106, 9);
+            this.lbLon.Location = new System.Drawing.Point(106, 33);
             this.lbLon.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lbLon.Name = "lbLon";
             this.lbLon.Size = new System.Drawing.Size(126, 24);
@@ -226,7 +226,7 @@
             // 
             this.lbLat.AutoSize = true;
             this.lbLat.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbLat.Location = new System.Drawing.Point(106, 33);
+            this.lbLat.Location = new System.Drawing.Point(106, 9);
             this.lbLat.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lbLat.Name = "lbLat";
             this.lbLat.Size = new System.Drawing.Size(126, 24);
@@ -484,6 +484,41 @@
             this.groupBox2.Text = "Transfer Rate";
             this.groupBox2.Paint += new System.Windows.Forms.PaintEventHandler(this.groupBox1_Paint);
             // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(351, 36);
+            this.label17.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(33, 24);
+            this.label17.TabIndex = 161;
+            this.label17.Text = "Hz";
+            // 
+            // cboRMC
+            // 
+            this.cboRMC.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboRMC.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold);
+            this.cboRMC.FormattingEnabled = true;
+            this.cboRMC.Items.AddRange(new object[] {
+            "1",
+            "5",
+            "10"});
+            this.cboRMC.Location = new System.Drawing.Point(282, 28);
+            this.cboRMC.Name = "cboRMC";
+            this.cboRMC.Size = new System.Drawing.Size(60, 37);
+            this.cboRMC.TabIndex = 160;
+            this.cboRMC.SelectedIndexChanged += new System.EventHandler(this.cboRMC_SelectedIndexChanged);
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(222, 36);
+            this.label18.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(52, 24);
+            this.label18.TabIndex = 159;
+            this.label18.Text = "RMC";
+            // 
             // label16
             // 
             this.label16.AutoSize = true;
@@ -673,41 +708,6 @@
             this.tbRMC.Size = new System.Drawing.Size(478, 20);
             this.tbRMC.TabIndex = 305;
             // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(351, 36);
-            this.label17.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(33, 24);
-            this.label17.TabIndex = 161;
-            this.label17.Text = "Hz";
-            // 
-            // cboRMC
-            // 
-            this.cboRMC.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboRMC.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold);
-            this.cboRMC.FormattingEnabled = true;
-            this.cboRMC.Items.AddRange(new object[] {
-            "1",
-            "5",
-            "10"});
-            this.cboRMC.Location = new System.Drawing.Point(282, 28);
-            this.cboRMC.Name = "cboRMC";
-            this.cboRMC.Size = new System.Drawing.Size(60, 37);
-            this.cboRMC.TabIndex = 160;
-            this.cboRMC.SelectedIndexChanged += new System.EventHandler(this.cboRMC_SelectedIndexChanged);
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(222, 36);
-            this.label18.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(52, 24);
-            this.label18.TabIndex = 159;
-            this.label18.Text = "RMC";
-            // 
             // tmrRMC
             // 
             this.tmrRMC.Tick += new System.EventHandler(this.tmrRMC_Tick);
@@ -716,7 +716,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(585, 579);
+            this.ClientSize = new System.Drawing.Size(584, 579);
             this.Controls.Add(this.btnRMC);
             this.Controls.Add(this.tbRMC);
             this.Controls.Add(this.ckAutoConnect);

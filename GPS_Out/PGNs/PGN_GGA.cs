@@ -47,106 +47,14 @@ namespace GPS_Out
             mf = CalledFrom;
         }
 
-        public float Age
-        { get { return (float)(cAgeX100 / 100.0); } }
-
-        public float Altitude
-        { get { return cAltitude; } }
-
-        public byte FixQuality
-        { get { return cFixQuality; } }
-
-        public float HDOP
-        { get { return (float)(cHdopX100 / 100.0); } }
-
-        public double Latitude
-        { get { return cLatitude; } }
-
-        public double Longitude
-        { get { return cLongitude; } }
-
-        public string ReceivedGGA
-        { get { return cSentence; } }
-
-        public UInt16 Satellites
-        { get { return cSatellites; } }
-
         public string Sentence
         { get { return cSentence; } }
-
-        public void DecodeGGA(string Sentence)
-        {
-            string[] words = Sentence.Split(',');
-            if (!string.IsNullOrEmpty(words[1]) && !string.IsNullOrEmpty(words[2]) && !string.IsNullOrEmpty(words[3])
-                && !string.IsNullOrEmpty(words[4]) && !string.IsNullOrEmpty(words[5]))
-            {
-                //FixQuality
-                byte.TryParse(words[6], NumberStyles.Float, CultureInfo.InvariantCulture, out byte fixQuality);
-                cFixQuality = fixQuality;
-
-                //satellites tracked
-                ushort.TryParse(words[7], NumberStyles.Float, CultureInfo.InvariantCulture, out ushort satellitesTracked);
-                cSatellites = satellitesTracked;
-
-                //hdop
-                float.TryParse(words[8], NumberStyles.Float, CultureInfo.InvariantCulture, out float hdopData);
-                cHdopX100 = (ushort)(hdopData * 100.0);
-
-                //altitude
-                float.TryParse(words[9], NumberStyles.Float, CultureInfo.InvariantCulture, out float altitude);
-                cAltitude = altitude;
-
-                //age
-                float.TryParse(words[13], NumberStyles.Float, CultureInfo.InvariantCulture, out float ageData);
-                cAgeX100 = (ushort)(ageData * 100.0);
-
-                //get latitude and convert to decimal degrees
-                int decim = words[2].IndexOf(".", StringComparison.Ordinal);
-                if (decim == -1)
-                {
-                    words[2] += ".00";
-                    decim = words[2].IndexOf(".", StringComparison.Ordinal);
-                }
-
-                decim -= 2;
-                double.TryParse(words[2].Substring(0, decim), NumberStyles.Float, CultureInfo.InvariantCulture, out double latitude);
-                double.TryParse(words[2].Substring(decim), NumberStyles.Float, CultureInfo.InvariantCulture, out double temp);
-                temp *= 0.01666666666667;
-                latitude += temp;
-                if (words[3] == "S")
-                    latitude *= -1;
-                cLatitude = latitude;
-
-                //get longitude and convert to decimal degrees
-                decim = words[4].IndexOf(".", StringComparison.Ordinal);
-                if (decim == -1)
-                {
-                    words[4] += ".00";
-                    decim = words[4].IndexOf(".", StringComparison.Ordinal);
-                }
-                double.TryParse(words[4].Substring(0, 3), NumberStyles.Float, CultureInfo.InvariantCulture, out double Lng);
-                double.TryParse(words[4].Substring(3), NumberStyles.Float, CultureInfo.InvariantCulture, out double Mins);
-                Lng += Mins * 0.0166666666667;
-                double longitude = Lng;
-
-                //decim -= 2;
-                //double.TryParse(words[4].Substring(0, decim), NumberStyles.Float, CultureInfo.InvariantCulture, out double longitude);
-                //double.TryParse(words[4].Substring(decim), NumberStyles.Float, CultureInfo.InvariantCulture, out temp);
-                //longitude += temp * 0.0166666666667;
-
-                { if (words[5] == "W") longitude *= -1; }
-                cLongitude = longitude;
-            }
-        }
 
         public string Build()
         {
             cSentence = "$GPGGA";
 
-            string Hour = DateTime.UtcNow.Hour.ToString();
-            string Minute = DateTime.UtcNow.Minute.ToString();
-            string Second = DateTime.UtcNow.Second.ToString();
-            cSentence += "," + Hour + Minute + Second;
+            cSentence += "," + DateTime.UtcNow.ToString("HHmmss.ss");
 
             double lat = mf.AGIOdata.Latitude;
             string NS = ",N";
@@ -154,7 +62,7 @@ namespace GPS_Out
             lat = Math.Abs(lat);
             cSentence += "," + ((int)lat).ToString("D2");
             double Mins = (double)(lat - (int)lat) * 60.0;
-            cSentence += Mins.ToString("N6");
+            cSentence += Mins.ToString("N7");
             cSentence += NS;
 
             double lon = mf.AGIOdata.Longitude;
@@ -163,7 +71,7 @@ namespace GPS_Out
             lon = Math.Abs(lon);
             cSentence += "," + ((int)lon).ToString("D3");
             Mins = (double)(lon - (int)lon) * 60.0;
-            cSentence += Mins.ToString("N6");
+            cSentence += Mins.ToString("N7");
             cSentence += EW;
 
             cSentence += "," + mf.AGIOdata.FixQuality.ToString();

@@ -22,18 +22,6 @@ namespace GPS_Out
             mf = CalledFrom;
         }
 
-        public double Heading
-        { get { return mf.AGIOdata.IMUheading; } }
-
-        public double KMH
-        { get { return mf.AGIOdata.Speed; } }
-
-        public double Knots
-        { get { return mf.AGIOdata.Speed * 0.5399568; } }
-
-        public double MagHeading
-        { get { return mf.AGIOdata.IMUheading; } }
-
         public string Sentence
         { get { return cSentence; } }
 

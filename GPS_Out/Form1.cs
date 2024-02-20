@@ -142,50 +142,6 @@ namespace GPS_Out
             return Result;
         }
 
-        public void UpdateForm()
-        {
-            if (this.WindowState != FormWindowState.Minimized)
-            {
-                lbAge.Text = AGIOdata.Age.ToString("N2");
-                lbLon.Text = AGIOdata.Longitude.ToString("N7");
-                lbLat.Text = AGIOdata.Latitude.ToString("N7");
-                lbSpeed.Text = AGIOdata.Speed.ToString("N1");
-                lbQuality.Text = FixQuality(AGIOdata.FixQuality);
-                lbHDOP.Text = AGIOdata.HDOP.ToString("N2");
-                lbSats.Text = AGIOdata.Satellites.ToString("");
-                lbElev.Text = AGIOdata.Altitude.ToString("N1");
-                lbAge.Text = AGIOdata.Age.ToString("N1");
-
-                lbYawRate.Text = AGIOdata.IMUyawRate.ToString("N0");
-                lbYaw.Text = AGIOdata.IMUheading.ToString("N1");
-
-                if (ckSwap.Checked)
-                {
-                    if (ckInvert.Checked)
-                    {
-                        lbRoll.Text = (AGIOdata.IMUpitch * -1.0).ToString("N1");
-                    }
-                    else
-                    {
-                        lbRoll.Text = AGIOdata.IMUpitch.ToString("N1");
-                    }
-                    lbPitch.Text = AGIOdata.IMUroll.ToString("N1");
-                }
-                else
-                {
-                    if (ckInvert.Checked)
-                    {
-                        lbRoll.Text = (AGIOdata.IMUroll * -1.0).ToString("N1");
-                    }
-                    else
-                    {
-                        lbRoll.Text = AGIOdata.IMUroll.ToString("N1");
-                    }
-                    lbPitch.Text = AGIOdata.IMUpitch.ToString("N1");
-                }
-            }
-        }
-
         private void AGIOdata_NewData(object sender, EventArgs e)
         {
             UpdateForm();
@@ -457,6 +413,50 @@ namespace GPS_Out
                 {
                     // Cancel the asynchronous operation.
                     backgroundWorker1.CancelAsync();
+                }
+            }
+        }
+
+        private void UpdateForm()
+        {
+            if (this.WindowState != FormWindowState.Minimized)
+            {
+                lbAge.Text = AGIOdata.Age.ToString("N2");
+                lbLon.Text = AGIOdata.Longitude.ToString("N7");
+                lbLat.Text = AGIOdata.Latitude.ToString("N7");
+                lbSpeed.Text = AGIOdata.Speed.ToString("N1");
+                lbQuality.Text = FixQuality(AGIOdata.FixQuality);
+                lbHDOP.Text = AGIOdata.HDOP.ToString("N2");
+                lbSats.Text = AGIOdata.Satellites.ToString("");
+                lbElev.Text = AGIOdata.Altitude.ToString("N1");
+                lbAge.Text = AGIOdata.Age.ToString("N1");
+
+                lbYawRate.Text = AGIOdata.IMUyawRate.ToString("N0");
+                lbYaw.Text = AGIOdata.IMUheading.ToString("N1");
+
+                if (ckSwap.Checked)
+                {
+                    if (ckInvert.Checked)
+                    {
+                        lbRoll.Text = (AGIOdata.IMUpitch * -1.0).ToString("N1");
+                    }
+                    else
+                    {
+                        lbRoll.Text = AGIOdata.IMUpitch.ToString("N1");
+                    }
+                    lbPitch.Text = AGIOdata.IMUroll.ToString("N1");
+                }
+                else
+                {
+                    if (ckInvert.Checked)
+                    {
+                        lbRoll.Text = (AGIOdata.IMUroll * -1.0).ToString("N1");
+                    }
+                    else
+                    {
+                        lbRoll.Text = AGIOdata.IMUroll.ToString("N1");
+                    }
+                    lbPitch.Text = AGIOdata.IMUpitch.ToString("N1");
                 }
             }
         }
