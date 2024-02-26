@@ -18,7 +18,6 @@ namespace GPS_Out
         private string cSubNet;
         private HandleDataDelegateObj HandleDataDelegate = null;
         private Socket recvSocket;
-        private DateTime SBtime;
         private Socket sendSocket;
 
         public UDPComm(frmStart CallingForm, int ReceivePort, int SendToPort, int SendFromPort, string ConnectionName, string DestinationEndPoint = "")

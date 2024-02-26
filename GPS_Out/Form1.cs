@@ -233,6 +233,7 @@ namespace GPS_Out
         private void ckAutoHide_CheckedChanged(object sender, EventArgs e)
         {
             tmrMinimize.Enabled = ckAutoHide.Checked;
+            if (ckAutoHide.Checked) this.WindowState = FormWindowState.Minimized;
         }
 
         private void frmStart_FormClosed(object sender, FormClosedEventArgs e)
@@ -282,6 +283,8 @@ namespace GPS_Out
 
             tmrMinimize.Enabled = ckAutoHide.Checked;
             this.Text = "GPS_Out [" + Tls.AppVersion() + "]";
+
+            if (ckAutoHide.Checked) this.WindowState = FormWindowState.Minimized;
         }
 
         private void frmStart_Resize(object sender, EventArgs e)

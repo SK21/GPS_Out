@@ -303,7 +303,7 @@
             // 
             this.lbYawRate.AutoSize = true;
             this.lbYawRate.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbYawRate.Location = new System.Drawing.Point(116, 165);
+            this.lbYawRate.Location = new System.Drawing.Point(106, 165);
             this.lbYawRate.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lbYawRate.Name = "lbYawRate";
             this.lbYawRate.Size = new System.Drawing.Size(126, 24);
@@ -336,7 +336,7 @@
             // 
             this.lbYaw.AutoSize = true;
             this.lbYaw.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbYaw.Location = new System.Drawing.Point(116, 126);
+            this.lbYaw.Location = new System.Drawing.Point(106, 126);
             this.lbYaw.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lbYaw.Name = "lbYaw";
             this.lbYaw.Size = new System.Drawing.Size(126, 24);
@@ -632,9 +632,9 @@
             this.ckSwap.Appearance = System.Windows.Forms.Appearance.Button;
             this.ckSwap.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.ckSwap.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ckSwap.Location = new System.Drawing.Point(295, 160);
+            this.ckSwap.Location = new System.Drawing.Point(298, 160);
             this.ckSwap.Name = "ckSwap";
-            this.ckSwap.Size = new System.Drawing.Size(72, 34);
+            this.ckSwap.Size = new System.Drawing.Size(69, 34);
             this.ckSwap.TabIndex = 302;
             this.ckSwap.Text = "Swap";
             this.ckSwap.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -645,9 +645,9 @@
             this.ckInvert.Appearance = System.Windows.Forms.Appearance.Button;
             this.ckInvert.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.ckInvert.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ckInvert.Location = new System.Drawing.Point(295, 121);
+            this.ckInvert.Location = new System.Drawing.Point(298, 121);
             this.ckInvert.Name = "ckInvert";
-            this.ckInvert.Size = new System.Drawing.Size(72, 34);
+            this.ckInvert.Size = new System.Drawing.Size(69, 34);
             this.ckInvert.TabIndex = 301;
             this.ckInvert.Text = "Invert";
             this.ckInvert.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -754,6 +754,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(6);
             this.MaximizeBox = false;

@@ -32,13 +32,6 @@ namespace GPS_Out
         // (empty field) DGPS station ID number
         // *47          the checksum data, always begins with*
 
-        private ushort cAgeX100;
-        private float cAltitude;
-        private byte cFixQuality;
-        private ushort cHdopX100;
-        private double cLatitude;
-        private double cLongitude;
-        private ushort cSatellites;
         private string cSentence;
         private frmStart mf;
 

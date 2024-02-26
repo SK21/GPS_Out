@@ -41,7 +41,32 @@ namespace RateController
             panel1.Width = this.Width - 40;
             panel1.Height = this.Height - 40;
             label1.MaximumSize = new Size(panel1.Width - 10, 0);
+        }
 
+        private void frmHelp_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (this.WindowState == FormWindowState.Normal)
+            {
+                mf.Tls.SaveFormData(this);
+            }
+        }
+
+        private void frmHelp_Load(object sender, EventArgs e)
+        {
+            try
+            {
+                mf.Tls.LoadFormData(this);
+                this.BackColor = GPS_Out.Properties.Settings.Default.DayColour;
+            }
+            catch (Exception ex)
+            {
+                mf.Tls.WriteErrorLog("frmHelp/frmHelp_Load: " + ex.Message);
+            }
+        }
+
+        private void panel1_Click(object sender, EventArgs e)
+        {
+            Close();
         }
 
         private void timer1_Tick(object sender, EventArgs e)
@@ -56,33 +81,5 @@ namespace RateController
             }
             Close();
         }
-
-        private void frmHelp_Load(object sender, EventArgs e)
-        {
-            try
-            {
-                mf.Tls.LoadFormData(this);
-                this.BackColor = GPS_Out.Properties.Settings.Default.DayColour;
-
-            }
-            catch (Exception ex)
-            {
-                mf.Tls.WriteErrorLog("frmHelp/frmHelp_Load: " + ex.Message);
-            }
-        }
-
-        private void frmHelp_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            if (this.WindowState == FormWindowState.Normal)
-            {
-                mf.Tls.SaveFormData(this);
-            }
-        }
-
-        private void panel1_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
-
     }
 }
