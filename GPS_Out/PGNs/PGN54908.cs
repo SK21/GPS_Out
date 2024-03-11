@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace GPS_Out
 {
@@ -48,6 +44,7 @@ namespace GPS_Out
         private ushort cSatellites;
         private float cSpeed;
         private frmStart mf;
+        private DateTime ReceiveTime;
 
         public PGN54908(frmStart CalledFrom)
         {
@@ -78,19 +75,43 @@ namespace GPS_Out
         { get { return cImuHeading; } }
 
         public float IMUpitch
-        { get { return (float)(cImuPitch/10.0); } }
+        { get { return (float)(cImuPitch / 10.0); } }
 
         public float IMUroll
-        { get { return (float)(cImuRoll/10.0); } }
+        { get { return (float)(cImuRoll / 10.0); } }
 
         public ushort IMUyawRate
         { get { return cImuYaw; } }
 
         public double Latitude
-        { get { return cLatitude; } }
+        {
+            get
+            {
+                if (Connected())
+                {
+                    return cLatitude;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+        }
 
         public double Longitude
-        { get { return cLongitude; } }
+        {
+            get
+            {
+                if (Connected())
+                {
+                    return cLongitude;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+        }
 
         public float Roll
         { get { return cRoll; } }
@@ -100,6 +121,11 @@ namespace GPS_Out
 
         public float Speed
         { get { return cSpeed; } }
+
+        public bool Connected()
+        {
+            return (DateTime.Now - ReceiveTime).TotalSeconds < 4;
+        }
 
         public bool ParseByteData(byte[] Data)
         {
@@ -123,6 +149,7 @@ namespace GPS_Out
                 cImuYaw = BitConverter.ToUInt16(Data, 54);
 
                 NewData?.Invoke(this, EventArgs.Empty);
+                ReceiveTime = DateTime.Now;
                 Result = true;
             }
             return Result;

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Net;
 using System.Net.Sockets;
 
@@ -50,7 +51,6 @@ namespace GPS_Out
                 }
             }
         }
-
 
         //sends byte array
         public void SendUDPMessage(byte[] byteData)
@@ -123,20 +123,17 @@ namespace GPS_Out
             {
                 if (Data.Length > 1)
                 {
-                    int PGN = Data[1] << 8 | Data[0];   
+                    int PGN = Data[1] << 8 | Data[0];
                     AddToLog("< " + PGN.ToString());
 
-                    switch (PGN)
+                    if (Data[0] == 0x80 && Data[1] == 0x81 && Data[2] == 0x7C && Data[3] == 0xD6)
                     {
-                        case 33152: // AOG, 0x81, 0x80
-                            int SubPGN = Data[3] << 8 | Data[2];
-                            switch (SubPGN)
-                            {
-                                case 54908: // AGIO NEMA translation
-                                    mf.AGIOdata.ParseByteData(Data);
-                                    break;
-                            }
-                            break;
+                        mf.AGIOdata.ParseByteData(Data);
+                    }
+
+                    if (Data[0] == 0x80 && Data[1] == 0x81 && Data[2] == 0x7F && Data[3] == 0x64)
+                    {
+                        mf.RollCorrected.ParseByteData(Data);
                     }
                 }
             }

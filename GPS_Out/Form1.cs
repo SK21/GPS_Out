@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GPS_Out.PGNs;
+using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
@@ -61,14 +62,17 @@ namespace GPS_Out
 
     public partial class frmStart : Form
     {
+        public UDPComm AGIOcomm;
         public PGN54908 AGIOdata;
+        public UDPComm AOGcomm;
         public PGN_GGA GGA;
         public string GGAsentence = "";
-        public UDPComm PandaComm;
         public PGNs_RMC RMC;
         public string RMCsentence = "";
+        public PGN100 RollCorrected;
         public SerialSend SER;
         public clsTools Tls;
+        public bool UseRollCorrected;
         public PGN_VTG VTG;
         public string VTGsentence = "";
         private int Watchdog;
@@ -77,13 +81,16 @@ namespace GPS_Out
         {
             InitializeComponent();
             Tls = new clsTools(this);
-            PandaComm = new UDPComm(this, 15555, 8000, 7120, "PandaComm", "127.255.255.255");
+            AGIOcomm = new UDPComm(this, 15555, 8000, 7120, "AGIOcomm", "127.255.255.255");
+            AOGcomm = new UDPComm(this, 17777, 8500, 9010, "AOGcomm", "127.255.255.255");
             AGIOdata = new PGN54908(this);
             AGIOdata.NewData += AGIOdata_NewData;
             GGA = new PGN_GGA(this);
             VTG = new PGN_VTG(this);
             SER = new SerialSend(this);
             RMC = new PGNs_RMC(this);
+            RollCorrected = new PGN100(this);
+            RollCorrected.NewData += RollCorrected_NewData;
             backgroundWorker1.WorkerSupportsCancellation = true;
         }
 
@@ -236,6 +243,11 @@ namespace GPS_Out
             if (ckAutoHide.Checked) this.WindowState = FormWindowState.Minimized;
         }
 
+        private void ckRollCorrected_CheckedChanged(object sender, EventArgs e)
+        {
+            UseRollCorrected = ckRollCorrected.Checked;
+        }
+
         private void frmStart_FormClosed(object sender, FormClosedEventArgs e)
         {
             Tls.SaveFormData(this);
@@ -246,13 +258,15 @@ namespace GPS_Out
             Tls.SaveProperty("Swap", ckSwap.Checked.ToString());
             Tls.SaveProperty("AutoHide", ckAutoHide.Checked.ToString());
             Tls.SaveProperty("AutoConnect", ckAutoConnect.Checked.ToString());
+            Tls.SaveProperty("UseRollCorrected", ckRollCorrected.Checked.ToString());
             SER.Close();
         }
 
         private void frmStart_Load(object sender, EventArgs e)
         {
             Tls.LoadFormData(this);
-            PandaComm.StartUDPServer();
+            AGIOcomm.StartUDPServer();
+            AOGcomm.StartUDPServer();
             LoadRCbox();
             tmrGGA.Enabled = true;
             UpdateForm();
@@ -279,6 +293,16 @@ namespace GPS_Out
             else
             {
                 ckAutoConnect.Checked = false;
+            }
+
+            if (bool.TryParse(Tls.LoadProperty("UseRollCorrected"), out bool RC))
+            {
+                ckRollCorrected.Checked = RC;
+                UseRollCorrected = RC;
+            }
+            else
+            {
+                ckRollCorrected.Checked = false;
             }
 
             tmrMinimize.Enabled = ckAutoHide.Checked;
@@ -313,6 +337,11 @@ namespace GPS_Out
                 cboPort1.Items.Add(s);
             }
             SetPortButtons1();
+        }
+
+        private void RollCorrected_NewData(object sender, EventArgs e)
+        {
+            UpdateForm();
         }
 
         private void Send()
@@ -424,9 +453,18 @@ namespace GPS_Out
         {
             if (this.WindowState != FormWindowState.Minimized)
             {
+                if (UseRollCorrected)
+                {
+                    lbLon.Text = RollCorrected.Longitude.ToString("N7");
+                    lbLat.Text = RollCorrected.Latitude.ToString("N7");
+                }
+                else
+                {
+                    lbLon.Text = AGIOdata.Longitude.ToString("N7");
+                    lbLat.Text = AGIOdata.Latitude.ToString("N7");
+                }
+
                 lbAge.Text = AGIOdata.Age.ToString("N2");
-                lbLon.Text = AGIOdata.Longitude.ToString("N7");
-                lbLat.Text = AGIOdata.Latitude.ToString("N7");
                 lbSpeed.Text = AGIOdata.Speed.ToString("N1");
                 lbQuality.Text = FixQuality(AGIOdata.FixQuality);
                 lbHDOP.Text = AGIOdata.HDOP.ToString("N2");

@@ -87,6 +87,7 @@
             this.btnRMC = new System.Windows.Forms.Button();
             this.tbRMC = new System.Windows.Forms.TextBox();
             this.tmrRMC = new System.Windows.Forms.Timer(this.components);
+            this.ckRollCorrected = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -660,7 +661,7 @@
             this.ckAutoHide.CheckState = System.Windows.Forms.CheckState.Checked;
             this.ckAutoHide.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.ckAutoHide.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ckAutoHide.Location = new System.Drawing.Point(430, 397);
+            this.ckAutoHide.Location = new System.Drawing.Point(430, 375);
             this.ckAutoHide.Name = "ckAutoHide";
             this.ckAutoHide.Size = new System.Drawing.Size(141, 34);
             this.ckAutoHide.TabIndex = 303;
@@ -681,7 +682,7 @@
             this.ckAutoConnect.CheckState = System.Windows.Forms.CheckState.Checked;
             this.ckAutoConnect.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.ckAutoConnect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ckAutoConnect.Location = new System.Drawing.Point(430, 348);
+            this.ckAutoConnect.Location = new System.Drawing.Point(430, 332);
             this.ckAutoConnect.Name = "ckAutoConnect";
             this.ckAutoConnect.Size = new System.Drawing.Size(141, 34);
             this.ckAutoConnect.TabIndex = 304;
@@ -712,11 +713,28 @@
             // 
             this.tmrRMC.Tick += new System.EventHandler(this.tmrRMC_Tick);
             // 
+            // ckRollCorrected
+            // 
+            this.ckRollCorrected.Appearance = System.Windows.Forms.Appearance.Button;
+            this.ckRollCorrected.Checked = true;
+            this.ckRollCorrected.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ckRollCorrected.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.ckRollCorrected.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ckRollCorrected.Location = new System.Drawing.Point(430, 418);
+            this.ckRollCorrected.Name = "ckRollCorrected";
+            this.ckRollCorrected.Size = new System.Drawing.Size(141, 34);
+            this.ckRollCorrected.TabIndex = 307;
+            this.ckRollCorrected.Text = "Roll Corrected";
+            this.ckRollCorrected.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.ckRollCorrected.UseVisualStyleBackColor = true;
+            this.ckRollCorrected.CheckedChanged += new System.EventHandler(this.ckRollCorrected_CheckedChanged);
+            // 
             // frmStart
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(584, 579);
+            this.Controls.Add(this.ckRollCorrected);
             this.Controls.Add(this.btnRMC);
             this.Controls.Add(this.tbRMC);
             this.Controls.Add(this.ckAutoConnect);
@@ -830,6 +848,7 @@
         private System.Windows.Forms.ComboBox cboRMC;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Timer tmrRMC;
+        private System.Windows.Forms.CheckBox ckRollCorrected;
     }
 }
 
