@@ -49,7 +49,7 @@ namespace GPS_Out
             double lon;
             cSentence = "$GPGGA";
 
-            cSentence += "," + DateTime.UtcNow.ToString("HHmmss.ss");
+            cSentence += "," + DateTime.UtcNow.ToString("HHmmss.f0");
 
             if (mf.UseRollCorrected)
             {

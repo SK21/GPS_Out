@@ -38,7 +38,7 @@ namespace GPS_Out
             double lon;
             cSentence = "$GPRMC";
 
-            cSentence += "," + DateTime.UtcNow.ToString("HHmmss.ss");
+            cSentence += "," + DateTime.UtcNow.ToString("HHmmss.f0");
 
             cSentence += ",A";
 
