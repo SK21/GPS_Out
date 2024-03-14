@@ -29,9 +29,9 @@ namespace GPS_Out
 
         private const byte cByteCount = 57;
         private ushort cAgeX100;
-        private float cAltitude;
-        private byte cFixQuality;
-        private ushort cHdopX100;
+        private float cAltitude = 732.0F;
+        private byte cFixQuality = 8;
+        private ushort cHdopX100 = 70;
         private float cHeading;
         private float cHeadingDual;
         private float cImuHeading;
@@ -41,8 +41,8 @@ namespace GPS_Out
         private double cLatitude;
         private double cLongitude;
         private float cRoll;
-        private ushort cSatellites;
-        private float cSpeed;
+        private ushort cSatellites = 12;
+        private float cSpeed = 4.8F;
         private frmStart mf;
         private DateTime ReceiveTime;
 
