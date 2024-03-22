@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Globalization;
 
 namespace GPS_Out
 {
@@ -29,14 +30,14 @@ namespace GPS_Out
         {
             cSentence = "$GPVTG";
 
-            cSentence += "," + mf.AGIOdata.IMUheading.ToString("N1") + ",T";
+            cSentence += "," + mf.AGIOdata.IMUheading.ToString("N1", CultureInfo.InvariantCulture) + ",T";
 
-            cSentence += "," + mf.AGIOdata.IMUheading.ToString("N1") + ",M";
+            cSentence += "," + mf.AGIOdata.IMUheading.ToString("N1", CultureInfo.InvariantCulture) + ",M";
 
             double knots = mf.AGIOdata.Speed * 0.5399568;
-            cSentence += "," + knots.ToString("N1") + ",N";
+            cSentence += "," + knots.ToString("N1", CultureInfo.InvariantCulture) + ",N";
 
-            cSentence += "," + mf.AGIOdata.Speed.ToString("N1") + ",K";
+            cSentence += "," + mf.AGIOdata.Speed.ToString("N1", CultureInfo.InvariantCulture) + ",K";
 
             cSentence += "*";
             string Hex = mf.CheckSum(cSentence).ToString("X2");

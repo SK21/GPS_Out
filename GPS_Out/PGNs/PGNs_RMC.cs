@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 
 namespace GPS_Out
 {
@@ -46,7 +47,7 @@ namespace GPS_Out
             lat = Math.Abs(lat);
             cSentence += "," + ((int)lat).ToString("D2");
             double Mins = (double)(lat - (int)lat) * 60.0;
-            cSentence += Mins.ToString("N7");
+            cSentence += Mins.ToString("N7", CultureInfo.InvariantCulture);
             cSentence += NS;
 
             double lon = mf.AGIOdata.Longitude;
@@ -55,13 +56,13 @@ namespace GPS_Out
             lon = Math.Abs(lon);
             cSentence += "," + ((int)lon).ToString("D3");
             Mins = (double)(lon - (int)lon) * 60.0;
-            cSentence += Mins.ToString("N7");
+            cSentence += Mins.ToString("N7", CultureInfo.InvariantCulture);
             cSentence += EW;
 
             double knots = mf.AGIOdata.Speed * 0.5399568;
-            cSentence += "," + knots.ToString("N1");
+            cSentence += "," + knots.ToString("N1", CultureInfo.InvariantCulture);
 
-            cSentence += "," + mf.AGIOdata.IMUheading.ToString("N1");
+            cSentence += "," + mf.AGIOdata.IMUheading.ToString("N1", CultureInfo.InvariantCulture);
 
             cSentence += "," + DateTime.Now.ToString("ddMMyy");
 
