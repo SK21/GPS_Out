@@ -36,11 +36,11 @@ namespace GPS_Out
         private static Hashtable HTapp;
         private static Hashtable HTfiles;
         private string cAppName = "GPS_Out";
-        private string cAppVersion = "1.0.6";
+        private string cAppVersion = "1.0.7";
         private string cPropertiesApp;
         private string cPropertiesFile;
         private string cSettingsDir;
-        private string cVersionDate = "22-Mar-2024";
+        private string cVersionDate = "11-Apr-2024";
         private frmStart mf;
 
         public clsTools(frmStart CallingForm)
@@ -91,7 +91,6 @@ namespace GPS_Out
         {
             return (byte)(ArdID << 4 | SenID & 0b00001111);
         }
-
 
         public byte CRC(byte[] Data, int Length, byte Start = 0)
         {

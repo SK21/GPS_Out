@@ -48,6 +48,7 @@ namespace GPS_Out
         private ushort cSatellites;
         private float cSpeed;
         private frmStart mf;
+        private DateTime ReceiveTime;
 
         public PGN54908(frmStart CalledFrom)
         {
@@ -60,13 +61,49 @@ namespace GPS_Out
         { get { return (float)(cAgeX100 / 100.0); } }
 
         public float Altitude
-        { get { return cAltitude; } }
+        {
+            get
+            {
+                if (Connected())
+                {
+                    return cAltitude;
+                }
+                else
+                {
+                    return 732.0F;
+                }
+            }
+        }
 
         public byte FixQuality
-        { get { return cFixQuality; } }
+        {
+            get
+            {
+                if (Connected())
+                {
+                    return cFixQuality;
+                }
+                else
+                {
+                    return 8;
+                }
+            }
+        }
 
         public float HDOP
-        { get { return (float)(cHdopX100 / 100.0); } }
+        {
+            get
+            {
+                if (Connected())
+                {
+                    return (float)(cHdopX100 / 100.0);
+                }
+                else
+                {
+                    return 7;
+                }
+            }
+        }
 
         public float Heading
         { get { return cHeading; } }
@@ -78,28 +115,81 @@ namespace GPS_Out
         { get { return cImuHeading; } }
 
         public float IMUpitch
-        { get { return (float)(cImuPitch/10.0); } }
+        { get { return (float)(cImuPitch / 10.0); } }
 
         public float IMUroll
-        { get { return (float)(cImuRoll/10.0); } }
+        { get { return (float)(cImuRoll / 10.0); } }
 
         public ushort IMUyawRate
         { get { return cImuYaw; } }
 
         public double Latitude
-        { get { return cLatitude; } }
+        {
+            get
+            {
+                if (Connected())
+                {
+                    return cLatitude;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+        }
 
         public double Longitude
-        { get { return cLongitude; } }
+        {
+            get
+            {
+                if (Connected())
+                {
+                    return cLongitude;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+        }
 
         public float Roll
         { get { return cRoll; } }
 
         public UInt16 Satellites
-        { get { return cSatellites; } }
+        {
+            get
+            {
+                if (Connected())
+                {
+                    return cSatellites;
+                }
+                else
+                {
+                    return 12;
+                }
+            }
+        }
 
         public float Speed
-        { get { return cSpeed; } }
+        {
+            get
+            {
+                if (Connected())
+                {
+                    return cSpeed;
+                }
+                else
+                {
+                    return 4.8F;
+                }
+            }
+        }
+
+        public bool Connected()
+        {
+            return (DateTime.Now - ReceiveTime).TotalSeconds < 4;
+        }
 
         public bool ParseByteData(byte[] Data)
         {
@@ -123,6 +213,7 @@ namespace GPS_Out
                 cImuYaw = BitConverter.ToUInt16(Data, 54);
 
                 NewData?.Invoke(this, EventArgs.Empty);
+                ReceiveTime = DateTime.Now;
                 Result = true;
             }
             return Result;
