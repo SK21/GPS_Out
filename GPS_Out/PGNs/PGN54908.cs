@@ -188,7 +188,7 @@ namespace GPS_Out
 
         public bool Connected()
         {
-            return (DateTime.Now - ReceiveTime).TotalSeconds < 4;
+            return (DateTime.Now - ReceiveTime).TotalSeconds < 10;
         }
 
         public bool ParseByteData(byte[] Data)
