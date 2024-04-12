@@ -7,7 +7,9 @@ using System.Drawing.Printing;
 using System.IO;
 using System.Linq;
 using System.Runtime.InteropServices;
+using System.Security.Cryptography;
 using System.Windows.Forms;
+using System.Xml.Linq;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace GPS_Out
@@ -36,12 +38,13 @@ namespace GPS_Out
         private static Hashtable HTapp;
         private static Hashtable HTfiles;
         private string cAppName = "GPS_Out";
-        private string cAppVersion = "1.0.7";
+        private string cAppVersion = "1.0.8";
         private string cPropertiesApp;
         private string cPropertiesFile;
         private string cSettingsDir;
         private string cVersionDate = "11-Apr-2024";
         private frmStart mf;
+        private int SentenceCount = 0;
 
         public clsTools(frmStart CallingForm)
         {
@@ -487,6 +490,19 @@ namespace GPS_Out
             return cVersionDate;
         }
 
+        public void WriteByteFile(byte[] Data)
+        {
+            string FileName = cSettingsDir + "\\" + "AGIOdata.txt";
+            if (SentenceCount < 9)
+            {
+                SentenceCount++;
+                using (var stream = new FileStream(FileName, FileMode.Append))
+                {
+                    stream.Write(Data, 0, Data.Length);
+                }
+            }
+        }
+
         public void WriteActivityLog(string Message, bool Newline = false)
         {
             string Line = "";
@@ -530,6 +546,10 @@ namespace GPS_Out
 
                 string FilesDir = Properties.Settings.Default.FilesDir;
                 if (!Directory.Exists(FilesDir)) Properties.Settings.Default.FilesDir = cSettingsDir;
+
+                // erase old debug file
+                string FileName = cSettingsDir + "\\" + "AGIOdata.txt";
+                if (File.Exists(FileName)) File.Delete(FileName);
             }
             catch (Exception)
             {
@@ -615,6 +635,7 @@ namespace GPS_Out
             {
             }
         }
+
 
         private void TrimFile(string FileName, int MaxSize = 100000)
         {

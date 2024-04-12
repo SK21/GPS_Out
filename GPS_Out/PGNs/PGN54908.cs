@@ -112,16 +112,44 @@ namespace GPS_Out
         { get { return cHeadingDual; } }
 
         public float IMUheading
-        { get { return cImuHeading; } }
+        {
+            get
+            {
+                float Result = 0;
+                if (cImuHeading < 361) Result = cImuHeading;
+                return Result; 
+            } 
+        }
 
         public float IMUpitch
-        { get { return (float)(cImuPitch / 10.0); } }
+        {
+            get
+            {
+                float Result = 0;
+                if ((cImuPitch / 10.0) < 30) Result = ((float)(cImuPitch / 10.0));
+                return Result;
+            }
+        }
 
         public float IMUroll
-        { get { return (float)(cImuRoll / 10.0); } }
+        {
+            get
+            { 
+                float Result = 0;
+                if ((cImuRoll / 10.0) < 30) Result = ((float)(cImuRoll / 10.0));
+                return Result;
+            } 
+        }
 
         public ushort IMUyawRate
-        { get { return cImuYaw; } }
+        {
+            get
+            { 
+                ushort Result = 0;
+                if (cImuYaw < 30) Result = cImuYaw;
+                return Result; 
+            }
+        }
 
         public double Latitude
         {
@@ -214,6 +242,7 @@ namespace GPS_Out
 
                 NewData?.Invoke(this, EventArgs.Empty);
                 ReceiveTime = DateTime.Now;
+                //mf.Tls.WriteByteFile( Data);
                 Result = true;
             }
             return Result;
