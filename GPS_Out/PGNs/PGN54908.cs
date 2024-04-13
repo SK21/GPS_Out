@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace GPS_Out
@@ -242,8 +243,11 @@ namespace GPS_Out
 
                 NewData?.Invoke(this, EventArgs.Empty);
                 ReceiveTime = DateTime.Now;
-                //mf.Tls.WriteByteFile( Data);
                 Result = true;
+
+                //mf.Tls.WriteByteFile( Data);
+                //int milliseconds = 80;
+                //Thread.Sleep(milliseconds);
             }
             return Result;
         }

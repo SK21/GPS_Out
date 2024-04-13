@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Drawing;
+using System.Globalization;
 using System.Windows.Forms;
 
 namespace GPS_Out
@@ -185,6 +186,7 @@ namespace GPS_Out
         private void btnGGA_Click(object sender, EventArgs e)
         {
             tbGGA.Text = GGA.Sentence;
+            Clipboard.SetText(tbGGA.Text);
         }
 
         private void btnRescan_Click(object sender, EventArgs e)
@@ -195,11 +197,13 @@ namespace GPS_Out
         private void btnRMC_Click(object sender, EventArgs e)
         {
             tbRMC.Text = RMC.Sentence;
+            Clipboard.SetText(tbRMC.Text);
         }
 
         private void btnVTG_Click(object sender, EventArgs e)
         {
             tbVTG.Text = VTG.Sentence;
+            Clipboard.SetText(tbVTG.Text);
         }
 
         private void cboBaud1_SelectedIndexChanged(object sender, EventArgs e)

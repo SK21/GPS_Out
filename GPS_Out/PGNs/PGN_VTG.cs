@@ -30,14 +30,14 @@ namespace GPS_Out
         {
             cSentence = "$GPVTG";
 
-            cSentence += "," + mf.AGIOdata.IMUheading.ToString("N1", CultureInfo.InvariantCulture) + ",T";
+            cSentence += "," + mf.AGIOdata.IMUheading.ToString("000.0", CultureInfo.InvariantCulture) + ",T";
 
-            cSentence += "," + mf.AGIOdata.IMUheading.ToString("N1", CultureInfo.InvariantCulture) + ",M";
+            cSentence += "," + mf.AGIOdata.IMUheading.ToString("000.0", CultureInfo.InvariantCulture) + ",M";
 
             double knots = mf.AGIOdata.Speed * 0.5399568;
-            cSentence += "," + knots.ToString("N1", CultureInfo.InvariantCulture) + ",N";
+            cSentence += "," + knots.ToString("000.0", CultureInfo.InvariantCulture) + ",N";
 
-            cSentence += "," + mf.AGIOdata.Speed.ToString("N1", CultureInfo.InvariantCulture) + ",K";
+            cSentence += "," + mf.AGIOdata.Speed.ToString("000.0", CultureInfo.InvariantCulture) + ",K";
 
             cSentence += "*";
             string Hex = mf.CheckSum(cSentence).ToString("X2");

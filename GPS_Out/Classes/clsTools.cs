@@ -42,7 +42,7 @@ namespace GPS_Out
         private string cPropertiesApp;
         private string cPropertiesFile;
         private string cSettingsDir;
-        private string cVersionDate = "11-Apr-2024";
+        private string cVersionDate = "12-Apr-2024";
         private frmStart mf;
         private int SentenceCount = 0;
 
