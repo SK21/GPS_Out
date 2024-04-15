@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace GPS_Out
 {
@@ -107,10 +108,33 @@ namespace GPS_Out
         }
 
         public float Heading
-        { get { return cHeading; } }
+        {
+            get
+            {
+                float Result = 0;
+
+                if (cHeadingDual < 361)
+                {
+                    Result = cHeadingDual;
+                }
+                else if (cHeading < 361)
+                {
+                    Result = cHeading;
+                }
+                else if (IMUheading < 361)
+                {
+                    Result = IMUheading;
+                }
+
+                return Result;
+            }
+        }
 
         public float HeadingDual
         { get { return cHeadingDual; } }
+
+        public float HeadingSource1
+        { get { return cHeading; } }
 
         public float IMUheading
         {
@@ -118,8 +142,8 @@ namespace GPS_Out
             {
                 float Result = 0;
                 if (cImuHeading < 361) Result = cImuHeading;
-                return Result; 
-            } 
+                return Result;
+            }
         }
 
         public float IMUpitch
@@ -127,7 +151,7 @@ namespace GPS_Out
             get
             {
                 float Result = 0;
-                if ((cImuPitch / 10.0) < 30) Result = ((float)(cImuPitch / 10.0));
+                if (Math.Abs(cImuPitch / 10.0) < 30) Result = ((float)(cImuPitch / 10.0));
                 return Result;
             }
         }
@@ -135,20 +159,20 @@ namespace GPS_Out
         public float IMUroll
         {
             get
-            { 
+            {
                 float Result = 0;
-                if ((cImuRoll / 10.0) < 30) Result = ((float)(cImuRoll / 10.0));
+                if (Math.Abs(cImuRoll / 10.0) < 30) Result = ((float)(cImuRoll / 10.0));
                 return Result;
-            } 
+            }
         }
 
         public ushort IMUyawRate
         {
             get
-            { 
+            {
                 ushort Result = 0;
                 if (cImuYaw < 30) Result = cImuYaw;
-                return Result; 
+                return Result;
             }
         }
 
@@ -183,6 +207,25 @@ namespace GPS_Out
         }
 
         public float Roll
+        {
+            get
+            {
+                float Result = 0;
+
+                if (Math.Abs(cRoll) < 30)
+                {
+                    Result = cRoll;
+                }
+                else if (Math.Abs(cImuRoll / 10.0) < 30)
+                {
+                    Result = (float)(cImuRoll / 10.0);
+                }
+
+                return Result;
+            }
+        }
+
+        public float RollSource1
         { get { return cRoll; } }
 
         public UInt16 Satellites

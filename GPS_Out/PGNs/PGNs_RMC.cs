@@ -62,7 +62,7 @@ namespace GPS_Out
             double knots = mf.AGIOdata.Speed * 0.5399568;
             cSentence += "," + knots.ToString("000.0", CultureInfo.InvariantCulture);
 
-            cSentence += "," + mf.AGIOdata.IMUheading.ToString("000.0", CultureInfo.InvariantCulture);
+            cSentence += "," + mf.AGIOdata.Heading.ToString("000.0", CultureInfo.InvariantCulture);
 
             cSentence += "," + DateTime.UtcNow.ToString("ddMMyy");
 

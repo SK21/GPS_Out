@@ -500,6 +500,7 @@
             this.cboRMC.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold);
             this.cboRMC.FormattingEnabled = true;
             this.cboRMC.Items.AddRange(new object[] {
+            "0",
             "1",
             "5",
             "10"});
@@ -535,6 +536,7 @@
             this.cboVTG.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold);
             this.cboVTG.FormattingEnabled = true;
             this.cboVTG.Items.AddRange(new object[] {
+            "0",
             "1",
             "5",
             "10"});
@@ -560,6 +562,7 @@
             this.cboGGA.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold);
             this.cboGGA.FormattingEnabled = true;
             this.cboGGA.Items.AddRange(new object[] {
+            "0",
             "1",
             "5",
             "10"});

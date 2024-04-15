@@ -211,10 +211,18 @@ namespace GPS_Out
             SER.Baud = Convert.ToInt32(cboBaud1.Text);
         }
 
+
         private void cboGGA_SelectedIndexChanged(object sender, EventArgs e)
         {
-            tmrGGA.Interval = 1000 / Convert.ToInt16(cboGGA.Text);
-            tmrGGA.Enabled = true;
+            if (cboGGA.Text == "0")
+            {
+                tmrGGA.Enabled = false;
+            }
+            else
+            {
+                tmrGGA.Interval = 1000 / Convert.ToInt16(cboGGA.Text);
+                tmrGGA.Enabled = true;
+            }
         }
 
         private void cboPort1_SelectedIndexChanged(object sender, EventArgs e)
@@ -224,14 +232,28 @@ namespace GPS_Out
 
         private void cboRMC_SelectedIndexChanged(object sender, EventArgs e)
         {
-            tmrRMC.Interval = 1000 / Convert.ToInt16(cboRMC.Text);
-            tmrRMC.Enabled = true;
+            if (cboRMC.Text == "0")
+            {
+                tmrRMC.Enabled = false;
+            }
+            else
+            {
+                tmrRMC.Interval = 1000 / Convert.ToInt16(cboRMC.Text);
+                tmrRMC.Enabled = true;
+            }
         }
 
         private void cboVTG_SelectedIndexChanged(object sender, EventArgs e)
         {
-            tmrVTG.Interval = 1000 / Convert.ToInt16(cboVTG.Text);
-            tmrVTG.Enabled = true;
+            if (cboVTG.Text == "0")
+            {
+                tmrVTG.Enabled = false;
+            }
+            else
+            {
+                tmrVTG.Interval = 1000 / Convert.ToInt16(cboVTG.Text);
+                tmrVTG.Enabled = true;
+            }
         }
 
         private void ckAutoHide_CheckedChanged(object sender, EventArgs e)
@@ -258,9 +280,8 @@ namespace GPS_Out
             Tls.LoadFormData(this);
             PandaComm.StartUDPServer();
             LoadRCbox();
-            tmrGGA.Enabled = true;
-            UpdateForm();
             SetCombos();
+            UpdateForm();
             PortIndicator1.BackColor = Properties.Settings.Default.DayColour;
             this.BackColor = Properties.Settings.Default.DayColour;
 
@@ -439,7 +460,7 @@ namespace GPS_Out
                 lbAge.Text = AGIOdata.Age.ToString("N1");
 
                 lbYawRate.Text = AGIOdata.IMUyawRate.ToString("N0");
-                lbYaw.Text = AGIOdata.IMUheading.ToString("N1");
+                lbYaw.Text = AGIOdata.Heading.ToString("N1");
 
                 if (ckSwap.Checked)
                 {
@@ -451,17 +472,17 @@ namespace GPS_Out
                     {
                         lbRoll.Text = AGIOdata.IMUpitch.ToString("N1");
                     }
-                    lbPitch.Text = AGIOdata.IMUroll.ToString("N1");
+                    lbPitch.Text = AGIOdata.Roll.ToString("N1");
                 }
                 else
                 {
                     if (ckInvert.Checked)
                     {
-                        lbRoll.Text = (AGIOdata.IMUroll * -1.0).ToString("N1");
+                        lbRoll.Text = (AGIOdata.Roll * -1.0).ToString("N1");
                     }
                     else
                     {
-                        lbRoll.Text = AGIOdata.IMUroll.ToString("N1");
+                        lbRoll.Text = AGIOdata.Roll.ToString("N1");
                     }
                     lbPitch.Text = AGIOdata.IMUpitch.ToString("N1");
                 }
