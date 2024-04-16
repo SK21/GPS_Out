@@ -14,6 +14,10 @@ namespace GPS_Out
             this.mf = CalledFrom;
             Sport = new SerialPort("Com1", 57600);
             Sport.WriteTimeout = 500;
+            Sport.Parity = Parity.None;
+            Sport.DataBits = 8;
+            Sport.StopBits = StopBits.One;
+
             LoadData();
 
             if (bool.TryParse(mf.Tls.LoadProperty("AutoConnect"), out bool CN))
@@ -94,7 +98,7 @@ namespace GPS_Out
             {
                 try
                 {
-                    Sport.WriteLine(data);
+                    Sport.WriteLine(data +"\r\n");
                 }
                 catch (Exception ex)
                 {
