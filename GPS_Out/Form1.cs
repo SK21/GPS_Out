@@ -211,7 +211,6 @@ namespace GPS_Out
             SER.Baud = Convert.ToInt32(cboBaud1.Text);
         }
 
-
         private void cboGGA_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (cboGGA.Text == "0")

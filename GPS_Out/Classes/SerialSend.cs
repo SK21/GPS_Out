@@ -98,7 +98,7 @@ namespace GPS_Out
             {
                 try
                 {
-                    Sport.WriteLine(data +"\r\n");
+                    Sport.WriteLine(data + "\r\n");
                 }
                 catch (Exception ex)
                 {

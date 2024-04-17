@@ -1,10 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 
 namespace GPS_Out
 {
@@ -121,9 +115,9 @@ namespace GPS_Out
                 {
                     Result = cHeading;
                 }
-                else if (IMUheading < 361)
+                else if (cImuHeading < 361)
                 {
-                    Result = IMUheading;
+                    Result = cImuHeading;
                 }
 
                 return Result;
@@ -289,8 +283,6 @@ namespace GPS_Out
                 Result = true;
 
                 //mf.Tls.WriteByteFile( Data);
-                //int milliseconds = 80;
-                //Thread.Sleep(milliseconds);
             }
             return Result;
         }
