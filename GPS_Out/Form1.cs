@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GPS_Out.PGNs;
+using System;
 using System.ComponentModel;
 using System.Drawing;
 using System.Globalization;
@@ -62,12 +63,14 @@ namespace GPS_Out
 
     public partial class frmStart : Form
     {
+        public UDPComm AGIOcomm;
         public PGN54908 AGIOdata;
+        public UDPComm AOGcomm;
         public PGN_GGA GGA;
         public string GGAsentence = "";
-        public UDPComm PandaComm;
         public PGNs_RMC RMC;
         public string RMCsentence = "";
+        public PGN100 RollCorrected;
         public SerialSend SER;
         public clsTools Tls;
         public PGN_VTG VTG;
@@ -78,13 +81,14 @@ namespace GPS_Out
         {
             InitializeComponent();
             Tls = new clsTools(this);
-            PandaComm = new UDPComm(this, 15555, 8000, 7120, "PandaComm", "127.255.255.255");
+            AGIOcomm = new UDPComm(this, 15555, 8000, 7120, "PandaComm", "127.255.255.255");
+            AOGcomm = new UDPComm(this, 17777, 8500, 9010, "AOGcomm", "127.255.255.255");
             AGIOdata = new PGN54908(this);
-            AGIOdata.NewData += AGIOdata_NewData;
             GGA = new PGN_GGA(this);
             VTG = new PGN_VTG(this);
             SER = new SerialSend(this);
             RMC = new PGNs_RMC(this);
+            RollCorrected = new PGN100(this);
             backgroundWorker1.WorkerSupportsCancellation = true;
         }
 
@@ -141,11 +145,6 @@ namespace GPS_Out
                     break;
             }
             return Result;
-        }
-
-        private void AGIOdata_NewData(object sender, EventArgs e)
-        {
-            UpdateForm();
         }
 
         private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
@@ -277,10 +276,10 @@ namespace GPS_Out
         private void frmStart_Load(object sender, EventArgs e)
         {
             Tls.LoadFormData(this);
-            PandaComm.StartUDPServer();
+            AGIOcomm.StartUDPServer();
+            AOGcomm.StartUDPServer();
             LoadRCbox();
             SetCombos();
-            UpdateForm();
             PortIndicator1.BackColor = Properties.Settings.Default.DayColour;
             this.BackColor = Properties.Settings.Default.DayColour;
 
@@ -384,6 +383,11 @@ namespace GPS_Out
             }
         }
 
+        private void tmrDisplay_Tick(object sender, EventArgs e)
+        {
+            UpdateForm();
+        }
+
         private void tmrGGA_Tick(object sender, EventArgs e)
         {
             if (GGAsentence == "")
@@ -448,9 +452,18 @@ namespace GPS_Out
         {
             if (this.WindowState != FormWindowState.Minimized)
             {
+                if (RollCorrected.Connected())
+                {
+                    lbLon.Text = RollCorrected.Longitude.ToString("N7");
+                    lbLat.Text = RollCorrected.Latitude.ToString("N7");
+                }
+                else
+                {
+                    lbLon.Text = AGIOdata.Longitude.ToString("N7");
+                    lbLat.Text = AGIOdata.Latitude.ToString("N7");
+                }
+
                 lbAge.Text = AGIOdata.Age.ToString("N2");
-                lbLon.Text = AGIOdata.Longitude.ToString("N7");
-                lbLat.Text = AGIOdata.Latitude.ToString("N7");
                 lbSpeed.Text = AGIOdata.Speed.ToString("N1");
                 lbQuality.Text = FixQuality(AGIOdata.FixQuality);
                 lbHDOP.Text = AGIOdata.HDOP.ToString("N2");

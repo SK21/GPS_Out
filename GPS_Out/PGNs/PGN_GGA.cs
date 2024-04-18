@@ -45,11 +45,22 @@ namespace GPS_Out
 
         public string Build()
         {
-            cSentence = "$GPGGA";
+            double lat;
+            double lon;
+            if (mf.RollCorrected.Connected())
+            {
+                lat = mf.RollCorrected.Latitude;
+                lon = mf.RollCorrected.Longitude;
+            }
+            else
+            {
+                lat = mf.AGIOdata.Latitude;
+                lon = mf.AGIOdata.Longitude;
+            }
 
+            cSentence = "$GPGGA";
             cSentence += "," + DateTime.UtcNow.ToString("HHmmss.fff", CultureInfo.InvariantCulture);
 
-            double lat = mf.AGIOdata.Latitude;
             string NS = ",N";
             if (lat < 0) NS = ",S";
             lat = Math.Abs(lat);
@@ -58,7 +69,6 @@ namespace GPS_Out
             cSentence += Mins.ToString("00.0000000", CultureInfo.InvariantCulture);
             cSentence += NS;
 
-            double lon = mf.AGIOdata.Longitude;
             string EW = ",E";
             if (lon < 0) EW = ",W";
             lon = Math.Abs(lon);

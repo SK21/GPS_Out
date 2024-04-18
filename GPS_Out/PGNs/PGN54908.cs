@@ -51,8 +51,6 @@ namespace GPS_Out
             mf = CalledFrom;
         }
 
-        public event EventHandler NewData;
-
         public float Age
         { get { return (float)(cAgeX100 / 100.0); } }
 
@@ -278,7 +276,6 @@ namespace GPS_Out
                 cImuPitch = (short)BitConverter.ToInt16(Data, 52);
                 cImuYaw = BitConverter.ToUInt16(Data, 54);
 
-                NewData?.Invoke(this, EventArgs.Empty);
                 ReceiveTime = DateTime.Now;
                 Result = true;
 

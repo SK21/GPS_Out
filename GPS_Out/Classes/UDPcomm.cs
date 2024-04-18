@@ -123,17 +123,21 @@ namespace GPS_Out
             {
                 if (Data.Length > 1)
                 {
-                    int PGN = Data[1] << 8 | Data[0];   
+                    int PGN = Data[1] << 8 | Data[0];
                     AddToLog("< " + PGN.ToString());
 
                     switch (PGN)
                     {
-                        case 33152: // AOG, 0x81, 0x80
+                        case 33152: // AOG, 0x8180
                             int SubPGN = Data[3] << 8 | Data[2];
                             switch (SubPGN)
                             {
-                                case 54908: // AGIO NEMA translation
+                                case 54908: // 0xD67C, AGIO NEMA translation
                                     mf.AGIOdata.ParseByteData(Data);
+                                    break;
+
+                                case 25727: // 0x647F, AOG roll corrected lat,lon
+                                    mf.RollCorrected.ParseByteData(Data);
                                     break;
                             }
                             break;

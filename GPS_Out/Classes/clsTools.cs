@@ -38,11 +38,11 @@ namespace GPS_Out
         private static Hashtable HTapp;
         private static Hashtable HTfiles;
         private string cAppName = "GPS_Out";
-        private string cAppVersion = "1.0.9";
+        private string cAppVersion = "1.0.10";
         private string cPropertiesApp;
         private string cPropertiesFile;
         private string cSettingsDir;
-        private string cVersionDate = "15-Apr-2024";
+        private string cVersionDate = "18-Apr-2024";
         private frmStart mf;
         private int SentenceCount = 0;
 
@@ -635,7 +635,6 @@ namespace GPS_Out
             {
             }
         }
-
 
         private void TrimFile(string FileName, int MaxSize = 100000)
         {

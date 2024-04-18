@@ -87,6 +87,7 @@
             this.btnRMC = new System.Windows.Forms.Button();
             this.tbRMC = new System.Windows.Forms.TextBox();
             this.tmrRMC = new System.Windows.Forms.Timer(this.components);
+            this.tmrDisplay = new System.Windows.Forms.Timer(this.components);
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -663,7 +664,7 @@
             this.ckAutoHide.CheckState = System.Windows.Forms.CheckState.Checked;
             this.ckAutoHide.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.ckAutoHide.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ckAutoHide.Location = new System.Drawing.Point(430, 397);
+            this.ckAutoHide.Location = new System.Drawing.Point(430, 401);
             this.ckAutoHide.Name = "ckAutoHide";
             this.ckAutoHide.Size = new System.Drawing.Size(141, 34);
             this.ckAutoHide.TabIndex = 303;
@@ -714,6 +715,12 @@
             // tmrRMC
             // 
             this.tmrRMC.Tick += new System.EventHandler(this.tmrRMC_Tick);
+            // 
+            // tmrDisplay
+            // 
+            this.tmrDisplay.Enabled = true;
+            this.tmrDisplay.Interval = 500;
+            this.tmrDisplay.Tick += new System.EventHandler(this.tmrDisplay_Tick);
             // 
             // frmStart
             // 
@@ -833,6 +840,7 @@
         private System.Windows.Forms.ComboBox cboRMC;
         private System.Windows.Forms.Label label18;
         private System.Windows.Forms.Timer tmrRMC;
+        private System.Windows.Forms.Timer tmrDisplay;
     }
 }
 
