@@ -69,6 +69,7 @@
     <Compile Include="PGNs\PGNs_RMC.cs" />
     <Compile Include="PGNs\PGN_GGA.cs" />
     <Compile Include="PGNs\PGN_VTG.cs" />
+    <Compile Include="PGNs\PGN_ZDA.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">

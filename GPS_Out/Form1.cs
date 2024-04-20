@@ -2,7 +2,6 @@
 using System;
 using System.ComponentModel;
 using System.Drawing;
-using System.Globalization;
 using System.Windows.Forms;
 
 namespace GPS_Out
@@ -75,6 +74,8 @@ namespace GPS_Out
         public clsTools Tls;
         public PGN_VTG VTG;
         public string VTGsentence = "";
+        public PGN_ZDA ZDA;
+        public string ZDAsentence = "";
         private int Watchdog;
 
         public frmStart()
@@ -90,6 +91,7 @@ namespace GPS_Out
             RMC = new PGNs_RMC(this);
             RollCorrected = new PGN100(this);
             backgroundWorker1.WorkerSupportsCancellation = true;
+            ZDA = new PGN_ZDA(this);
         }
 
         public int CheckSum(string Data)
@@ -159,6 +161,7 @@ namespace GPS_Out
                 if (GGAsentence != "") SER.SendStringData(GGAsentence);
                 if (VTGsentence != "") SER.SendStringData(VTGsentence);
                 if (RMCsentence != "") SER.SendStringData(RMCsentence);
+                if (ZDAsentence != "") SER.SendStringData(ZDAsentence);
             }
         }
 
@@ -167,6 +170,7 @@ namespace GPS_Out
             GGAsentence = "";
             VTGsentence = "";
             RMCsentence = "";
+            ZDAsentence = "";
         }
 
         private void btnConnect1_Click(object sender, EventArgs e)
@@ -185,7 +189,7 @@ namespace GPS_Out
         private void btnGGA_Click(object sender, EventArgs e)
         {
             tbGGA.Text = GGA.Sentence;
-            Clipboard.SetText(tbGGA.Text);
+            if (tbGGA.Text != "") Clipboard.SetText(tbGGA.Text);
         }
 
         private void btnRescan_Click(object sender, EventArgs e)
@@ -196,13 +200,19 @@ namespace GPS_Out
         private void btnRMC_Click(object sender, EventArgs e)
         {
             tbRMC.Text = RMC.Sentence;
-            Clipboard.SetText(tbRMC.Text);
+            if (tbRMC.Text != "") Clipboard.SetText(tbRMC.Text);
         }
 
         private void btnVTG_Click(object sender, EventArgs e)
         {
             tbVTG.Text = VTG.Sentence;
-            Clipboard.SetText(tbVTG.Text);
+            if (tbVTG.Text != "") Clipboard.SetText(tbVTG.Text);
+        }
+
+        private void btnZDA_Click(object sender, EventArgs e)
+        {
+            tbZDA.Text = ZDA.Sentence;
+            if (tbZDA.Text != "") Clipboard.SetText(tbZDA.Text);
         }
 
         private void cboBaud1_SelectedIndexChanged(object sender, EventArgs e)
@@ -254,6 +264,19 @@ namespace GPS_Out
             }
         }
 
+        private void cboZDA_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (cboZDA.Text == "0")
+            {
+                tmrZDA.Enabled = false;
+            }
+            else
+            {
+                tmrZDA.Interval = 1000 / Convert.ToInt16(cboZDA.Text);
+                tmrZDA.Enabled = true;
+            }
+        }
+
         private void ckAutoHide_CheckedChanged(object sender, EventArgs e)
         {
             tmrMinimize.Enabled = ckAutoHide.Checked;
@@ -266,6 +289,7 @@ namespace GPS_Out
             Tls.SaveProperty("cboGGA", cboGGA.SelectedIndex.ToString());
             Tls.SaveProperty("cboVTG", cboVTG.SelectedIndex.ToString());
             Tls.SaveProperty("cboRMC", cboRMC.SelectedIndex.ToString());
+            Tls.SaveProperty("cboZDA",cboZDA.SelectedIndex.ToString());
             Tls.SaveProperty("Invert", ckInvert.Checked.ToString());
             Tls.SaveProperty("Swap", ckSwap.Checked.ToString());
             Tls.SaveProperty("AutoHide", ckAutoHide.Checked.ToString());
@@ -352,14 +376,17 @@ namespace GPS_Out
             byte GGAcombo = 1;
             byte VTGcombo = 1;
             byte RMCcombo = 1;
+            byte ZDAcombo = 1;
 
             if (byte.TryParse(Tls.LoadProperty("cboGGA"), out byte gga)) GGAcombo = gga;
             if (byte.TryParse(Tls.LoadProperty("cboVTG"), out byte vtg)) VTGcombo = vtg;
             if (byte.TryParse(Tls.LoadProperty("cboRMC"), out byte rmc)) RMCcombo = rmc;
+            if (byte.TryParse(Tls.LoadProperty("cboZDA"), out byte zda)) ZDAcombo = zda;
 
             cboGGA.SelectedIndex = GGAcombo;
             cboVTG.SelectedIndex = VTGcombo;
             cboRMC.SelectedIndex = RMCcombo;
+            cboZDA.SelectedIndex = ZDAcombo;
         }
 
         private void SetPortButtons1()
@@ -436,6 +463,24 @@ namespace GPS_Out
             {
                 Watchdog = 0;
                 VTGsentence = VTG.Build();
+            }
+            else
+            {
+                Watchdog++;
+                if (Watchdog > 10 && backgroundWorker1.WorkerSupportsCancellation == true && !backgroundWorker1.CancellationPending)
+                {
+                    // Cancel the asynchronous operation.
+                    backgroundWorker1.CancelAsync();
+                }
+            }
+        }
+
+        private void tmrZDA_Tick(object sender, EventArgs e)
+        {
+            if (ZDAsentence == "")
+            {
+                Watchdog = 0;
+                ZDAsentence = ZDA.Build();
             }
             else
             {
