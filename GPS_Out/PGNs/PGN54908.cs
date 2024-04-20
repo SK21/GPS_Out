@@ -34,6 +34,7 @@ namespace GPS_Out
         private ushort cHdopX100;
         private float cHeading;
         private float cHeadingDual;
+        private string cHeadingType = "I";
         private float cImuHeading;
         private short cImuPitch;
         private short cImuRoll;
@@ -108,14 +109,17 @@ namespace GPS_Out
                 if (cHeadingDual < 361)
                 {
                     Result = cHeadingDual;
+                    cHeadingType = "D";
                 }
                 else if (cHeading < 361)
                 {
                     Result = cHeading;
+                    cHeadingType = "H";
                 }
                 else if (cImuHeading < 361)
                 {
                     Result = cImuHeading;
+                    cHeadingType = "I";
                 }
 
                 return Result;
@@ -127,6 +131,9 @@ namespace GPS_Out
 
         public float HeadingSource1
         { get { return cHeading; } }
+
+        public string HeadingType
+        { get { return cHeadingType; } }
 
         public float IMUheading
         {

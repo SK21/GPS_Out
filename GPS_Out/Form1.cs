@@ -547,6 +547,8 @@ namespace GPS_Out
                     }
                     lbPitch.Text = AGIOdata.IMUpitch.ToString("N1");
                 }
+
+                lbHeadingType.Text = AGIOdata.HeadingType;
             }
         }
     }
