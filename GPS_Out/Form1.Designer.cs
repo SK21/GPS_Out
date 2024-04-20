@@ -65,6 +65,9 @@
             this.tmrGGA = new System.Windows.Forms.Timer(this.components);
             this.label9 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.label19 = new System.Windows.Forms.Label();
+            this.cboZDA = new System.Windows.Forms.ComboBox();
+            this.label20 = new System.Windows.Forms.Label();
             this.label17 = new System.Windows.Forms.Label();
             this.cboRMC = new System.Windows.Forms.ComboBox();
             this.label18 = new System.Windows.Forms.Label();
@@ -88,12 +91,11 @@
             this.tbRMC = new System.Windows.Forms.TextBox();
             this.tmrRMC = new System.Windows.Forms.Timer(this.components);
             this.tmrDisplay = new System.Windows.Forms.Timer(this.components);
-            this.label19 = new System.Windows.Forms.Label();
-            this.cboZDA = new System.Windows.Forms.ComboBox();
-            this.label20 = new System.Windows.Forms.Label();
             this.tmrZDA = new System.Windows.Forms.Timer(this.components);
             this.btnZDA = new System.Windows.Forms.Button();
             this.tbZDA = new System.Windows.Forms.TextBox();
+            this.lbLatCor = new System.Windows.Forms.Label();
+            this.lbLonCor = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -494,6 +496,42 @@
             this.groupBox2.Text = "Transfer Rate";
             this.groupBox2.Paint += new System.Windows.Forms.PaintEventHandler(this.groupBox1_Paint);
             // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Location = new System.Drawing.Point(351, 79);
+            this.label19.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(33, 24);
+            this.label19.TabIndex = 164;
+            this.label19.Text = "Hz";
+            // 
+            // cboZDA
+            // 
+            this.cboZDA.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboZDA.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold);
+            this.cboZDA.FormattingEnabled = true;
+            this.cboZDA.Items.AddRange(new object[] {
+            "0",
+            "1",
+            "5",
+            "10"});
+            this.cboZDA.Location = new System.Drawing.Point(282, 71);
+            this.cboZDA.Name = "cboZDA";
+            this.cboZDA.Size = new System.Drawing.Size(60, 37);
+            this.cboZDA.TabIndex = 163;
+            this.cboZDA.SelectedIndexChanged += new System.EventHandler(this.cboZDA_SelectedIndexChanged);
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Location = new System.Drawing.Point(222, 79);
+            this.label20.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(48, 24);
+            this.label20.TabIndex = 162;
+            this.label20.Text = "ZDA";
+            // 
             // label17
             // 
             this.label17.AutoSize = true;
@@ -731,42 +769,6 @@
             this.tmrDisplay.Interval = 500;
             this.tmrDisplay.Tick += new System.EventHandler(this.tmrDisplay_Tick);
             // 
-            // label19
-            // 
-            this.label19.AutoSize = true;
-            this.label19.Location = new System.Drawing.Point(351, 79);
-            this.label19.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(33, 24);
-            this.label19.TabIndex = 164;
-            this.label19.Text = "Hz";
-            // 
-            // cboZDA
-            // 
-            this.cboZDA.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboZDA.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold);
-            this.cboZDA.FormattingEnabled = true;
-            this.cboZDA.Items.AddRange(new object[] {
-            "0",
-            "1",
-            "5",
-            "10"});
-            this.cboZDA.Location = new System.Drawing.Point(282, 71);
-            this.cboZDA.Name = "cboZDA";
-            this.cboZDA.Size = new System.Drawing.Size(60, 37);
-            this.cboZDA.TabIndex = 163;
-            this.cboZDA.SelectedIndexChanged += new System.EventHandler(this.cboZDA_SelectedIndexChanged);
-            // 
-            // label20
-            // 
-            this.label20.AutoSize = true;
-            this.label20.Location = new System.Drawing.Point(222, 79);
-            this.label20.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(48, 24);
-            this.label20.TabIndex = 162;
-            this.label20.Text = "ZDA";
-            // 
             // tmrZDA
             // 
             this.tmrZDA.Tick += new System.EventHandler(this.tmrZDA_Tick);
@@ -790,11 +792,35 @@
             this.tbZDA.Size = new System.Drawing.Size(478, 20);
             this.tbZDA.TabIndex = 307;
             // 
+            // lbLatCor
+            // 
+            this.lbLatCor.AutoSize = true;
+            this.lbLatCor.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbLatCor.Location = new System.Drawing.Point(244, 17);
+            this.lbLatCor.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.lbLatCor.Name = "lbLatCor";
+            this.lbLatCor.Size = new System.Drawing.Size(15, 13);
+            this.lbLatCor.TabIndex = 309;
+            this.lbLatCor.Text = "C";
+            // 
+            // lbLonCor
+            // 
+            this.lbLonCor.AutoSize = true;
+            this.lbLonCor.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbLonCor.Location = new System.Drawing.Point(244, 41);
+            this.lbLonCor.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.lbLonCor.Name = "lbLonCor";
+            this.lbLonCor.Size = new System.Drawing.Size(15, 13);
+            this.lbLonCor.TabIndex = 310;
+            this.lbLonCor.Text = "C";
+            // 
             // frmStart
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(584, 618);
+            this.Controls.Add(this.lbLonCor);
+            this.Controls.Add(this.lbLatCor);
             this.Controls.Add(this.btnZDA);
             this.Controls.Add(this.tbZDA);
             this.Controls.Add(this.btnRMC);
@@ -917,6 +943,8 @@
         private System.Windows.Forms.Timer tmrZDA;
         private System.Windows.Forms.Button btnZDA;
         private System.Windows.Forms.TextBox tbZDA;
+        private System.Windows.Forms.Label lbLatCor;
+        private System.Windows.Forms.Label lbLonCor;
     }
 }
 

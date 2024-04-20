@@ -501,11 +501,15 @@ namespace GPS_Out
                 {
                     lbLon.Text = RollCorrected.Longitude.ToString("N7");
                     lbLat.Text = RollCorrected.Latitude.ToString("N7");
+                    lbLatCor.Visible = true;
+                    lbLonCor.Visible = true;
                 }
                 else
                 {
                     lbLon.Text = AGIOdata.Longitude.ToString("N7");
                     lbLat.Text = AGIOdata.Latitude.ToString("N7");
+                    lbLatCor.Visible = false;
+                    lbLonCor.Visible = false;
                 }
 
                 lbAge.Text = AGIOdata.Age.ToString("N2");
