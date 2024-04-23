@@ -82,8 +82,8 @@ namespace GPS_Out
         {
             InitializeComponent();
             Tls = new clsTools(this);
-            AGIOcomm = new UDPComm(this, 15555, 8000, 7120, "PandaComm", "127.255.255.255");
-            AOGcomm = new UDPComm(this, 17777, 8500, 9010, "AOGcomm", "127.255.255.255");
+            AGIOcomm = new UDPComm(this, 15555, 8000, 7120, "PandaComm", "127.103.104.105", "127.255.255.255");
+            AOGcomm = new UDPComm(this, 17777, 8500, 9010, "AOGcomm", "127.100.101.102", "127.255.255.255");
             AGIOdata = new PGN54908(this);
             GGA = new PGN_GGA(this);
             VTG = new PGN_VTG(this);
@@ -517,7 +517,7 @@ namespace GPS_Out
                 lbQuality.Text = FixQuality(AGIOdata.FixQuality);
                 lbHDOP.Text = AGIOdata.HDOP.ToString("N2");
                 lbSats.Text = AGIOdata.Satellites.ToString("");
-                lbElev.Text = AGIOdata.Altitude.ToString("N1");
+                lbElev.Text = AGIOdata.Altitude.ToString("N2");
                 lbAge.Text = AGIOdata.Age.ToString("N1");
 
                 lbYawRate.Text = AGIOdata.IMUyawRate.ToString("N0");

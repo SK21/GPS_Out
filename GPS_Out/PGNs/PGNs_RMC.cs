@@ -49,7 +49,7 @@ namespace GPS_Out
             }
 
             cSentence = "$GPRMC";
-            cSentence += "," + DateTime.UtcNow.ToString("HHmmss.fff", CultureInfo.InvariantCulture);
+            cSentence += "," + DateTime.UtcNow.ToString("HHmmss.ff", CultureInfo.InvariantCulture);
 
             cSentence += ",A";
 
@@ -78,7 +78,7 @@ namespace GPS_Out
 
             cSentence += ",0.0,W";
 
-            cSentence += "*";
+            cSentence += ",*";
             string Hex = mf.CheckSum(cSentence).ToString("X2");
             cSentence += Hex;
 

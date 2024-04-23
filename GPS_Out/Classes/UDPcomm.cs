@@ -15,12 +15,14 @@ namespace GPS_Out
         private int cReceivePort;   // local ports must be unique for each app on same pc and each class instance
         private int cSendFromPort;
         private int cSendToPort;
+        private IPAddress cSourceIP;
         private string cSubNet;
         private HandleDataDelegateObj HandleDataDelegate = null;
         private Socket recvSocket;
         private Socket sendSocket;
 
-        public UDPComm(frmStart CallingForm, int ReceivePort, int SendToPort, int SendFromPort, string ConnectionName, string DestinationEndPoint = "")
+        public UDPComm(frmStart CallingForm, int ReceivePort, int SendToPort, int SendFromPort,
+            string ConnectionName, string SourceIPaddress, string DestinationEndPoint = "")
         {
             mf = CallingForm;
             cReceivePort = ReceivePort;
@@ -28,6 +30,7 @@ namespace GPS_Out
             cSendFromPort = SendFromPort;
             cConnectionName = ConnectionName;
             SetEP(DestinationEndPoint);
+            SetSourceIP(SourceIPaddress);
         }
 
         // Status delegate
@@ -50,7 +53,6 @@ namespace GPS_Out
                 }
             }
         }
-
 
         //sends byte array
         public void SendUDPMessage(byte[] byteData)
@@ -85,7 +87,7 @@ namespace GPS_Out
 
                 // initialize the receive socket
                 recvSocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
-                recvSocket.Bind(new IPEndPoint(IPAddress.Any, cReceivePort));
+                recvSocket.Bind(new IPEndPoint(cSourceIP, cReceivePort));
 
                 // initialize the send socket
                 sendSocket = new Socket(AddressFamily.InterNetwork, SocketType.Dgram, ProtocolType.Udp);
@@ -217,6 +219,25 @@ namespace GPS_Out
             catch (Exception ex)
             {
                 mf.Tls.WriteErrorLog("UDPcomm/SetEP " + ex.Message);
+            }
+        }
+
+        private void SetSourceIP(string Source)
+        {
+            try
+            {
+                if (IPAddress.TryParse(Source, out IPAddress tmp))
+                {
+                    cSourceIP = tmp;
+                }
+                else
+                {
+                    cSourceIP = IPAddress.Any;
+                }
+            }
+            catch (Exception ex)
+            {
+                mf.Tls.WriteErrorLog("UDPcomm/SetSourceEP " + ex.Message);
             }
         }
     }

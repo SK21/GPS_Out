@@ -59,7 +59,7 @@ namespace GPS_Out
             }
 
             cSentence = "$GPGGA";
-            cSentence += "," + DateTime.UtcNow.ToString("HHmmss.fff", CultureInfo.InvariantCulture);
+            cSentence += "," + DateTime.UtcNow.ToString("HHmmss.ff", CultureInfo.InvariantCulture);
 
             string NS = ",N";
             if (lat < 0) NS = ",S";
@@ -81,15 +81,15 @@ namespace GPS_Out
 
             cSentence += "," + mf.AGIOdata.Satellites.ToString("00");
 
-            cSentence += "," + mf.AGIOdata.HDOP.ToString("N1", CultureInfo.InvariantCulture);
+            cSentence += "," + mf.AGIOdata.HDOP.ToString("N2", CultureInfo.InvariantCulture);
 
-            cSentence += "," + mf.AGIOdata.Altitude.ToString("N1", CultureInfo.InvariantCulture) + ",M";
+            cSentence += "," + mf.AGIOdata.Altitude.ToString("N3", CultureInfo.InvariantCulture) + ",M";
 
             cSentence += ",0.0,M";
 
             cSentence += "," + mf.AGIOdata.Age.ToString("N1", CultureInfo.InvariantCulture) + ",";
 
-            cSentence += ",*";
+            cSentence += "0000*";
             string Hex = mf.CheckSum(cSentence).ToString("X2");
             cSentence += Hex;
 
