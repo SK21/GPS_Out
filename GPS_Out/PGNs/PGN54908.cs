@@ -133,7 +133,9 @@ namespace GPS_Out
         { get { return cHeading; } }
 
         public string HeadingType
-        { get { return cHeadingType; } }
+        {
+            get { return cHeadingType; }
+        }
 
         public float IMUheading
         {

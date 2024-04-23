@@ -796,33 +796,33 @@
             // lbLatCor
             // 
             this.lbLatCor.AutoSize = true;
-            this.lbLatCor.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbLatCor.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbLatCor.Location = new System.Drawing.Point(73, 17);
             this.lbLatCor.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lbLatCor.Name = "lbLatCor";
-            this.lbLatCor.Size = new System.Drawing.Size(15, 13);
+            this.lbLatCor.Size = new System.Drawing.Size(14, 13);
             this.lbLatCor.TabIndex = 309;
             this.lbLatCor.Text = "C";
             // 
             // lbLonCor
             // 
             this.lbLonCor.AutoSize = true;
-            this.lbLonCor.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbLonCor.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbLonCor.Location = new System.Drawing.Point(73, 41);
             this.lbLonCor.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lbLonCor.Name = "lbLonCor";
-            this.lbLonCor.Size = new System.Drawing.Size(15, 13);
+            this.lbLonCor.Size = new System.Drawing.Size(14, 13);
             this.lbLonCor.TabIndex = 310;
             this.lbLonCor.Text = "C";
             // 
             // lbHeadingType
             // 
             this.lbHeadingType.AutoSize = true;
-            this.lbHeadingType.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbHeadingType.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbHeadingType.Location = new System.Drawing.Point(73, 134);
             this.lbHeadingType.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.lbHeadingType.Name = "lbHeadingType";
-            this.lbHeadingType.Size = new System.Drawing.Size(11, 13);
+            this.lbHeadingType.Size = new System.Drawing.Size(10, 13);
             this.lbHeadingType.TabIndex = 311;
             this.lbHeadingType.Text = "I";
             // 
