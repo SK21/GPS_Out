@@ -38,10 +38,6 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.label15 = new System.Windows.Forms.Label();
             this.lbLon = new System.Windows.Forms.Label();
             this.lbLat = new System.Windows.Forms.Label();
             this.lbSpeed = new System.Windows.Forms.Label();
@@ -50,10 +46,6 @@
             this.lbElev = new System.Windows.Forms.Label();
             this.lbSats = new System.Windows.Forms.Label();
             this.lbHDOP = new System.Windows.Forms.Label();
-            this.lbYawRate = new System.Windows.Forms.Label();
-            this.lbPitch = new System.Windows.Forms.Label();
-            this.lbRoll = new System.Windows.Forms.Label();
-            this.lbYaw = new System.Windows.Forms.Label();
             this.btnConnect1 = new System.Windows.Forms.Button();
             this.cboPort1 = new System.Windows.Forms.ComboBox();
             this.lbBaud = new System.Windows.Forms.Label();
@@ -82,8 +74,6 @@
             this.btnGGA = new System.Windows.Forms.Button();
             this.btnVTG = new System.Windows.Forms.Button();
             this.tmrMinimize = new System.Windows.Forms.Timer(this.components);
-            this.ckSwap = new System.Windows.Forms.CheckBox();
-            this.ckInvert = new System.Windows.Forms.CheckBox();
             this.ckAutoHide = new System.Windows.Forms.CheckBox();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.ckAutoConnect = new System.Windows.Forms.CheckBox();
@@ -96,7 +86,6 @@
             this.tbZDA = new System.Windows.Forms.TextBox();
             this.lbLatCor = new System.Windows.Forms.Label();
             this.lbLonCor = new System.Windows.Forms.Label();
-            this.lbHeadingType = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -180,46 +169,6 @@
             this.label8.Size = new System.Drawing.Size(45, 24);
             this.label8.TabIndex = 7;
             this.label8.Text = "Age";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(15, 126);
-            this.label12.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(46, 24);
-            this.label12.TabIndex = 11;
-            this.label12.Text = "Yaw";
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(376, 126);
-            this.label13.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(42, 24);
-            this.label13.TabIndex = 12;
-            this.label13.Text = "Roll";
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(376, 165);
-            this.label14.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(51, 24);
-            this.label14.TabIndex = 13;
-            this.label14.Text = "Pitch";
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(15, 165);
-            this.label15.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(89, 24);
-            this.label15.TabIndex = 14;
-            this.label15.Text = "Yaw Rate";
             // 
             // lbLon
             // 
@@ -308,50 +257,6 @@
             this.lbHDOP.Size = new System.Drawing.Size(126, 24);
             this.lbHDOP.TabIndex = 19;
             this.lbHDOP.Text = "1234567890.";
-            // 
-            // lbYawRate
-            // 
-            this.lbYawRate.AutoSize = true;
-            this.lbYawRate.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbYawRate.Location = new System.Drawing.Point(106, 165);
-            this.lbYawRate.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.lbYawRate.Name = "lbYawRate";
-            this.lbYawRate.Size = new System.Drawing.Size(126, 24);
-            this.lbYawRate.TabIndex = 29;
-            this.lbYawRate.Text = "1234567890.";
-            // 
-            // lbPitch
-            // 
-            this.lbPitch.AutoSize = true;
-            this.lbPitch.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbPitch.Location = new System.Drawing.Point(445, 165);
-            this.lbPitch.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.lbPitch.Name = "lbPitch";
-            this.lbPitch.Size = new System.Drawing.Size(126, 24);
-            this.lbPitch.TabIndex = 28;
-            this.lbPitch.Text = "1234567890.";
-            // 
-            // lbRoll
-            // 
-            this.lbRoll.AutoSize = true;
-            this.lbRoll.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbRoll.Location = new System.Drawing.Point(445, 126);
-            this.lbRoll.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.lbRoll.Name = "lbRoll";
-            this.lbRoll.Size = new System.Drawing.Size(126, 24);
-            this.lbRoll.TabIndex = 27;
-            this.lbRoll.Text = "1234567890.";
-            // 
-            // lbYaw
-            // 
-            this.lbYaw.AutoSize = true;
-            this.lbYaw.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbYaw.Location = new System.Drawing.Point(106, 126);
-            this.lbYaw.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.lbYaw.Name = "lbYaw";
-            this.lbYaw.Size = new System.Drawing.Size(126, 24);
-            this.lbYaw.TabIndex = 26;
-            this.lbYaw.Text = "1234567890.";
             // 
             // btnConnect1
             // 
@@ -452,7 +357,7 @@
             this.groupBox1.Controls.Add(this.cboBaud1);
             this.groupBox1.Controls.Add(this.cboPort1);
             this.groupBox1.Controls.Add(this.lbBaud);
-            this.groupBox1.Location = new System.Drawing.Point(12, 200);
+            this.groupBox1.Location = new System.Drawing.Point(12, 112);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(559, 116);
             this.groupBox1.TabIndex = 152;
@@ -489,7 +394,7 @@
             this.groupBox2.Controls.Add(this.cboGGA);
             this.groupBox2.Controls.Add(this.label10);
             this.groupBox2.Controls.Add(this.label9);
-            this.groupBox2.Location = new System.Drawing.Point(12, 322);
+            this.groupBox2.Location = new System.Drawing.Point(12, 234);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(396, 131);
             this.groupBox2.TabIndex = 154;
@@ -638,7 +543,7 @@
             // tbGGA
             // 
             this.tbGGA.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbGGA.Location = new System.Drawing.Point(93, 468);
+            this.tbGGA.Location = new System.Drawing.Point(93, 380);
             this.tbGGA.Name = "tbGGA";
             this.tbGGA.ReadOnly = true;
             this.tbGGA.Size = new System.Drawing.Size(478, 20);
@@ -647,7 +552,7 @@
             // tbVTG
             // 
             this.tbVTG.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbVTG.Location = new System.Drawing.Point(93, 507);
+            this.tbVTG.Location = new System.Drawing.Point(93, 419);
             this.tbVTG.Name = "tbVTG";
             this.tbVTG.ReadOnly = true;
             this.tbVTG.Size = new System.Drawing.Size(478, 20);
@@ -655,7 +560,7 @@
             // 
             // btnGGA
             // 
-            this.btnGGA.Location = new System.Drawing.Point(12, 459);
+            this.btnGGA.Location = new System.Drawing.Point(12, 371);
             this.btnGGA.Name = "btnGGA";
             this.btnGGA.Size = new System.Drawing.Size(75, 33);
             this.btnGGA.TabIndex = 159;
@@ -665,7 +570,7 @@
             // 
             // btnVTG
             // 
-            this.btnVTG.Location = new System.Drawing.Point(12, 498);
+            this.btnVTG.Location = new System.Drawing.Point(12, 410);
             this.btnVTG.Name = "btnVTG";
             this.btnVTG.Size = new System.Drawing.Size(75, 33);
             this.btnVTG.TabIndex = 160;
@@ -679,32 +584,6 @@
             this.tmrMinimize.Interval = 120000;
             this.tmrMinimize.Tick += new System.EventHandler(this.tmrMinimize_Tick);
             // 
-            // ckSwap
-            // 
-            this.ckSwap.Appearance = System.Windows.Forms.Appearance.Button;
-            this.ckSwap.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.ckSwap.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ckSwap.Location = new System.Drawing.Point(298, 160);
-            this.ckSwap.Name = "ckSwap";
-            this.ckSwap.Size = new System.Drawing.Size(69, 34);
-            this.ckSwap.TabIndex = 302;
-            this.ckSwap.Text = "Swap";
-            this.ckSwap.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.ckSwap.UseVisualStyleBackColor = true;
-            // 
-            // ckInvert
-            // 
-            this.ckInvert.Appearance = System.Windows.Forms.Appearance.Button;
-            this.ckInvert.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.ckInvert.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ckInvert.Location = new System.Drawing.Point(298, 121);
-            this.ckInvert.Name = "ckInvert";
-            this.ckInvert.Size = new System.Drawing.Size(69, 34);
-            this.ckInvert.TabIndex = 301;
-            this.ckInvert.Text = "Invert";
-            this.ckInvert.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.ckInvert.UseVisualStyleBackColor = true;
-            // 
             // ckAutoHide
             // 
             this.ckAutoHide.Appearance = System.Windows.Forms.Appearance.Button;
@@ -712,7 +591,7 @@
             this.ckAutoHide.CheckState = System.Windows.Forms.CheckState.Checked;
             this.ckAutoHide.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.ckAutoHide.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ckAutoHide.Location = new System.Drawing.Point(430, 401);
+            this.ckAutoHide.Location = new System.Drawing.Point(430, 313);
             this.ckAutoHide.Name = "ckAutoHide";
             this.ckAutoHide.Size = new System.Drawing.Size(141, 34);
             this.ckAutoHide.TabIndex = 303;
@@ -733,7 +612,7 @@
             this.ckAutoConnect.CheckState = System.Windows.Forms.CheckState.Checked;
             this.ckAutoConnect.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.ckAutoConnect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ckAutoConnect.Location = new System.Drawing.Point(430, 348);
+            this.ckAutoConnect.Location = new System.Drawing.Point(430, 260);
             this.ckAutoConnect.Name = "ckAutoConnect";
             this.ckAutoConnect.Size = new System.Drawing.Size(141, 34);
             this.ckAutoConnect.TabIndex = 304;
@@ -743,7 +622,7 @@
             // 
             // btnRMC
             // 
-            this.btnRMC.Location = new System.Drawing.Point(12, 537);
+            this.btnRMC.Location = new System.Drawing.Point(12, 449);
             this.btnRMC.Name = "btnRMC";
             this.btnRMC.Size = new System.Drawing.Size(75, 33);
             this.btnRMC.TabIndex = 306;
@@ -754,7 +633,7 @@
             // tbRMC
             // 
             this.tbRMC.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbRMC.Location = new System.Drawing.Point(93, 546);
+            this.tbRMC.Location = new System.Drawing.Point(93, 458);
             this.tbRMC.Name = "tbRMC";
             this.tbRMC.ReadOnly = true;
             this.tbRMC.Size = new System.Drawing.Size(478, 20);
@@ -776,7 +655,7 @@
             // 
             // btnZDA
             // 
-            this.btnZDA.Location = new System.Drawing.Point(12, 576);
+            this.btnZDA.Location = new System.Drawing.Point(12, 488);
             this.btnZDA.Name = "btnZDA";
             this.btnZDA.Size = new System.Drawing.Size(75, 33);
             this.btnZDA.TabIndex = 308;
@@ -787,7 +666,7 @@
             // tbZDA
             // 
             this.tbZDA.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbZDA.Location = new System.Drawing.Point(93, 585);
+            this.tbZDA.Location = new System.Drawing.Point(93, 497);
             this.tbZDA.Name = "tbZDA";
             this.tbZDA.ReadOnly = true;
             this.tbZDA.Size = new System.Drawing.Size(478, 20);
@@ -815,23 +694,11 @@
             this.lbLonCor.TabIndex = 310;
             this.lbLonCor.Text = "C";
             // 
-            // lbHeadingType
-            // 
-            this.lbHeadingType.AutoSize = true;
-            this.lbHeadingType.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbHeadingType.Location = new System.Drawing.Point(73, 134);
-            this.lbHeadingType.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.lbHeadingType.Name = "lbHeadingType";
-            this.lbHeadingType.Size = new System.Drawing.Size(10, 13);
-            this.lbHeadingType.TabIndex = 311;
-            this.lbHeadingType.Text = "I";
-            // 
             // frmStart
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(584, 618);
-            this.Controls.Add(this.lbHeadingType);
+            this.ClientSize = new System.Drawing.Size(584, 528);
             this.Controls.Add(this.lbLonCor);
             this.Controls.Add(this.lbLatCor);
             this.Controls.Add(this.btnZDA);
@@ -840,18 +707,12 @@
             this.Controls.Add(this.tbRMC);
             this.Controls.Add(this.ckAutoConnect);
             this.Controls.Add(this.ckAutoHide);
-            this.Controls.Add(this.ckSwap);
-            this.Controls.Add(this.ckInvert);
             this.Controls.Add(this.btnVTG);
             this.Controls.Add(this.btnGGA);
             this.Controls.Add(this.tbVTG);
             this.Controls.Add(this.tbGGA);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.lbYawRate);
-            this.Controls.Add(this.lbPitch);
-            this.Controls.Add(this.lbRoll);
-            this.Controls.Add(this.lbYaw);
             this.Controls.Add(this.lbAge);
             this.Controls.Add(this.lbElev);
             this.Controls.Add(this.lbSats);
@@ -860,10 +721,6 @@
             this.Controls.Add(this.lbSpeed);
             this.Controls.Add(this.lbLat);
             this.Controls.Add(this.lbLon);
-            this.Controls.Add(this.label15);
-            this.Controls.Add(this.label14);
-            this.Controls.Add(this.label13);
-            this.Controls.Add(this.label12);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.label6);
@@ -900,10 +757,6 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label label12;
-        private System.Windows.Forms.Label label13;
-        private System.Windows.Forms.Label label14;
-        private System.Windows.Forms.Label label15;
         private System.Windows.Forms.Label lbLon;
         private System.Windows.Forms.Label lbLat;
         private System.Windows.Forms.Label lbSpeed;
@@ -912,10 +765,6 @@
         private System.Windows.Forms.Label lbElev;
         private System.Windows.Forms.Label lbSats;
         private System.Windows.Forms.Label lbHDOP;
-        private System.Windows.Forms.Label lbYawRate;
-        private System.Windows.Forms.Label lbPitch;
-        private System.Windows.Forms.Label lbRoll;
-        private System.Windows.Forms.Label lbYaw;
         private System.Windows.Forms.Button btnConnect1;
         private System.Windows.Forms.ComboBox cboPort1;
         private System.Windows.Forms.Label lbBaud;
@@ -938,8 +787,6 @@
         private System.Windows.Forms.Button btnGGA;
         private System.Windows.Forms.Button btnVTG;
         private System.Windows.Forms.Timer tmrMinimize;
-        private System.Windows.Forms.CheckBox ckSwap;
-        private System.Windows.Forms.CheckBox ckInvert;
         private System.Windows.Forms.CheckBox ckAutoHide;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.CheckBox ckAutoConnect;
@@ -958,7 +805,6 @@
         private System.Windows.Forms.TextBox tbZDA;
         private System.Windows.Forms.Label lbLatCor;
         private System.Windows.Forms.Label lbLonCor;
-        private System.Windows.Forms.Label lbHeadingType;
     }
 }
 

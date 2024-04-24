@@ -79,6 +79,7 @@ namespace GPS_Out
             cSentence += ",0.0,W";
 
             cSentence += ",*";
+            //cSentence += "*";
             string Hex = mf.CheckSum(cSentence).ToString("X2");
             cSentence += Hex;
 

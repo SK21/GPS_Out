@@ -290,8 +290,6 @@ namespace GPS_Out
             Tls.SaveProperty("cboVTG", cboVTG.SelectedIndex.ToString());
             Tls.SaveProperty("cboRMC", cboRMC.SelectedIndex.ToString());
             Tls.SaveProperty("cboZDA",cboZDA.SelectedIndex.ToString());
-            Tls.SaveProperty("Invert", ckInvert.Checked.ToString());
-            Tls.SaveProperty("Swap", ckSwap.Checked.ToString());
             Tls.SaveProperty("AutoHide", ckAutoHide.Checked.ToString());
             Tls.SaveProperty("AutoConnect", ckAutoConnect.Checked.ToString());
             SER.Close();
@@ -306,9 +304,6 @@ namespace GPS_Out
             SetCombos();
             PortIndicator1.BackColor = Properties.Settings.Default.DayColour;
             this.BackColor = Properties.Settings.Default.DayColour;
-
-            if (bool.TryParse(Tls.LoadProperty("Invert"), out bool IV)) ckInvert.Checked = IV;
-            if (bool.TryParse(Tls.LoadProperty("Swap"), out bool SP)) ckSwap.Checked = SP;
 
             if (bool.TryParse(Tls.LoadProperty("AutoHide"), out bool HD))
             {
@@ -373,10 +368,10 @@ namespace GPS_Out
 
         private void SetCombos()
         {
-            byte GGAcombo = 1;
-            byte VTGcombo = 1;
-            byte RMCcombo = 1;
-            byte ZDAcombo = 1;
+            byte GGAcombo = 2;
+            byte VTGcombo = 0;
+            byte RMCcombo = 0;
+            byte ZDAcombo = 0;
 
             if (byte.TryParse(Tls.LoadProperty("cboGGA"), out byte gga)) GGAcombo = gga;
             if (byte.TryParse(Tls.LoadProperty("cboVTG"), out byte vtg)) VTGcombo = vtg;
@@ -519,36 +514,6 @@ namespace GPS_Out
                 lbSats.Text = AGIOdata.Satellites.ToString("");
                 lbElev.Text = AGIOdata.Altitude.ToString("N2");
                 lbAge.Text = AGIOdata.Age.ToString("N1");
-
-                lbYawRate.Text = AGIOdata.IMUyawRate.ToString("N0");
-                lbYaw.Text = AGIOdata.Heading.ToString("N1");
-
-                if (ckSwap.Checked)
-                {
-                    if (ckInvert.Checked)
-                    {
-                        lbRoll.Text = (AGIOdata.IMUpitch * -1.0).ToString("N1");
-                    }
-                    else
-                    {
-                        lbRoll.Text = AGIOdata.IMUpitch.ToString("N1");
-                    }
-                    lbPitch.Text = AGIOdata.Roll.ToString("N1");
-                }
-                else
-                {
-                    if (ckInvert.Checked)
-                    {
-                        lbRoll.Text = (AGIOdata.Roll * -1.0).ToString("N1");
-                    }
-                    else
-                    {
-                        lbRoll.Text = AGIOdata.Roll.ToString("N1");
-                    }
-                    lbPitch.Text = AGIOdata.IMUpitch.ToString("N1");
-                }
-
-                lbHeadingType.Text = AGIOdata.HeadingType;
             }
         }
     }
