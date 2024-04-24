@@ -84,8 +84,6 @@
             this.tmrZDA = new System.Windows.Forms.Timer(this.components);
             this.btnZDA = new System.Windows.Forms.Button();
             this.tbZDA = new System.Windows.Forms.TextBox();
-            this.lbLatCor = new System.Windows.Forms.Label();
-            this.lbLonCor = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
@@ -672,35 +670,11 @@
             this.tbZDA.Size = new System.Drawing.Size(478, 20);
             this.tbZDA.TabIndex = 307;
             // 
-            // lbLatCor
-            // 
-            this.lbLatCor.AutoSize = true;
-            this.lbLatCor.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbLatCor.Location = new System.Drawing.Point(73, 17);
-            this.lbLatCor.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.lbLatCor.Name = "lbLatCor";
-            this.lbLatCor.Size = new System.Drawing.Size(14, 13);
-            this.lbLatCor.TabIndex = 309;
-            this.lbLatCor.Text = "C";
-            // 
-            // lbLonCor
-            // 
-            this.lbLonCor.AutoSize = true;
-            this.lbLonCor.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbLonCor.Location = new System.Drawing.Point(73, 41);
-            this.lbLonCor.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.lbLonCor.Name = "lbLonCor";
-            this.lbLonCor.Size = new System.Drawing.Size(14, 13);
-            this.lbLonCor.TabIndex = 310;
-            this.lbLonCor.Text = "C";
-            // 
             // frmStart
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(584, 528);
-            this.Controls.Add(this.lbLonCor);
-            this.Controls.Add(this.lbLatCor);
             this.Controls.Add(this.btnZDA);
             this.Controls.Add(this.tbZDA);
             this.Controls.Add(this.btnRMC);
@@ -803,8 +777,6 @@
         private System.Windows.Forms.Timer tmrZDA;
         private System.Windows.Forms.Button btnZDA;
         private System.Windows.Forms.TextBox tbZDA;
-        private System.Windows.Forms.Label lbLatCor;
-        private System.Windows.Forms.Label lbLonCor;
     }
 }
 
