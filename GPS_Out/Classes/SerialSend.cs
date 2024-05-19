@@ -60,7 +60,11 @@ namespace GPS_Out
             try
             {
                 Timer1.Stop();
-                if (Sport.IsOpen) Sport.Close();
+                if (Sport.IsOpen)
+                {
+                    Sport.Close();
+                    Sport.Dispose();
+                }
                 SaveData();
             }
             catch (Exception ex)

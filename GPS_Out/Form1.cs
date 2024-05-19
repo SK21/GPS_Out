@@ -149,6 +149,41 @@ namespace GPS_Out
             return Result;
         }
 
+        public double Heading()
+        {
+            double Result = 0;
+            if (AGIOdata.Connected())
+            {
+                Result = AGIOdata.Heading;
+            }
+            else if (RollCorrected.Connected())
+            {
+                Result = RollCorrected.Fix2Fix;
+            }
+            return Result;
+        }
+
+        public void SetPortButtons1()
+        {
+            cboPort1.SelectedIndex = cboPort1.FindStringExact(SER.PortNm);
+            cboBaud1.SelectedIndex = cboBaud1.FindStringExact(SER.Baud.ToString());
+
+            if (SER.IsOpen())
+            {
+                cboBaud1.Enabled = false;
+                cboPort1.Enabled = false;
+                btnConnect1.Text = "Disconnect";
+                PortIndicator1.Image = Properties.Resources.On;
+            }
+            else
+            {
+                cboBaud1.Enabled = true;
+                cboPort1.Enabled = true;
+                btnConnect1.Text = "Connect";
+                PortIndicator1.Image = Properties.Resources.Off;
+            }
+        }
+
         private void backgroundWorker1_DoWork(object sender, System.ComponentModel.DoWorkEventArgs e)
         {
             BackgroundWorker worker = sender as BackgroundWorker;
@@ -289,7 +324,7 @@ namespace GPS_Out
             Tls.SaveProperty("cboGGA", cboGGA.SelectedIndex.ToString());
             Tls.SaveProperty("cboVTG", cboVTG.SelectedIndex.ToString());
             Tls.SaveProperty("cboRMC", cboRMC.SelectedIndex.ToString());
-            Tls.SaveProperty("cboZDA",cboZDA.SelectedIndex.ToString());
+            Tls.SaveProperty("cboZDA", cboZDA.SelectedIndex.ToString());
             Tls.SaveProperty("AutoHide", ckAutoHide.Checked.ToString());
             Tls.SaveProperty("AutoConnect", ckAutoConnect.Checked.ToString());
             SER.Close();
@@ -382,27 +417,6 @@ namespace GPS_Out
             cboVTG.SelectedIndex = VTGcombo;
             cboRMC.SelectedIndex = RMCcombo;
             cboZDA.SelectedIndex = ZDAcombo;
-        }
-
-        public void SetPortButtons1()
-        {
-            cboPort1.SelectedIndex = cboPort1.FindStringExact(SER.PortNm);
-            cboBaud1.SelectedIndex = cboBaud1.FindStringExact(SER.Baud.ToString());
-
-            if (SER.IsOpen())
-            {
-                cboBaud1.Enabled = false;
-                cboPort1.Enabled = false;
-                btnConnect1.Text = "Disconnect";
-                PortIndicator1.Image = Properties.Resources.On;
-            }
-            else
-            {
-                cboBaud1.Enabled = true;
-                cboPort1.Enabled = true;
-                btnConnect1.Text = "Connect";
-                PortIndicator1.Image = Properties.Resources.Off;
-            }
         }
 
         private void tmrDisplay_Tick(object sender, EventArgs e)

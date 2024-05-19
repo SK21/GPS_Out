@@ -30,9 +30,9 @@ namespace GPS_Out
         {
             cSentence = "$GPVTG";
 
-            cSentence += "," + mf.AGIOdata.Heading.ToString("000.0", CultureInfo.InvariantCulture) + ",T";
+            cSentence += "," + mf.Heading().ToString("000.0", CultureInfo.InvariantCulture) + ",T";
 
-            cSentence += "," + mf.AGIOdata.Heading.ToString("000.0", CultureInfo.InvariantCulture) + ",M";
+            cSentence += "," + mf.Heading().ToString("000.0", CultureInfo.InvariantCulture) + ",M";
 
             double knots = mf.AGIOdata.Speed * 0.5399568;
             cSentence += "," + knots.ToString("000.0", CultureInfo.InvariantCulture) + ",N";

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,12 +14,14 @@ namespace GPS_Out.PGNs
         // 1        header Lo       129 0x81
         // 2        source          127 0x7F
         // 3        AGIO PGN        100 0x64
-        // 4        length          16
+        // 4        length          24
         // 5-12     longitude       double
         // 13-20    latitude        double
-        // 21       CRC
+        // 21-28    Fix2Fix         double
+        // 29       CRC
 
         private const byte HeaderCount = 5;
+        private double cFix2Fix;
         private double cLatitude;
         private double cLongitude;
         private frmStart mf;
@@ -27,6 +30,21 @@ namespace GPS_Out.PGNs
         public PGN100(frmStart CalledFrom)
         {
             mf = CalledFrom;
+        }
+
+        public double Fix2Fix
+        {
+            get
+            {
+                if (Connected())
+                {
+                    return cFix2Fix;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
         }
 
         public double Latitude
@@ -72,7 +90,9 @@ namespace GPS_Out.PGNs
                 {
                     cLongitude = BitConverter.ToDouble(Data, 5);
                     cLatitude = BitConverter.ToDouble(Data, 13);
+                    cFix2Fix = BitConverter.ToDouble(Data, 21);
                     ReceiveTime = DateTime.Now;
+                    Debug.Print(cFix2Fix.ToString("N1"  ));
                 }
             }
         }
