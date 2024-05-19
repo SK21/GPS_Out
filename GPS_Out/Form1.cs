@@ -384,7 +384,7 @@ namespace GPS_Out
             cboZDA.SelectedIndex = ZDAcombo;
         }
 
-        private void SetPortButtons1()
+        public void SetPortButtons1()
         {
             cboPort1.SelectedIndex = cboPort1.FindStringExact(SER.PortNm);
             cboBaud1.SelectedIndex = cboBaud1.FindStringExact(SER.Baud.ToString());

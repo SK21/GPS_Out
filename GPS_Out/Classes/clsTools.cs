@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Drawing.Printing;
 using System.IO;
 using System.Linq;
+using System.Media;
 using System.Runtime.InteropServices;
 using System.Security.Cryptography;
 using System.Windows.Forms;
@@ -38,11 +39,11 @@ namespace GPS_Out
         private static Hashtable HTapp;
         private static Hashtable HTfiles;
         private string cAppName = "GPS_Out";
-        private string cAppVersion = "1.0.12";
+        private string cAppVersion = "1.0.13";
         private string cPropertiesApp;
         private string cPropertiesFile;
         private string cSettingsDir;
-        private string cVersionDate = "24-Apr-2024";
+        private string cVersionDate = "18-May-2024";
         private frmStart mf;
         private int SentenceCount = 0;
 
@@ -419,7 +420,7 @@ namespace GPS_Out
         }
 
         public void ShowHelp(string Message, string Title = "Help",
-            int timeInMsec = 30000, bool LogError = false, bool Modal = false)
+            int timeInMsec = 30000, bool LogError = false, bool Modal = false, bool PlayErrorSound = false)
         {
             var Hlp = new frmHelp(mf, Message, Title, timeInMsec);
             if (Modal)
@@ -432,6 +433,7 @@ namespace GPS_Out
             }
 
             if (LogError) WriteErrorLog(Message);
+            if (PlayErrorSound) SystemSounds.Exclamation.Play();
         }
 
         public void StartWifi()
