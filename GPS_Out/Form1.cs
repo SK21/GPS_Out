@@ -158,7 +158,14 @@ namespace GPS_Out
             }
             else if (RollCorrected.Connected())
             {
-                Result = RollCorrected.Fix2Fix;
+                if (RollCorrected.Fix2Fix < 361)
+                {
+                    Result = RollCorrected.Fix2Fix;
+                }
+                else
+                {
+                    Result = 0;
+                }
             }
             return Result;
         }
