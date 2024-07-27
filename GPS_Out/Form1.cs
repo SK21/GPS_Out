@@ -77,6 +77,7 @@ namespace GPS_Out
         public PGN_ZDA ZDA;
         public string ZDAsentence = "";
         private int Watchdog;
+        private string cSenStart = "$GP";
 
         public frmStart()
         {
@@ -346,6 +347,8 @@ namespace GPS_Out
             SetCombos();
             PortIndicator1.BackColor = Properties.Settings.Default.DayColour;
             this.BackColor = Properties.Settings.Default.DayColour;
+            tabPage1.BackColor = Properties.Settings.Default.DayColour;
+            tabPage2.BackColor = Properties.Settings.Default.DayColour;
 
             if (bool.TryParse(Tls.LoadProperty("AutoHide"), out bool HD))
             {
