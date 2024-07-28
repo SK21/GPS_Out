@@ -8,14 +8,13 @@ namespace GPS_Out
         private readonly frmStart mf;
         private bool cWriteTimeOut = false;
         private SerialPort Sport;
-        private bool PortOpenedSuccessfully = false;
         private System.Windows.Forms.Timer Timer1 = new System.Windows.Forms.Timer();
         private int WriteErrorCount;
 
         public SerialSend(frmStart CalledFrom)
         {
             this.mf = CalledFrom;
-            Sport = new SerialPort("Com1", 57600);
+            Sport = new SerialPort(Properties.Settings.Default.Port, Properties.Settings.Default.Baud);
             Sport.WriteTimeout = 500;
             Sport.Parity = Parity.None;
             Sport.DataBits = 8;
@@ -23,12 +22,7 @@ namespace GPS_Out
             Timer1.Interval = 1000;
             Timer1.Tick += new EventHandler(CheckConnection);
 
-            LoadData();
-
-            if (bool.TryParse(mf.Tls.LoadProperty("AutoConnect"), out bool CN))
-            {
-                if (CN && PortOpenedSuccessfully) Open();
-            }
+            if (Properties.Settings.Default.AutoConnect && Properties.Settings.Default.SerialSuccessful) Open();
         }
 
         public int Baud
@@ -39,6 +33,7 @@ namespace GPS_Out
                 if (!Sport.IsOpen && value > 0 && value < 115201)
                 {
                     Sport.BaudRate = value;
+                    Properties.Settings.Default.Baud = Sport.BaudRate;
                 }
             }
         }
@@ -51,6 +46,7 @@ namespace GPS_Out
                 if (!Sport.IsOpen && value != "")
                 {
                     Sport.PortName = value;
+                    Properties.Settings.Default.Port = Sport.PortName;
                 }
             }
         }
@@ -65,7 +61,6 @@ namespace GPS_Out
                     Sport.Close();
                     Sport.Dispose();
                 }
-                SaveData();
             }
             catch (Exception ex)
             {
@@ -100,7 +95,7 @@ namespace GPS_Out
             {
                 mf.Tls.WriteErrorLog("SerialSend/OpenRCport: " + ex.Message);
             }
-            PortOpenedSuccessfully = Result;
+            Properties.Settings.Default.SerialSuccessful = Result;
             return Result;
         }
 
@@ -125,7 +120,7 @@ namespace GPS_Out
         {
             if (cWriteTimeOut)
             {
-                if (++WriteErrorCount > 5)
+                if (++WriteErrorCount > 2)
                 {
                     mf.Tls.ShowHelp(Sport.PortName + " is not sending correctly. It will be closed.", "Serial Port", 5000, true, false, true);
                     Close();
@@ -136,20 +131,6 @@ namespace GPS_Out
             {
                 WriteErrorCount = 0;
             }
-        }
-
-        private void LoadData()
-        {
-            PortNm = mf.Tls.LoadProperty("Serial_PortName");
-            if (int.TryParse(mf.Tls.LoadProperty("Serial_Baud"), out int PB)) Baud = PB;
-            if (bool.TryParse(mf.Tls.LoadProperty("Serial_Successful"), out bool tmp)) PortOpenedSuccessfully = tmp;
-        }
-
-        private void SaveData()
-        {
-            mf.Tls.SaveProperty("Serial_PortName", Sport.PortName);
-            mf.Tls.SaveProperty("Serial_Baud", Sport.BaudRate.ToString());
-            mf.Tls.SaveProperty("Serial_Successful", PortOpenedSuccessfully.ToString());
         }
 
         private bool SerialPortExists(string Name)

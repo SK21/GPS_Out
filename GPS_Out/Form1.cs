@@ -67,7 +67,9 @@ namespace GPS_Out
         public UDPComm AOGcomm;
         public PGN_GGA GGA;
         public string GGAsentence = "";
-        public PGNs_RMC RMC;
+        public PGN_GSA GSA;
+        public string GSAsentence = "";
+        public PGN_RMC RMC;
         public string RMCsentence = "";
         public PGN100 RollCorrected;
         public SerialSend SER;
@@ -77,22 +79,22 @@ namespace GPS_Out
         public PGN_ZDA ZDA;
         public string ZDAsentence = "";
         private int Watchdog;
-        private string cSenStart = "$GP";
 
         public frmStart()
         {
             InitializeComponent();
             Tls = new clsTools(this);
-            AGIOcomm = new UDPComm(this, 15555, 8000, 7120, "PandaComm", "127.103.104.105", "127.255.255.255");
-            AOGcomm = new UDPComm(this, 17777, 8500, 9010, "AOGcomm", "127.100.101.102", "127.255.255.255");
+            AGIOcomm = new UDPComm(this, 15555, 8000, 7120, "AGIO", "127.103.104.105", "127.255.255.255");
+            AOGcomm = new UDPComm(this, 17777, 8500, 9010, "AOG", "127.100.101.102", "127.255.255.255");
             AGIOdata = new PGN54908(this);
             GGA = new PGN_GGA(this);
             VTG = new PGN_VTG(this);
             SER = new SerialSend(this);
-            RMC = new PGNs_RMC(this);
+            RMC = new PGN_RMC(this);
             RollCorrected = new PGN100(this);
             backgroundWorker1.WorkerSupportsCancellation = true;
             ZDA = new PGN_ZDA(this);
+            GSA = new PGN_GSA(this);
         }
 
         public int CheckSum(string Data)
@@ -159,9 +161,9 @@ namespace GPS_Out
             }
             else if (RollCorrected.Connected())
             {
-                if (RollCorrected.Fix2Fix < 361)
+                if (RollCorrected.Fix2FixHeading < 361)
                 {
-                    Result = RollCorrected.Fix2Fix;
+                    Result = RollCorrected.Fix2FixHeading;
                 }
                 else
                 {
@@ -205,6 +207,7 @@ namespace GPS_Out
                 if (VTGsentence != "") SER.SendStringData(VTGsentence);
                 if (RMCsentence != "") SER.SendStringData(RMCsentence);
                 if (ZDAsentence != "") SER.SendStringData(ZDAsentence);
+                if (GSAsentence != "") SER.SendStringData(GSAsentence);
             }
         }
 
@@ -214,6 +217,7 @@ namespace GPS_Out
             VTGsentence = "";
             RMCsentence = "";
             ZDAsentence = "";
+            GSAsentence = "";
         }
 
         private void btnConnect1_Click(object sender, EventArgs e)
@@ -274,6 +278,7 @@ namespace GPS_Out
                 tmrGGA.Interval = 1000 / Convert.ToInt16(cboGGA.Text);
                 tmrGGA.Enabled = true;
             }
+            Properties.Settings.Default.GGA = cboGGA.SelectedIndex;
         }
 
         private void cboPort1_SelectedIndexChanged(object sender, EventArgs e)
@@ -292,6 +297,7 @@ namespace GPS_Out
                 tmrRMC.Interval = 1000 / Convert.ToInt16(cboRMC.Text);
                 tmrRMC.Enabled = true;
             }
+            Properties.Settings.Default.RMC = cboRMC.SelectedIndex;
         }
 
         private void cboVTG_SelectedIndexChanged(object sender, EventArgs e)
@@ -305,6 +311,7 @@ namespace GPS_Out
                 tmrVTG.Interval = 1000 / Convert.ToInt16(cboVTG.Text);
                 tmrVTG.Enabled = true;
             }
+            Properties.Settings.Default.VTG = cboVTG.SelectedIndex;
         }
 
         private void cboZDA_SelectedIndexChanged(object sender, EventArgs e)
@@ -318,23 +325,36 @@ namespace GPS_Out
                 tmrZDA.Interval = 1000 / Convert.ToInt16(cboZDA.Text);
                 tmrZDA.Enabled = true;
             }
+            Properties.Settings.Default.ZDA = cboZDA.SelectedIndex;
+        }
+
+        private void ckAutoConnect_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.AutoConnect = ckAutoConnect.Checked;
         }
 
         private void ckAutoHide_CheckedChanged(object sender, EventArgs e)
         {
             tmrMinimize.Enabled = ckAutoHide.Checked;
             if (ckAutoHide.Checked) this.WindowState = FormWindowState.Minimized;
+            Properties.Settings.Default.AutoHide = ckAutoHide.Checked;
+        }
+
+        private void ckGSA_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.SendGSA = ckGSA.Checked;
+            tmrGSA.Enabled = ckGSA.Checked;
+        }
+
+        private void ckRoll_CheckedChanged(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.UseRollCorrected = ckRoll.Checked;
         }
 
         private void frmStart_FormClosed(object sender, FormClosedEventArgs e)
         {
             Tls.SaveFormData(this);
-            Tls.SaveProperty("cboGGA", cboGGA.SelectedIndex.ToString());
-            Tls.SaveProperty("cboVTG", cboVTG.SelectedIndex.ToString());
-            Tls.SaveProperty("cboRMC", cboRMC.SelectedIndex.ToString());
-            Tls.SaveProperty("cboZDA", cboZDA.SelectedIndex.ToString());
-            Tls.SaveProperty("AutoHide", ckAutoHide.Checked.ToString());
-            Tls.SaveProperty("AutoConnect", ckAutoConnect.Checked.ToString());
+            Properties.Settings.Default.Save();
             SER.Close();
         }
 
@@ -344,33 +364,23 @@ namespace GPS_Out
             AGIOcomm.StartUDPServer();
             AOGcomm.StartUDPServer();
             LoadRCbox();
-            SetCombos();
             PortIndicator1.BackColor = Properties.Settings.Default.DayColour;
             this.BackColor = Properties.Settings.Default.DayColour;
             tabPage1.BackColor = Properties.Settings.Default.DayColour;
             tabPage2.BackColor = Properties.Settings.Default.DayColour;
 
-            if (bool.TryParse(Tls.LoadProperty("AutoHide"), out bool HD))
-            {
-                ckAutoHide.Checked = HD;
-            }
-            else
-            {
-                ckAutoHide.Checked = false;
-            }
+            ckAutoHide.Checked = Properties.Settings.Default.AutoHide;
+            ckAutoConnect.Checked = Properties.Settings.Default.AutoConnect;
+            ckRoll.Checked = Properties.Settings.Default.UseRollCorrected;
+            rbGN.Checked = (Properties.Settings.Default.SentenceStart == "$GN");
+            ckGSA.Checked = Properties.Settings.Default.SendGSA;
 
-            if (bool.TryParse(Tls.LoadProperty("AutoConnect"), out bool CN))
-            {
-                ckAutoConnect.Checked = CN;
-            }
-            else
-            {
-                ckAutoConnect.Checked = false;
-            }
+            cboGGA.SelectedIndex = Properties.Settings.Default.GGA;
+            cboVTG.SelectedIndex = Properties.Settings.Default.VTG;
+            cboRMC.SelectedIndex = Properties.Settings.Default.RMC;
+            cboZDA.SelectedIndex = Properties.Settings.Default.ZDA;
 
-            tmrMinimize.Enabled = ckAutoHide.Checked;
             this.Text = "GPS_Out [" + Tls.AppVersion() + "]";
-
             if (ckAutoHide.Checked) this.WindowState = FormWindowState.Minimized;
         }
 
@@ -402,6 +412,18 @@ namespace GPS_Out
             SetPortButtons1();
         }
 
+        private void rbGP_CheckedChanged(object sender, EventArgs e)
+        {
+            if (rbGP.Checked)
+            {
+                Properties.Settings.Default.SentenceStart = "$GP";
+            }
+            else
+            {
+                Properties.Settings.Default.SentenceStart = "$GN";
+            }
+        }
+
         private void Send()
         {
             if (backgroundWorker1.IsBusy != true)
@@ -409,24 +431,6 @@ namespace GPS_Out
                 // Start the asynchronous operation.
                 backgroundWorker1.RunWorkerAsync();
             }
-        }
-
-        private void SetCombos()
-        {
-            byte GGAcombo = 2;
-            byte VTGcombo = 0;
-            byte RMCcombo = 0;
-            byte ZDAcombo = 0;
-
-            if (byte.TryParse(Tls.LoadProperty("cboGGA"), out byte gga)) GGAcombo = gga;
-            if (byte.TryParse(Tls.LoadProperty("cboVTG"), out byte vtg)) VTGcombo = vtg;
-            if (byte.TryParse(Tls.LoadProperty("cboRMC"), out byte rmc)) RMCcombo = rmc;
-            if (byte.TryParse(Tls.LoadProperty("cboZDA"), out byte zda)) ZDAcombo = zda;
-
-            cboGGA.SelectedIndex = GGAcombo;
-            cboVTG.SelectedIndex = VTGcombo;
-            cboRMC.SelectedIndex = RMCcombo;
-            cboZDA.SelectedIndex = ZDAcombo;
         }
 
         private void tmrDisplay_Tick(object sender, EventArgs e)
@@ -441,6 +445,24 @@ namespace GPS_Out
                 Watchdog = 0;
                 GGAsentence = GGA.Build();
                 Send();
+            }
+            else
+            {
+                Watchdog++;
+                if (Watchdog > 10 && backgroundWorker1.WorkerSupportsCancellation == true && !backgroundWorker1.CancellationPending)
+                {
+                    // Cancel the asynchronous operation.
+                    backgroundWorker1.CancelAsync();
+                }
+            }
+        }
+
+        private void tmrGSA_Tick(object sender, EventArgs e)
+        {
+            if (GSAsentence == "")
+            {
+                Watchdog = 0;
+                GSAsentence = GSA.Build();
             }
             else
             {
@@ -534,6 +556,8 @@ namespace GPS_Out
                 lbSats.Text = AGIOdata.Satellites.ToString("");
                 lbElev.Text = AGIOdata.Altitude.ToString("N2");
                 lbAge.Text = AGIOdata.Age.ToString("N1");
+
+                ckRoll.Enabled = RollCorrected.Connected();
             }
         }
     }

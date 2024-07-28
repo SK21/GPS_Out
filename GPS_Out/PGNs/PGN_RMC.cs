@@ -3,7 +3,7 @@ using System.Globalization;
 
 namespace GPS_Out
 {
-    public class PGNs_RMC
+    public class PGN_RMC
     {
         #region RMC Message
 
@@ -25,7 +25,7 @@ namespace GPS_Out
         private string cSentence;
         private frmStart mf;
 
-        public PGNs_RMC(frmStart CalledFrom)
+        public PGN_RMC(frmStart CalledFrom)
         {
             mf = CalledFrom;
         }
@@ -37,7 +37,7 @@ namespace GPS_Out
         {
             double lat;
             double lon;
-            if (mf.RollCorrected.Connected())
+            if (mf.RollCorrected.Connected() && Properties.Settings.Default.UseRollCorrected)
             {
                 lat = mf.RollCorrected.Latitude;
                 lon = mf.RollCorrected.Longitude;
@@ -48,7 +48,7 @@ namespace GPS_Out
                 lon = mf.AGIOdata.Longitude;
             }
 
-            cSentence = "$GPRMC";
+            cSentence = Properties.Settings.Default.SentenceStart + "RMC";
             cSentence += "," + DateTime.UtcNow.ToString("HHmmss.ff", CultureInfo.InvariantCulture);
 
             cSentence += ",A";

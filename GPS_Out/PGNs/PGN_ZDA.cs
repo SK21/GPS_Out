@@ -36,7 +36,7 @@ namespace GPS_Out.PGNs
 
         public string Build()
         {
-            cSentence = "$GPZDA";
+            cSentence = Properties.Settings.Default.SentenceStart + "ZDA";
             cSentence += "," + DateTime.UtcNow.ToString("HHmmss.fff", CultureInfo.InvariantCulture);
             cSentence += "," + DateTime.UtcNow.Day.ToString("00");
             cSentence += "," + DateTime.UtcNow.Month.ToString("00");

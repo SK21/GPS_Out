@@ -39,7 +39,14 @@
             this.tmrZDA = new System.Windows.Forms.Timer(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.btnZDA = new System.Windows.Forms.Button();
+            this.tbZDA = new System.Windows.Forms.TextBox();
+            this.btnRMC = new System.Windows.Forms.Button();
+            this.tbRMC = new System.Windows.Forms.TextBox();
+            this.btnVTG = new System.Windows.Forms.Button();
+            this.btnGGA = new System.Windows.Forms.Button();
+            this.tbVTG = new System.Windows.Forms.TextBox();
+            this.tbGGA = new System.Windows.Forms.TextBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.PortIndicator1 = new System.Windows.Forms.Label();
             this.btnRescan = new System.Windows.Forms.Button();
@@ -64,6 +71,13 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.rbGP = new System.Windows.Forms.RadioButton();
+            this.rbGN = new System.Windows.Forms.RadioButton();
+            this.ckGSA = new System.Windows.Forms.CheckBox();
+            this.ckRoll = new System.Windows.Forms.CheckBox();
+            this.ckAutoConnect = new System.Windows.Forms.CheckBox();
+            this.ckAutoHide = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label19 = new System.Windows.Forms.Label();
             this.cboZDA = new System.Windows.Forms.ComboBox();
@@ -77,24 +91,11 @@
             this.cboGGA = new System.Windows.Forms.ComboBox();
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
-            this.ckAutoConnect = new System.Windows.Forms.CheckBox();
-            this.ckAutoHide = new System.Windows.Forms.CheckBox();
-            this.btnZDA = new System.Windows.Forms.Button();
-            this.tbZDA = new System.Windows.Forms.TextBox();
-            this.btnRMC = new System.Windows.Forms.Button();
-            this.tbRMC = new System.Windows.Forms.TextBox();
-            this.btnVTG = new System.Windows.Forms.Button();
-            this.btnGGA = new System.Windows.Forms.Button();
-            this.tbVTG = new System.Windows.Forms.TextBox();
-            this.tbGGA = new System.Windows.Forms.TextBox();
-            this.ckGSA = new System.Windows.Forms.CheckBox();
-            this.ckRoll = new System.Windows.Forms.CheckBox();
-            this.rbGN = new System.Windows.Forms.RadioButton();
-            this.rbGP = new System.Windows.Forms.RadioButton();
+            this.tmrGSA = new System.Windows.Forms.Timer(this.components);
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
-            this.tabPage2.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.tabPage2.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -177,22 +178,81 @@
             this.tabPage1.Text = "Main";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
-            // tabPage2
+            // btnZDA
             // 
-            this.tabPage2.Controls.Add(this.rbGP);
-            this.tabPage2.Controls.Add(this.rbGN);
-            this.tabPage2.Controls.Add(this.ckGSA);
-            this.tabPage2.Controls.Add(this.ckRoll);
-            this.tabPage2.Controls.Add(this.ckAutoConnect);
-            this.tabPage2.Controls.Add(this.ckAutoHide);
-            this.tabPage2.Controls.Add(this.groupBox2);
-            this.tabPage2.Location = new System.Drawing.Point(4, 33);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(574, 371);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "Options";
-            this.tabPage2.UseVisualStyleBackColor = true;
+            this.btnZDA.Location = new System.Drawing.Point(6, 330);
+            this.btnZDA.Name = "btnZDA";
+            this.btnZDA.Size = new System.Drawing.Size(75, 33);
+            this.btnZDA.TabIndex = 316;
+            this.btnZDA.Text = "ZDA";
+            this.btnZDA.UseVisualStyleBackColor = true;
+            this.btnZDA.Click += new System.EventHandler(this.btnZDA_Click);
+            // 
+            // tbZDA
+            // 
+            this.tbZDA.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbZDA.Location = new System.Drawing.Point(87, 339);
+            this.tbZDA.Name = "tbZDA";
+            this.tbZDA.ReadOnly = true;
+            this.tbZDA.Size = new System.Drawing.Size(478, 20);
+            this.tbZDA.TabIndex = 315;
+            // 
+            // btnRMC
+            // 
+            this.btnRMC.Location = new System.Drawing.Point(6, 291);
+            this.btnRMC.Name = "btnRMC";
+            this.btnRMC.Size = new System.Drawing.Size(75, 33);
+            this.btnRMC.TabIndex = 314;
+            this.btnRMC.Text = "RMC";
+            this.btnRMC.UseVisualStyleBackColor = true;
+            this.btnRMC.Click += new System.EventHandler(this.btnRMC_Click);
+            // 
+            // tbRMC
+            // 
+            this.tbRMC.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbRMC.Location = new System.Drawing.Point(87, 300);
+            this.tbRMC.Name = "tbRMC";
+            this.tbRMC.ReadOnly = true;
+            this.tbRMC.Size = new System.Drawing.Size(478, 20);
+            this.tbRMC.TabIndex = 313;
+            // 
+            // btnVTG
+            // 
+            this.btnVTG.Location = new System.Drawing.Point(6, 252);
+            this.btnVTG.Name = "btnVTG";
+            this.btnVTG.Size = new System.Drawing.Size(75, 33);
+            this.btnVTG.TabIndex = 312;
+            this.btnVTG.Text = "VTG";
+            this.btnVTG.UseVisualStyleBackColor = true;
+            this.btnVTG.Click += new System.EventHandler(this.btnVTG_Click);
+            // 
+            // btnGGA
+            // 
+            this.btnGGA.Location = new System.Drawing.Point(6, 213);
+            this.btnGGA.Name = "btnGGA";
+            this.btnGGA.Size = new System.Drawing.Size(75, 33);
+            this.btnGGA.TabIndex = 311;
+            this.btnGGA.Text = "GGA";
+            this.btnGGA.UseVisualStyleBackColor = true;
+            this.btnGGA.Click += new System.EventHandler(this.btnGGA_Click);
+            // 
+            // tbVTG
+            // 
+            this.tbVTG.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbVTG.Location = new System.Drawing.Point(87, 261);
+            this.tbVTG.Name = "tbVTG";
+            this.tbVTG.ReadOnly = true;
+            this.tbVTG.Size = new System.Drawing.Size(478, 20);
+            this.tbVTG.TabIndex = 310;
+            // 
+            // tbGGA
+            // 
+            this.tbGGA.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbGGA.Location = new System.Drawing.Point(87, 222);
+            this.tbGGA.Name = "tbGGA";
+            this.tbGGA.ReadOnly = true;
+            this.tbGGA.Size = new System.Drawing.Size(478, 20);
+            this.tbGGA.TabIndex = 309;
             // 
             // groupBox1
             // 
@@ -226,6 +286,7 @@
             // 
             this.btnRescan.BackColor = System.Drawing.Color.Transparent;
             this.btnRescan.FlatAppearance.BorderSize = 0;
+            this.btnRescan.FlatAppearance.MouseDownBackColor = System.Drawing.Color.LightGreen;
             this.btnRescan.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.btnRescan.Font = new System.Drawing.Font("Tahoma", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnRescan.Image = global::GPS_Out.Properties.Resources.Update;
@@ -235,6 +296,7 @@
             this.btnRescan.TabIndex = 151;
             this.btnRescan.TextAlign = System.Drawing.ContentAlignment.TopLeft;
             this.btnRescan.UseVisualStyleBackColor = false;
+            this.btnRescan.Click += new System.EventHandler(this.btnRescan_Click);
             // 
             // lbPort
             // 
@@ -257,6 +319,7 @@
             this.btnConnect1.TabIndex = 128;
             this.btnConnect1.Text = "Connect";
             this.btnConnect1.UseVisualStyleBackColor = false;
+            this.btnConnect1.Click += new System.EventHandler(this.btnConnect1_Click);
             // 
             // cboBaud1
             // 
@@ -276,6 +339,7 @@
             this.cboBaud1.Name = "cboBaud1";
             this.cboBaud1.Size = new System.Drawing.Size(127, 37);
             this.cboBaud1.TabIndex = 130;
+            this.cboBaud1.SelectedIndexChanged += new System.EventHandler(this.cboBaud1_SelectedIndexChanged);
             // 
             // cboPort1
             // 
@@ -286,6 +350,7 @@
             this.cboPort1.Name = "cboPort1";
             this.cboPort1.Size = new System.Drawing.Size(127, 37);
             this.cboPort1.TabIndex = 127;
+            this.cboPort1.SelectedIndexChanged += new System.EventHandler(this.cboPort1_SelectedIndexChanged);
             // 
             // lbBaud
             // 
@@ -465,6 +530,110 @@
             this.label1.TabIndex = 153;
             this.label1.Text = "Lon";
             // 
+            // tabPage2
+            // 
+            this.tabPage2.Controls.Add(this.rbGP);
+            this.tabPage2.Controls.Add(this.rbGN);
+            this.tabPage2.Controls.Add(this.ckGSA);
+            this.tabPage2.Controls.Add(this.ckRoll);
+            this.tabPage2.Controls.Add(this.ckAutoConnect);
+            this.tabPage2.Controls.Add(this.ckAutoHide);
+            this.tabPage2.Controls.Add(this.groupBox2);
+            this.tabPage2.Location = new System.Drawing.Point(4, 33);
+            this.tabPage2.Name = "tabPage2";
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+            this.tabPage2.Size = new System.Drawing.Size(574, 371);
+            this.tabPage2.TabIndex = 1;
+            this.tabPage2.Text = "Options";
+            this.tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // rbGP
+            // 
+            this.rbGP.Appearance = System.Windows.Forms.Appearance.Button;
+            this.rbGP.Checked = true;
+            this.rbGP.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.rbGP.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rbGP.Location = new System.Drawing.Point(99, 254);
+            this.rbGP.Name = "rbGP";
+            this.rbGP.Size = new System.Drawing.Size(165, 34);
+            this.rbGP.TabIndex = 314;
+            this.rbGP.TabStop = true;
+            this.rbGP.Text = "Send $GP---";
+            this.rbGP.UseVisualStyleBackColor = true;
+            this.rbGP.CheckedChanged += new System.EventHandler(this.rbGP_CheckedChanged);
+            // 
+            // rbGN
+            // 
+            this.rbGN.Appearance = System.Windows.Forms.Appearance.Button;
+            this.rbGN.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.rbGN.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.rbGN.Location = new System.Drawing.Point(330, 254);
+            this.rbGN.Name = "rbGN";
+            this.rbGN.Size = new System.Drawing.Size(165, 34);
+            this.rbGN.TabIndex = 313;
+            this.rbGN.Text = "Send $GN---";
+            this.rbGN.UseVisualStyleBackColor = true;
+            // 
+            // ckGSA
+            // 
+            this.ckGSA.Appearance = System.Windows.Forms.Appearance.Button;
+            this.ckGSA.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.ckGSA.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ckGSA.Location = new System.Drawing.Point(330, 313);
+            this.ckGSA.Name = "ckGSA";
+            this.ckGSA.Size = new System.Drawing.Size(165, 34);
+            this.ckGSA.TabIndex = 312;
+            this.ckGSA.Text = "Send empty GSA";
+            this.ckGSA.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.ckGSA.UseVisualStyleBackColor = true;
+            this.ckGSA.CheckedChanged += new System.EventHandler(this.ckGSA_CheckedChanged);
+            // 
+            // ckRoll
+            // 
+            this.ckRoll.Appearance = System.Windows.Forms.Appearance.Button;
+            this.ckRoll.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.ckRoll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ckRoll.Location = new System.Drawing.Point(99, 313);
+            this.ckRoll.Name = "ckRoll";
+            this.ckRoll.Size = new System.Drawing.Size(165, 34);
+            this.ckRoll.TabIndex = 311;
+            this.ckRoll.Text = "Roll Corrected";
+            this.ckRoll.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.ckRoll.UseVisualStyleBackColor = true;
+            this.ckRoll.CheckedChanged += new System.EventHandler(this.ckRoll_CheckedChanged);
+            // 
+            // ckAutoConnect
+            // 
+            this.ckAutoConnect.Appearance = System.Windows.Forms.Appearance.Button;
+            this.ckAutoConnect.Checked = true;
+            this.ckAutoConnect.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ckAutoConnect.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.ckAutoConnect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ckAutoConnect.Location = new System.Drawing.Point(99, 195);
+            this.ckAutoConnect.Name = "ckAutoConnect";
+            this.ckAutoConnect.Size = new System.Drawing.Size(165, 34);
+            this.ckAutoConnect.TabIndex = 306;
+            this.ckAutoConnect.Text = "Auto Connect";
+            this.ckAutoConnect.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.ckAutoConnect.UseVisualStyleBackColor = true;
+            this.ckAutoConnect.CheckedChanged += new System.EventHandler(this.ckAutoConnect_CheckedChanged);
+            // 
+            // ckAutoHide
+            // 
+            this.ckAutoHide.Appearance = System.Windows.Forms.Appearance.Button;
+            this.ckAutoHide.Checked = true;
+            this.ckAutoHide.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ckAutoHide.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.ckAutoHide.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ckAutoHide.Location = new System.Drawing.Point(330, 195);
+            this.ckAutoHide.Name = "ckAutoHide";
+            this.ckAutoHide.Size = new System.Drawing.Size(165, 34);
+            this.ckAutoHide.TabIndex = 305;
+            this.ckAutoHide.Text = "Auto Hide";
+            this.ckAutoHide.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.ckAutoHide.UseVisualStyleBackColor = true;
+            this.ckAutoHide.CheckedChanged += new System.EventHandler(this.ckAutoHide_CheckedChanged);
+            // 
             // groupBox2
             // 
             this.groupBox2.Controls.Add(this.label19);
@@ -511,6 +680,7 @@
             this.cboZDA.Name = "cboZDA";
             this.cboZDA.Size = new System.Drawing.Size(60, 37);
             this.cboZDA.TabIndex = 163;
+            this.cboZDA.SelectedIndexChanged += new System.EventHandler(this.cboZDA_SelectedIndexChanged);
             // 
             // label20
             // 
@@ -546,6 +716,7 @@
             this.cboRMC.Name = "cboRMC";
             this.cboRMC.Size = new System.Drawing.Size(60, 37);
             this.cboRMC.TabIndex = 160;
+            this.cboRMC.SelectedIndexChanged += new System.EventHandler(this.cboRMC_SelectedIndexChanged);
             // 
             // label18
             // 
@@ -581,6 +752,7 @@
             this.cboVTG.Name = "cboVTG";
             this.cboVTG.Size = new System.Drawing.Size(60, 37);
             this.cboVTG.TabIndex = 157;
+            this.cboVTG.SelectedIndexChanged += new System.EventHandler(this.cboVTG_SelectedIndexChanged);
             // 
             // label11
             // 
@@ -606,6 +778,7 @@
             this.cboGGA.Name = "cboGGA";
             this.cboGGA.Size = new System.Drawing.Size(60, 37);
             this.cboGGA.TabIndex = 155;
+            this.cboGGA.SelectedIndexChanged += new System.EventHandler(this.cboGGA_SelectedIndexChanged);
             // 
             // label10
             // 
@@ -627,159 +800,10 @@
             this.label9.TabIndex = 153;
             this.label9.Text = "GGA";
             // 
-            // ckAutoConnect
+            // tmrGSA
             // 
-            this.ckAutoConnect.Appearance = System.Windows.Forms.Appearance.Button;
-            this.ckAutoConnect.Checked = true;
-            this.ckAutoConnect.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ckAutoConnect.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.ckAutoConnect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ckAutoConnect.Location = new System.Drawing.Point(99, 195);
-            this.ckAutoConnect.Name = "ckAutoConnect";
-            this.ckAutoConnect.Size = new System.Drawing.Size(165, 34);
-            this.ckAutoConnect.TabIndex = 306;
-            this.ckAutoConnect.Text = "Auto Connect";
-            this.ckAutoConnect.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.ckAutoConnect.UseVisualStyleBackColor = true;
-            // 
-            // ckAutoHide
-            // 
-            this.ckAutoHide.Appearance = System.Windows.Forms.Appearance.Button;
-            this.ckAutoHide.Checked = true;
-            this.ckAutoHide.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ckAutoHide.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.ckAutoHide.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ckAutoHide.Location = new System.Drawing.Point(330, 195);
-            this.ckAutoHide.Name = "ckAutoHide";
-            this.ckAutoHide.Size = new System.Drawing.Size(165, 34);
-            this.ckAutoHide.TabIndex = 305;
-            this.ckAutoHide.Text = "Auto Hide";
-            this.ckAutoHide.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.ckAutoHide.UseVisualStyleBackColor = true;
-            // 
-            // btnZDA
-            // 
-            this.btnZDA.Location = new System.Drawing.Point(6, 330);
-            this.btnZDA.Name = "btnZDA";
-            this.btnZDA.Size = new System.Drawing.Size(75, 33);
-            this.btnZDA.TabIndex = 316;
-            this.btnZDA.Text = "ZDA";
-            this.btnZDA.UseVisualStyleBackColor = true;
-            // 
-            // tbZDA
-            // 
-            this.tbZDA.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbZDA.Location = new System.Drawing.Point(87, 339);
-            this.tbZDA.Name = "tbZDA";
-            this.tbZDA.ReadOnly = true;
-            this.tbZDA.Size = new System.Drawing.Size(478, 20);
-            this.tbZDA.TabIndex = 315;
-            // 
-            // btnRMC
-            // 
-            this.btnRMC.Location = new System.Drawing.Point(6, 291);
-            this.btnRMC.Name = "btnRMC";
-            this.btnRMC.Size = new System.Drawing.Size(75, 33);
-            this.btnRMC.TabIndex = 314;
-            this.btnRMC.Text = "RMC";
-            this.btnRMC.UseVisualStyleBackColor = true;
-            // 
-            // tbRMC
-            // 
-            this.tbRMC.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbRMC.Location = new System.Drawing.Point(87, 300);
-            this.tbRMC.Name = "tbRMC";
-            this.tbRMC.ReadOnly = true;
-            this.tbRMC.Size = new System.Drawing.Size(478, 20);
-            this.tbRMC.TabIndex = 313;
-            // 
-            // btnVTG
-            // 
-            this.btnVTG.Location = new System.Drawing.Point(6, 252);
-            this.btnVTG.Name = "btnVTG";
-            this.btnVTG.Size = new System.Drawing.Size(75, 33);
-            this.btnVTG.TabIndex = 312;
-            this.btnVTG.Text = "VTG";
-            this.btnVTG.UseVisualStyleBackColor = true;
-            // 
-            // btnGGA
-            // 
-            this.btnGGA.Location = new System.Drawing.Point(6, 213);
-            this.btnGGA.Name = "btnGGA";
-            this.btnGGA.Size = new System.Drawing.Size(75, 33);
-            this.btnGGA.TabIndex = 311;
-            this.btnGGA.Text = "GGA";
-            this.btnGGA.UseVisualStyleBackColor = true;
-            // 
-            // tbVTG
-            // 
-            this.tbVTG.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbVTG.Location = new System.Drawing.Point(87, 261);
-            this.tbVTG.Name = "tbVTG";
-            this.tbVTG.ReadOnly = true;
-            this.tbVTG.Size = new System.Drawing.Size(478, 20);
-            this.tbVTG.TabIndex = 310;
-            // 
-            // tbGGA
-            // 
-            this.tbGGA.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbGGA.Location = new System.Drawing.Point(87, 222);
-            this.tbGGA.Name = "tbGGA";
-            this.tbGGA.ReadOnly = true;
-            this.tbGGA.Size = new System.Drawing.Size(478, 20);
-            this.tbGGA.TabIndex = 309;
-            // 
-            // ckGSA
-            // 
-            this.ckGSA.Appearance = System.Windows.Forms.Appearance.Button;
-            this.ckGSA.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.ckGSA.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ckGSA.Location = new System.Drawing.Point(330, 313);
-            this.ckGSA.Name = "ckGSA";
-            this.ckGSA.Size = new System.Drawing.Size(165, 34);
-            this.ckGSA.TabIndex = 312;
-            this.ckGSA.Text = "Send empty GSA";
-            this.ckGSA.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.ckGSA.UseVisualStyleBackColor = true;
-            // 
-            // ckRoll
-            // 
-            this.ckRoll.Appearance = System.Windows.Forms.Appearance.Button;
-            this.ckRoll.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.ckRoll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ckRoll.Location = new System.Drawing.Point(99, 313);
-            this.ckRoll.Name = "ckRoll";
-            this.ckRoll.Size = new System.Drawing.Size(165, 34);
-            this.ckRoll.TabIndex = 311;
-            this.ckRoll.Text = "Roll Corrected";
-            this.ckRoll.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.ckRoll.UseVisualStyleBackColor = true;
-            // 
-            // rbGN
-            // 
-            this.rbGN.Appearance = System.Windows.Forms.Appearance.Button;
-            this.rbGN.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.rbGN.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.rbGN.Location = new System.Drawing.Point(330, 254);
-            this.rbGN.Name = "rbGN";
-            this.rbGN.Size = new System.Drawing.Size(165, 34);
-            this.rbGN.TabIndex = 313;
-            this.rbGN.Text = "Send $GN---";
-            this.rbGN.UseVisualStyleBackColor = true;
-            // 
-            // rbGP
-            // 
-            this.rbGP.Appearance = System.Windows.Forms.Appearance.Button;
-            this.rbGP.Checked = true;
-            this.rbGP.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.rbGP.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.rbGP.Location = new System.Drawing.Point(99, 254);
-            this.rbGP.Name = "rbGP";
-            this.rbGP.Size = new System.Drawing.Size(165, 34);
-            this.rbGP.TabIndex = 314;
-            this.rbGP.TabStop = true;
-            this.rbGP.Text = "Send $GP---";
-            this.rbGP.UseVisualStyleBackColor = true;
+            this.tmrGSA.Interval = 1000;
+            this.tmrGSA.Tick += new System.EventHandler(this.tmrGSA_Tick);
             // 
             // frmStart
             // 
@@ -800,8 +824,8 @@
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
-            this.tabPage2.ResumeLayout(false);
             this.groupBox1.ResumeLayout(false);
+            this.tabPage2.ResumeLayout(false);
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
@@ -870,6 +894,7 @@
         private System.Windows.Forms.CheckBox ckGSA;
         private System.Windows.Forms.CheckBox ckRoll;
         private System.Windows.Forms.RadioButton rbGP;
+        private System.Windows.Forms.Timer tmrGSA;
     }
 }
 

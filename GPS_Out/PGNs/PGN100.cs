@@ -38,7 +38,7 @@ namespace GPS_Out.PGNs
             cFix2Fix = 1000;
         }
 
-        public double Fix2Fix
+        public double Fix2FixHeading
         {
             get
             {

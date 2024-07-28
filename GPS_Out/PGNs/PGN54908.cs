@@ -111,9 +111,9 @@ namespace GPS_Out
                     Result = cHeadingDual;
                     cHeadingType = "D";
                 }
-                else if (mf.RollCorrected.Fix2Fix < 361)
+                else if (mf.RollCorrected.Fix2FixHeading < 361)
                 {
-                    Result = (float)mf.RollCorrected.Fix2Fix;
+                    Result = (float)mf.RollCorrected.Fix2FixHeading;
                     cHeadingType = "F";
                 }
                 else if (cHeading < 361)

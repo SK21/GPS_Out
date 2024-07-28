@@ -28,7 +28,7 @@ namespace GPS_Out
 
         public string Build()
         {
-            cSentence = "$GPVTG";
+            cSentence = Properties.Settings.Default.SentenceStart + "VTG";
 
             cSentence += "," + mf.Heading().ToString("000.0", CultureInfo.InvariantCulture) + ",T";
 
