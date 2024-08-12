@@ -39,11 +39,11 @@ namespace GPS_Out
         private static Hashtable HTapp;
         private static Hashtable HTfiles;
         private string cAppName = "GPS_Out";
-        private string cAppVersion = "1.2.1";
+        private string cAppVersion = "1.2.0";
         private string cPropertiesApp;
         private string cPropertiesFile;
         private string cSettingsDir;
-        private string cVersionDate = "11-Aug-2024";
+        private string cVersionDate = "29-Jul-2024";
         private frmStart mf;
         private int SentenceCount = 0;
 
@@ -422,7 +422,6 @@ namespace GPS_Out
         public void ShowHelp(string Message, string Title = "Help",
             int timeInMsec = 30000, bool LogError = false, bool Modal = false, bool PlayErrorSound = false)
         {
-            if (PlayErrorSound) SystemSounds.Exclamation.Play();
             var Hlp = new frmHelp(mf, Message, Title, timeInMsec);
             if (Modal)
             {
@@ -434,6 +433,7 @@ namespace GPS_Out
             }
 
             if (LogError) WriteErrorLog(Message);
+            if (PlayErrorSound) SystemSounds.Exclamation.Play();
         }
 
         public void StartWifi()

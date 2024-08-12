@@ -92,8 +92,6 @@
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.tmrGSA = new System.Windows.Forms.Timer(this.components);
-            this.ckIMU = new System.Windows.Forms.CheckBox();
-            this.tmrIMU = new System.Windows.Forms.Timer(this.components);
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -534,7 +532,6 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.ckIMU);
             this.tabPage2.Controls.Add(this.rbGP);
             this.tabPage2.Controls.Add(this.rbGN);
             this.tabPage2.Controls.Add(this.ckGSA);
@@ -556,7 +553,7 @@
             this.rbGP.Checked = true;
             this.rbGP.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.rbGP.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.rbGP.Location = new System.Drawing.Point(6, 244);
+            this.rbGP.Location = new System.Drawing.Point(99, 254);
             this.rbGP.Name = "rbGP";
             this.rbGP.Size = new System.Drawing.Size(165, 34);
             this.rbGP.TabIndex = 314;
@@ -570,7 +567,7 @@
             this.rbGN.Appearance = System.Windows.Forms.Appearance.Button;
             this.rbGN.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.rbGN.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.rbGN.Location = new System.Drawing.Point(204, 244);
+            this.rbGN.Location = new System.Drawing.Point(330, 254);
             this.rbGN.Name = "rbGN";
             this.rbGN.Size = new System.Drawing.Size(165, 34);
             this.rbGN.TabIndex = 313;
@@ -582,7 +579,7 @@
             this.ckGSA.Appearance = System.Windows.Forms.Appearance.Button;
             this.ckGSA.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.ckGSA.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ckGSA.Location = new System.Drawing.Point(204, 303);
+            this.ckGSA.Location = new System.Drawing.Point(330, 313);
             this.ckGSA.Name = "ckGSA";
             this.ckGSA.Size = new System.Drawing.Size(165, 34);
             this.ckGSA.TabIndex = 312;
@@ -596,7 +593,7 @@
             this.ckRoll.Appearance = System.Windows.Forms.Appearance.Button;
             this.ckRoll.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.ckRoll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ckRoll.Location = new System.Drawing.Point(6, 303);
+            this.ckRoll.Location = new System.Drawing.Point(99, 313);
             this.ckRoll.Name = "ckRoll";
             this.ckRoll.Size = new System.Drawing.Size(165, 34);
             this.ckRoll.TabIndex = 311;
@@ -612,7 +609,7 @@
             this.ckAutoConnect.CheckState = System.Windows.Forms.CheckState.Checked;
             this.ckAutoConnect.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.ckAutoConnect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ckAutoConnect.Location = new System.Drawing.Point(6, 185);
+            this.ckAutoConnect.Location = new System.Drawing.Point(99, 195);
             this.ckAutoConnect.Name = "ckAutoConnect";
             this.ckAutoConnect.Size = new System.Drawing.Size(165, 34);
             this.ckAutoConnect.TabIndex = 306;
@@ -628,7 +625,7 @@
             this.ckAutoHide.CheckState = System.Windows.Forms.CheckState.Checked;
             this.ckAutoHide.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.ckAutoHide.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ckAutoHide.Location = new System.Drawing.Point(204, 185);
+            this.ckAutoHide.Location = new System.Drawing.Point(330, 195);
             this.ckAutoHide.Name = "ckAutoHide";
             this.ckAutoHide.Size = new System.Drawing.Size(165, 34);
             this.ckAutoHide.TabIndex = 305;
@@ -808,25 +805,6 @@
             this.tmrGSA.Interval = 1000;
             this.tmrGSA.Tick += new System.EventHandler(this.tmrGSA_Tick);
             // 
-            // ckIMU
-            // 
-            this.ckIMU.Appearance = System.Windows.Forms.Appearance.Button;
-            this.ckIMU.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.ckIMU.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ckIMU.Location = new System.Drawing.Point(402, 185);
-            this.ckIMU.Name = "ckIMU";
-            this.ckIMU.Size = new System.Drawing.Size(165, 34);
-            this.ckIMU.TabIndex = 315;
-            this.ckIMU.Text = "IMU Notification";
-            this.ckIMU.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.ckIMU.UseVisualStyleBackColor = true;
-            this.ckIMU.CheckedChanged += new System.EventHandler(this.ckIMU_CheckedChanged);
-            // 
-            // tmrIMU
-            // 
-            this.tmrIMU.Interval = 10000;
-            this.tmrIMU.Tick += new System.EventHandler(this.tmrIMU_Tick);
-            // 
             // frmStart
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
@@ -917,8 +895,6 @@
         private System.Windows.Forms.CheckBox ckRoll;
         private System.Windows.Forms.RadioButton rbGP;
         private System.Windows.Forms.Timer tmrGSA;
-        private System.Windows.Forms.CheckBox ckIMU;
-        private System.Windows.Forms.Timer tmrIMU;
     }
 }
 

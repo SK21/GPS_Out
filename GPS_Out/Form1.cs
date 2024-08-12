@@ -78,9 +78,6 @@ namespace GPS_Out
         public string VTGsentence = "";
         public PGN_ZDA ZDA;
         public string ZDAsentence = "";
-        private bool CheckIMUstarted;
-        private DateTime IMUtime;
-        private float IMUvalue;
         private int Watchdog;
 
         public frmStart()
@@ -331,40 +328,6 @@ namespace GPS_Out
             Properties.Settings.Default.ZDA = cboZDA.SelectedIndex;
         }
 
-        private void CheckIMU()
-        {
-            if (AGIOdata.Connected() && AGIOdata.Speed > 0.5)
-            {
-                if (CheckIMUstarted)
-                {
-                    if (Math.Abs(AGIOdata.IMUheading - IMUvalue) > 0.2)
-                    {
-                        CheckIMUstarted = false;
-                    }
-                    else
-                    {
-                        if ((DateTime.Now - IMUtime).TotalSeconds > 60)
-                        {
-                            tmrIMU.Enabled = false;
-                            Tls.ShowHelp("No IMU heading!", "IMU", 30000, true, true, true);
-                            CheckIMUstarted = false;
-                            tmrIMU.Enabled = true;
-                        }
-                    }
-                }
-                else
-                {
-                    CheckIMUstarted = true;
-                    IMUtime = DateTime.Now;
-                    IMUvalue = AGIOdata.IMUheading;
-                }
-            }
-            else
-            {
-                CheckIMUstarted = false;
-            }
-        }
-
         private void ckAutoConnect_CheckedChanged(object sender, EventArgs e)
         {
             Properties.Settings.Default.AutoConnect = ckAutoConnect.Checked;
@@ -381,12 +344,6 @@ namespace GPS_Out
         {
             Properties.Settings.Default.SendGSA = ckGSA.Checked;
             tmrGSA.Enabled = ckGSA.Checked;
-        }
-
-        private void ckIMU_CheckedChanged(object sender, EventArgs e)
-        {
-            Properties.Settings.Default.IMUnotification = ckIMU.Checked;
-            tmrIMU.Enabled = ckIMU.Checked;
         }
 
         private void ckRoll_CheckedChanged(object sender, EventArgs e)
@@ -417,7 +374,6 @@ namespace GPS_Out
             ckRoll.Checked = Properties.Settings.Default.UseRollCorrected;
             rbGN.Checked = (Properties.Settings.Default.SentenceStart == "$GN");
             ckGSA.Checked = Properties.Settings.Default.SendGSA;
-            ckIMU.Checked = Properties.Settings.Default.IMUnotification;
 
             cboGGA.SelectedIndex = Properties.Settings.Default.GGA;
             cboVTG.SelectedIndex = Properties.Settings.Default.VTG;
@@ -517,11 +473,6 @@ namespace GPS_Out
                     backgroundWorker1.CancelAsync();
                 }
             }
-        }
-
-        private void tmrIMU_Tick(object sender, EventArgs e)
-        {
-            CheckIMU();
         }
 
         private void tmrMinimize_Tick(object sender, EventArgs e)
