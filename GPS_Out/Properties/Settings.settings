@@ -53,5 +53,8 @@
     <Setting Name="SentenceStart" Type="System.String" Scope="User">
       <Value Profile="(Default)">$GP</Value>
     </Setting>
+    <Setting Name="IMUnotification" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

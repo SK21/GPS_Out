@@ -226,5 +226,17 @@ namespace GPS_Out.Properties {
                 this["SentenceStart"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("False")]
+        public bool IMUnotification {
+            get {
+                return ((bool)(this["IMUnotification"]));
+            }
+            set {
+                this["IMUnotification"] = value;
+            }
+        }
     }
 }
