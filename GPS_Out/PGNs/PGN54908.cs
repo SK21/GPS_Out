@@ -53,7 +53,19 @@ namespace GPS_Out
         }
 
         public float Age
-        { get { return (float)(cAgeX100 / 100.0); } }
+        {
+            get 
+            {
+                if (Connected())
+                {
+                    return (float)(cAgeX100 / 100.0);
+                }
+                else
+                {
+                    return 1.8F;
+                }
+            }
+        }
 
         public float Altitude
         {
@@ -80,7 +92,7 @@ namespace GPS_Out
                 }
                 else
                 {
-                    return 8;
+                    return 4;
                 }
             }
         }

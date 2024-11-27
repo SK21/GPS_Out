@@ -79,6 +79,7 @@ namespace GPS_Out
         public PGN_ZDA ZDA;
         public string ZDAsentence = "";
         private int Watchdog;
+        private Color SimColor = Color.Orange;
 
         public frmStart()
         {
@@ -380,7 +381,6 @@ namespace GPS_Out
             cboRMC.SelectedIndex = Properties.Settings.Default.RMC;
             cboZDA.SelectedIndex = Properties.Settings.Default.ZDA;
 
-            this.Text = "GPS_Out [" + Tls.AppVersion() + "]";
             if (ckAutoHide.Checked) this.WindowState = FormWindowState.Minimized;
         }
 
@@ -558,6 +558,22 @@ namespace GPS_Out
                 lbAge.Text = AGIOdata.Age.ToString("N1");
 
                 ckRoll.Enabled = RollCorrected.Connected();
+
+                if(AGIOdata.Connected())
+                {
+                    lbQuality.BackColor = Color.Transparent;
+                    label4.BackColor = Color.Transparent;
+                    lbSim.Visible = false;
+                    this.Text = "GPS_Out [" + Tls.AppVersion() + "]";
+                }
+                else
+                {
+                    lbQuality.BackColor= SimColor;
+                    label4.BackColor= SimColor;
+                    lbSim.Visible = true;
+                    lbSim.BackColor= SimColor;
+                    this.Text = "GPS_Out [" + Tls.AppVersion() + "]  Simulated Data";
+                }
             }
         }
     }

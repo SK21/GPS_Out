@@ -39,11 +39,11 @@ namespace GPS_Out
         private static Hashtable HTapp;
         private static Hashtable HTfiles;
         private string cAppName = "GPS_Out";
-        private string cAppVersion = "1.2.0";
+        private string cAppVersion = "1.2.1";
         private string cPropertiesApp;
         private string cPropertiesFile;
         private string cSettingsDir;
-        private string cVersionDate = "29-Jul-2024";
+        private string cVersionDate = "27-Nov-2024";
         private frmStart mf;
         private int SentenceCount = 0;
 

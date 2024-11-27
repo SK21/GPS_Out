@@ -33,7 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>satellite.ico</ApplicationIcon>
+    <ApplicationIcon>Resources\satellite.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -115,6 +115,8 @@
     <None Include="Resources\ConS_SourcesRoll.png" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Resources\satellite.ico" />
+    <None Include="Resources\satelliteSim.ico" />
     <Content Include="satellite.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

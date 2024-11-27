@@ -92,6 +92,7 @@
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.tmrGSA = new System.Windows.Forms.Timer(this.components);
+            this.lbSim = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -145,6 +146,8 @@
             // 
             // tabPage1
             // 
+            this.tabPage1.BackColor = System.Drawing.Color.Transparent;
+            this.tabPage1.Controls.Add(this.lbSim);
             this.tabPage1.Controls.Add(this.btnZDA);
             this.tabPage1.Controls.Add(this.tbZDA);
             this.tabPage1.Controls.Add(this.btnRMC);
@@ -176,7 +179,6 @@
             this.tabPage1.Size = new System.Drawing.Size(574, 371);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Main";
-            this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // btnZDA
             // 
@@ -409,6 +411,7 @@
             // lbQuality
             // 
             this.lbQuality.AutoSize = true;
+            this.lbQuality.BackColor = System.Drawing.Color.Transparent;
             this.lbQuality.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbQuality.Location = new System.Drawing.Point(100, 75);
             this.lbQuality.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
@@ -493,6 +496,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.Color.Transparent;
             this.label4.Location = new System.Drawing.Point(9, 75);
             this.label4.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
             this.label4.Name = "label4";
@@ -805,10 +809,23 @@
             this.tmrGSA.Interval = 1000;
             this.tmrGSA.Tick += new System.EventHandler(this.tmrGSA_Tick);
             // 
+            // lbSim
+            // 
+            this.lbSim.AutoSize = true;
+            this.lbSim.BackColor = System.Drawing.Color.Transparent;
+            this.lbSim.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbSim.Location = new System.Drawing.Point(232, 75);
+            this.lbSim.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.lbSim.Name = "lbSim";
+            this.lbSim.Size = new System.Drawing.Size(102, 24);
+            this.lbSim.TabIndex = 317;
+            this.lbSim.Text = "Simulated";
+            // 
             // frmStart
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(603, 425);
             this.Controls.Add(this.tabControl1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -895,6 +912,7 @@
         private System.Windows.Forms.CheckBox ckRoll;
         private System.Windows.Forms.RadioButton rbGP;
         private System.Windows.Forms.Timer tmrGSA;
+        private System.Windows.Forms.Label lbSim;
     }
 }
 
