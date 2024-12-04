@@ -39,6 +39,7 @@
             this.tmrZDA = new System.Windows.Forms.Timer(this.components);
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.lbSim = new System.Windows.Forms.Label();
             this.btnZDA = new System.Windows.Forms.Button();
             this.tbZDA = new System.Windows.Forms.TextBox();
             this.btnRMC = new System.Windows.Forms.Button();
@@ -92,7 +93,7 @@
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.tmrGSA = new System.Windows.Forms.Timer(this.components);
-            this.lbSim = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -179,6 +180,18 @@
             this.tabPage1.Size = new System.Drawing.Size(574, 371);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Main";
+            // 
+            // lbSim
+            // 
+            this.lbSim.AutoSize = true;
+            this.lbSim.BackColor = System.Drawing.Color.Transparent;
+            this.lbSim.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbSim.Location = new System.Drawing.Point(232, 75);
+            this.lbSim.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.lbSim.Name = "lbSim";
+            this.lbSim.Size = new System.Drawing.Size(102, 24);
+            this.lbSim.TabIndex = 317;
+            this.lbSim.Text = "Simulated";
             // 
             // btnZDA
             // 
@@ -536,6 +549,7 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.button1);
             this.tabPage2.Controls.Add(this.rbGP);
             this.tabPage2.Controls.Add(this.rbGN);
             this.tabPage2.Controls.Add(this.ckGSA);
@@ -809,17 +823,15 @@
             this.tmrGSA.Interval = 1000;
             this.tmrGSA.Tick += new System.EventHandler(this.tmrGSA_Tick);
             // 
-            // lbSim
+            // button1
             // 
-            this.lbSim.AutoSize = true;
-            this.lbSim.BackColor = System.Drawing.Color.Transparent;
-            this.lbSim.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lbSim.Location = new System.Drawing.Point(232, 75);
-            this.lbSim.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.lbSim.Name = "lbSim";
-            this.lbSim.Size = new System.Drawing.Size(102, 24);
-            this.lbSim.TabIndex = 317;
-            this.lbSim.Text = "Simulated";
+            this.button1.Location = new System.Drawing.Point(6, 54);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(87, 37);
+            this.button1.TabIndex = 315;
+            this.button1.Text = "button1";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // frmStart
             // 
@@ -913,6 +925,7 @@
         private System.Windows.Forms.RadioButton rbGP;
         private System.Windows.Forms.Timer tmrGSA;
         private System.Windows.Forms.Label lbSim;
+        private System.Windows.Forms.Button button1;
     }
 }
 

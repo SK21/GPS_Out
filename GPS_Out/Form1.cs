@@ -2,6 +2,7 @@
 using System;
 using System.ComponentModel;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 
 namespace GPS_Out
@@ -576,5 +577,12 @@ namespace GPS_Out
                 }
             }
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            RollCorrected.ParseByteData(Tls.ReadByteFile("AOGdata.txt"));
+            AGIOdata.ParseByteData(Tls.ReadByteFile("AGIOdata.txt"));
+        }
+
     }
 }

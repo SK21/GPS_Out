@@ -305,7 +305,7 @@ namespace GPS_Out
                 ReceiveTime = DateTime.Now;
                 Result = true;
 
-                //mf.Tls.WriteByteFile( Data);
+                mf.Tls.WriteByteFile(Data, "AGIOdata.txt");
             }
             return Result;
         }

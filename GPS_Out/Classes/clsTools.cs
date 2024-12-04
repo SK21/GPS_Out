@@ -492,10 +492,10 @@ namespace GPS_Out
             return cVersionDate;
         }
 
-        public void WriteByteFile(byte[] Data)
+        public void WriteByteFile(byte[] Data,string DataName)
         {
-            string FileName = cSettingsDir + "\\" + "AGIOdata.txt";
-            if (SentenceCount < 9)
+            string FileName = cSettingsDir + "\\" + DataName;
+            if (SentenceCount < 20)
             {
                 SentenceCount++;
                 using (var stream = new FileStream(FileName, FileMode.Append))
@@ -504,13 +504,26 @@ namespace GPS_Out
                 }
             }
         }
+        public byte[] ReadByteFile(string DataName)
+        {
+            string FileName = cSettingsDir + "\\" + DataName;
 
-        public void WriteActivityLog(string Message, bool Newline = false)
+            if (File.Exists(FileName))
+            {
+                return File.ReadAllBytes(FileName);
+            }
+            else
+            {
+                throw new FileNotFoundException("The specified file does not exist.", FileName);
+            }
+        }
+
+        public void WriteActivityLog(string Message, bool Newline = false,string DataName="Activity Log.txt")
         {
             string Line = "";
             try
             {
-                string FileName = cSettingsDir + "\\Activity Log.txt";
+                string FileName = cSettingsDir + "\\" + DataName;
                 TrimFile(FileName);
 
                 if (Newline) Line = "\r\n";
