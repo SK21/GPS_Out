@@ -4,7 +4,7 @@ namespace GPS_Out
 {
     public class PGN54908
     {
-        // NMEA data from AGIO
+        // data from AGIO
         // 0        0x80
         // 1        0x81
         // 2        0x7C
@@ -32,9 +32,7 @@ namespace GPS_Out
         private float cAltitude;
         private byte cFixQuality;
         private ushort cHdopX100;
-        private float cHeading;
         private float cHeadingDual;
-        private string cHeadingType = "I";
         private float cImuHeading;
         private short cImuPitch;
         private short cImuRoll;
@@ -44,6 +42,7 @@ namespace GPS_Out
         private float cRoll;
         private ushort cSatellites;
         private float cSpeed;
+        private float cTrueHeading;
         private frmStart mf;
         private DateTime ReceiveTime;
 
@@ -54,7 +53,7 @@ namespace GPS_Out
 
         public float Age
         {
-            get 
+            get
             {
                 if (Connected())
                 {
@@ -112,55 +111,33 @@ namespace GPS_Out
             }
         }
 
-        public float Heading
+        public float HeadingDual
         {
             get
             {
-                float Result = 0;
-
-                if (cHeadingDual < 361)
+                if (Connected())
                 {
-                    Result = cHeadingDual;
-                    cHeadingType = "D";
+                    return cHeadingDual;
                 }
-                else if (mf.RollCorrected.Fix2FixHeading < 361)
+                else
                 {
-                    Result = (float)mf.RollCorrected.Fix2FixHeading;
-                    cHeadingType = "F";
+                    return 1000;
                 }
-                else if (cHeading < 361)
-                {
-                    Result = cHeading;
-                    cHeadingType = "H";
-                }
-                else if (cImuHeading < 361)
-                {
-                    Result = cImuHeading;
-                    cHeadingType = "I";
-                }
-
-                return Result;
             }
-        }
-
-        public float HeadingDual
-        { get { return cHeadingDual; } }
-
-        public float HeadingSource1
-        { get { return cHeading; } }
-
-        public string HeadingType
-        {
-            get { return cHeadingType; }
         }
 
         public float IMUheading
         {
             get
             {
-                float Result = 0;
-                if (cImuHeading < 361) Result = cImuHeading;
-                return Result;
+                if (Connected())
+                {
+                    return cImuHeading;
+                }
+                else
+                {
+                    return 1000;
+                }
             }
         }
 
@@ -267,11 +244,33 @@ namespace GPS_Out
             {
                 if (Connected())
                 {
-                    return cSpeed;
+                    if (cSpeed < 100)
+                    {
+                        return cSpeed;
+                    }
+                    else
+                    {
+                        return 0;
+                    }
                 }
                 else
                 {
                     return 4.8F;
+                }
+            }
+        }
+
+        public float TrueHeading
+        {
+            get
+            {
+                if (Connected())
+                {
+                    return cTrueHeading;
+                }
+                else
+                {
+                    return 1000;
                 }
             }
         }
@@ -289,7 +288,7 @@ namespace GPS_Out
                 cLongitude = BitConverter.ToDouble(Data, 5);
                 cLatitude = BitConverter.ToDouble(Data, 13);
                 cHeadingDual = BitConverter.ToSingle(Data, 21);
-                cHeading = BitConverter.ToSingle(Data, 25);
+                cTrueHeading = BitConverter.ToSingle(Data, 25);
                 cSpeed = BitConverter.ToSingle(Data, 29);
                 cRoll = BitConverter.ToSingle(Data, 33);
                 cAltitude = BitConverter.ToSingle(Data, 37);
@@ -305,7 +304,7 @@ namespace GPS_Out
                 ReceiveTime = DateTime.Now;
                 Result = true;
 
-                mf.Tls.WriteByteFile(Data, "AGIOdata.txt");
+                //mf.Tls.WriteByteFile(Data, "AGIOdata.txt");
             }
             return Result;
         }

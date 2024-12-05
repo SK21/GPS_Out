@@ -1,9 +1,11 @@
 ﻿using System;
+using System.Diagnostics;
 
 namespace GPS_Out.PGNs
 {
     public class PGN100
     {
+        // data from AOG
         // corrected position
         // 0        header Hi       128 0x80
         // 1        header Lo       129 0x81
@@ -31,24 +33,25 @@ namespace GPS_Out.PGNs
         private double cLongitude;
         private frmStart mf;
         private DateTime ReceiveTime;
+        private bool ExtendedPGN = false;
 
         public PGN100(frmStart CalledFrom)
         {
             mf = CalledFrom;
-            cFix2Fix = 1000;
+            cFix2Fix = 1000;    // invalid data flag
         }
 
         public double Fix2FixHeading
         {
             get
             {
-                if (Connected())
+                if (Connected() && Properties.Settings.Default.UseRollCorrected && ExtendedPGN)
                 {
                     return cFix2Fix;
                 }
                 else
                 {
-                    return 0;
+                    return 1000;
                 }
             }
         }
@@ -94,13 +97,14 @@ namespace GPS_Out.PGNs
             {
                 if ((Data.Length > HeaderCount) && (Data.Length == Data[4] + HeaderCount + 1))
                 {
+                    ExtendedPGN = (Data[4] == 24);
                     if (mf.Tls.GoodCRC(Data, 2))
                     {
                         cLongitude = BitConverter.ToDouble(Data, 5);
                         cLatitude = BitConverter.ToDouble(Data, 13);
                         if (Data[4] == 24) cFix2Fix = BitConverter.ToDouble(Data, 21);  // alternate pgn
                         ReceiveTime = DateTime.Now;
-                        mf.Tls.WriteByteFile(Data, "AOGdata.txt");
+                        //mf.Tls.WriteByteFile(Data, "AOGdata.txt");
                     }
                 }
             }

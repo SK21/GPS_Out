@@ -2,7 +2,6 @@
 using System;
 using System.ComponentModel;
 using System.Drawing;
-using System.IO;
 using System.Windows.Forms;
 
 namespace GPS_Out
@@ -66,21 +65,22 @@ namespace GPS_Out
         public UDPComm AGIOcomm;
         public PGN54908 AGIOdata;
         public UDPComm AOGcomm;
+        public PGN100 AOGdata;
         public PGN_GGA GGA;
         public string GGAsentence = "";
         public PGN_GSA GSA;
         public string GSAsentence = "";
         public PGN_RMC RMC;
         public string RMCsentence = "";
-        public PGN100 RollCorrected;
         public SerialSend SER;
         public clsTools Tls;
         public PGN_VTG VTG;
         public string VTGsentence = "";
         public PGN_ZDA ZDA;
         public string ZDAsentence = "";
-        private int Watchdog;
+        private string HeadingType;
         private Color SimColor = Color.Orange;
+        private int Watchdog;
 
         public frmStart()
         {
@@ -93,7 +93,7 @@ namespace GPS_Out
             VTG = new PGN_VTG(this);
             SER = new SerialSend(this);
             RMC = new PGN_RMC(this);
-            RollCorrected = new PGN100(this);
+            AOGdata = new PGN100(this);
             backgroundWorker1.WorkerSupportsCancellation = true;
             ZDA = new PGN_ZDA(this);
             GSA = new PGN_GSA(this);
@@ -157,21 +157,29 @@ namespace GPS_Out
         public double Heading()
         {
             double Result = 0;
-            if (AGIOdata.Connected())
+            HeadingType = "";
+
+            if (AGIOdata.HeadingDual < 361)
             {
-                Result = AGIOdata.Heading;
+                Result = AGIOdata.HeadingDual;
+                HeadingType = "D";
             }
-            else if (RollCorrected.Connected())
+            else if (AOGdata.Fix2FixHeading < 361)
             {
-                if (RollCorrected.Fix2FixHeading < 361)
-                {
-                    Result = RollCorrected.Fix2FixHeading;
-                }
-                else
-                {
-                    Result = 0;
-                }
+                Result = AOGdata.Fix2FixHeading;
+                HeadingType = "F";
             }
+            else if (AGIOdata.TrueHeading < 361)
+            {
+                Result = AGIOdata.TrueHeading;
+                HeadingType = "T";
+            }
+            else if (AGIOdata.IMUheading < 361)
+            {
+                Result = AGIOdata.IMUheading;
+                HeadingType = "I";
+            }
+
             return Result;
         }
 
@@ -362,6 +370,7 @@ namespace GPS_Out
 
         private void frmStart_Load(object sender, EventArgs e)
         {
+            //Properties.Settings.Default.Reset();
             Tls.LoadFormData(this);
             AGIOcomm.StartUDPServer();
             AOGcomm.StartUDPServer();
@@ -539,10 +548,10 @@ namespace GPS_Out
         {
             if (this.WindowState != FormWindowState.Minimized)
             {
-                if (RollCorrected.Connected())
+                if (AOGdata.Connected())
                 {
-                    lbLon.Text = RollCorrected.Longitude.ToString("N7");
-                    lbLat.Text = RollCorrected.Latitude.ToString("N7");
+                    lbLon.Text = AOGdata.Longitude.ToString("N7");
+                    lbLat.Text = AOGdata.Latitude.ToString("N7");
                 }
                 else
                 {
@@ -558,31 +567,24 @@ namespace GPS_Out
                 lbElev.Text = AGIOdata.Altitude.ToString("N2");
                 lbAge.Text = AGIOdata.Age.ToString("N1");
 
-                ckRoll.Enabled = RollCorrected.Connected();
+                ckRoll.Enabled = AOGdata.Connected();
 
-                if(AGIOdata.Connected())
+                if (AGIOdata.Connected())
                 {
                     lbQuality.BackColor = Color.Transparent;
                     label4.BackColor = Color.Transparent;
                     lbSim.Visible = false;
-                    this.Text = "GPS_Out [" + Tls.AppVersion() + "]";
+                    this.Text = "GPS_Out [" + Tls.AppVersion() + "]   " + HeadingType;
                 }
                 else
                 {
-                    lbQuality.BackColor= SimColor;
-                    label4.BackColor= SimColor;
+                    lbQuality.BackColor = SimColor;
+                    label4.BackColor = SimColor;
                     lbSim.Visible = true;
-                    lbSim.BackColor= SimColor;
-                    this.Text = "GPS_Out [" + Tls.AppVersion() + "]  Simulated Data";
+                    lbSim.BackColor = SimColor;
+                    this.Text = "GPS_Out [" + Tls.AppVersion() + "]  Simulated Data   " + HeadingType;
                 }
             }
         }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            RollCorrected.ParseByteData(Tls.ReadByteFile("AOGdata.txt"));
-            AGIOdata.ParseByteData(Tls.ReadByteFile("AGIOdata.txt"));
-        }
-
     }
 }

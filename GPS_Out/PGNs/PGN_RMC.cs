@@ -37,10 +37,10 @@ namespace GPS_Out
         {
             double lat;
             double lon;
-            if (mf.RollCorrected.Connected() && Properties.Settings.Default.UseRollCorrected)
+            if (mf.AOGdata.Connected() && Properties.Settings.Default.UseRollCorrected)
             {
-                lat = mf.RollCorrected.Latitude;
-                lon = mf.RollCorrected.Longitude;
+                lat = mf.AOGdata.Latitude;
+                lon = mf.AOGdata.Longitude;
             }
             else
             {

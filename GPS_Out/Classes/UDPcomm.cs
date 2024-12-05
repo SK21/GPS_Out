@@ -139,7 +139,7 @@ namespace GPS_Out
                                     break;
 
                                 case 25727: // 0x647F, AOG roll corrected lat,lon
-                                    mf.RollCorrected.ParseByteData(Data);
+                                    mf.AOGdata.ParseByteData(Data);
                                     break;
                             }
                             break;

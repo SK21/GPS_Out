@@ -93,7 +93,6 @@
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.tmrGSA = new System.Windows.Forms.Timer(this.components);
-            this.button1 = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -142,7 +141,7 @@
             this.tabControl1.Location = new System.Drawing.Point(12, 12);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(582, 408);
+            this.tabControl1.Size = new System.Drawing.Size(582, 493);
             this.tabControl1.TabIndex = 309;
             // 
             // tabPage1
@@ -177,7 +176,7 @@
             this.tabPage1.Location = new System.Drawing.Point(4, 33);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(574, 371);
+            this.tabPage1.Size = new System.Drawing.Size(574, 456);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Main";
             // 
@@ -195,7 +194,7 @@
             // 
             // btnZDA
             // 
-            this.btnZDA.Location = new System.Drawing.Point(6, 330);
+            this.btnZDA.Location = new System.Drawing.Point(6, 406);
             this.btnZDA.Name = "btnZDA";
             this.btnZDA.Size = new System.Drawing.Size(75, 33);
             this.btnZDA.TabIndex = 316;
@@ -205,16 +204,17 @@
             // 
             // tbZDA
             // 
-            this.tbZDA.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbZDA.Location = new System.Drawing.Point(87, 339);
+            this.tbZDA.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbZDA.Location = new System.Drawing.Point(87, 396);
+            this.tbZDA.Multiline = true;
             this.tbZDA.Name = "tbZDA";
             this.tbZDA.ReadOnly = true;
-            this.tbZDA.Size = new System.Drawing.Size(478, 20);
+            this.tbZDA.Size = new System.Drawing.Size(478, 52);
             this.tbZDA.TabIndex = 315;
             // 
             // btnRMC
             // 
-            this.btnRMC.Location = new System.Drawing.Point(6, 291);
+            this.btnRMC.Location = new System.Drawing.Point(6, 348);
             this.btnRMC.Name = "btnRMC";
             this.btnRMC.Size = new System.Drawing.Size(75, 33);
             this.btnRMC.TabIndex = 314;
@@ -224,16 +224,17 @@
             // 
             // tbRMC
             // 
-            this.tbRMC.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbRMC.Location = new System.Drawing.Point(87, 300);
+            this.tbRMC.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbRMC.Location = new System.Drawing.Point(87, 338);
+            this.tbRMC.Multiline = true;
             this.tbRMC.Name = "tbRMC";
             this.tbRMC.ReadOnly = true;
-            this.tbRMC.Size = new System.Drawing.Size(478, 20);
+            this.tbRMC.Size = new System.Drawing.Size(478, 52);
             this.tbRMC.TabIndex = 313;
             // 
             // btnVTG
             // 
-            this.btnVTG.Location = new System.Drawing.Point(6, 252);
+            this.btnVTG.Location = new System.Drawing.Point(6, 290);
             this.btnVTG.Name = "btnVTG";
             this.btnVTG.Size = new System.Drawing.Size(75, 33);
             this.btnVTG.TabIndex = 312;
@@ -243,7 +244,7 @@
             // 
             // btnGGA
             // 
-            this.btnGGA.Location = new System.Drawing.Point(6, 213);
+            this.btnGGA.Location = new System.Drawing.Point(6, 232);
             this.btnGGA.Name = "btnGGA";
             this.btnGGA.Size = new System.Drawing.Size(75, 33);
             this.btnGGA.TabIndex = 311;
@@ -253,20 +254,22 @@
             // 
             // tbVTG
             // 
-            this.tbVTG.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbVTG.Location = new System.Drawing.Point(87, 261);
+            this.tbVTG.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbVTG.Location = new System.Drawing.Point(87, 280);
+            this.tbVTG.Multiline = true;
             this.tbVTG.Name = "tbVTG";
             this.tbVTG.ReadOnly = true;
-            this.tbVTG.Size = new System.Drawing.Size(478, 20);
+            this.tbVTG.Size = new System.Drawing.Size(478, 52);
             this.tbVTG.TabIndex = 310;
             // 
             // tbGGA
             // 
-            this.tbGGA.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbGGA.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.tbGGA.Location = new System.Drawing.Point(87, 222);
+            this.tbGGA.Multiline = true;
             this.tbGGA.Name = "tbGGA";
             this.tbGGA.ReadOnly = true;
-            this.tbGGA.Size = new System.Drawing.Size(478, 20);
+            this.tbGGA.Size = new System.Drawing.Size(478, 52);
             this.tbGGA.TabIndex = 309;
             // 
             // groupBox1
@@ -549,7 +552,6 @@
             // 
             // tabPage2
             // 
-            this.tabPage2.Controls.Add(this.button1);
             this.tabPage2.Controls.Add(this.rbGP);
             this.tabPage2.Controls.Add(this.rbGN);
             this.tabPage2.Controls.Add(this.ckGSA);
@@ -560,7 +562,7 @@
             this.tabPage2.Location = new System.Drawing.Point(4, 33);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(574, 371);
+            this.tabPage2.Size = new System.Drawing.Size(574, 456);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Options";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -571,7 +573,7 @@
             this.rbGP.Checked = true;
             this.rbGP.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.rbGP.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.rbGP.Location = new System.Drawing.Point(99, 254);
+            this.rbGP.Location = new System.Drawing.Point(90, 278);
             this.rbGP.Name = "rbGP";
             this.rbGP.Size = new System.Drawing.Size(165, 34);
             this.rbGP.TabIndex = 314;
@@ -585,7 +587,7 @@
             this.rbGN.Appearance = System.Windows.Forms.Appearance.Button;
             this.rbGN.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.rbGN.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.rbGN.Location = new System.Drawing.Point(330, 254);
+            this.rbGN.Location = new System.Drawing.Point(321, 278);
             this.rbGN.Name = "rbGN";
             this.rbGN.Size = new System.Drawing.Size(165, 34);
             this.rbGN.TabIndex = 313;
@@ -597,7 +599,7 @@
             this.ckGSA.Appearance = System.Windows.Forms.Appearance.Button;
             this.ckGSA.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.ckGSA.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ckGSA.Location = new System.Drawing.Point(330, 313);
+            this.ckGSA.Location = new System.Drawing.Point(321, 337);
             this.ckGSA.Name = "ckGSA";
             this.ckGSA.Size = new System.Drawing.Size(165, 34);
             this.ckGSA.TabIndex = 312;
@@ -611,7 +613,7 @@
             this.ckRoll.Appearance = System.Windows.Forms.Appearance.Button;
             this.ckRoll.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.ckRoll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ckRoll.Location = new System.Drawing.Point(99, 313);
+            this.ckRoll.Location = new System.Drawing.Point(90, 337);
             this.ckRoll.Name = "ckRoll";
             this.ckRoll.Size = new System.Drawing.Size(165, 34);
             this.ckRoll.TabIndex = 311;
@@ -627,7 +629,7 @@
             this.ckAutoConnect.CheckState = System.Windows.Forms.CheckState.Checked;
             this.ckAutoConnect.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.ckAutoConnect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ckAutoConnect.Location = new System.Drawing.Point(99, 195);
+            this.ckAutoConnect.Location = new System.Drawing.Point(90, 219);
             this.ckAutoConnect.Name = "ckAutoConnect";
             this.ckAutoConnect.Size = new System.Drawing.Size(165, 34);
             this.ckAutoConnect.TabIndex = 306;
@@ -643,7 +645,7 @@
             this.ckAutoHide.CheckState = System.Windows.Forms.CheckState.Checked;
             this.ckAutoHide.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.ckAutoHide.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ckAutoHide.Location = new System.Drawing.Point(330, 195);
+            this.ckAutoHide.Location = new System.Drawing.Point(321, 219);
             this.ckAutoHide.Name = "ckAutoHide";
             this.ckAutoHide.Size = new System.Drawing.Size(165, 34);
             this.ckAutoHide.TabIndex = 305;
@@ -666,7 +668,7 @@
             this.groupBox2.Controls.Add(this.cboGGA);
             this.groupBox2.Controls.Add(this.label10);
             this.groupBox2.Controls.Add(this.label9);
-            this.groupBox2.Location = new System.Drawing.Point(99, 31);
+            this.groupBox2.Location = new System.Drawing.Point(90, 55);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(396, 131);
             this.groupBox2.TabIndex = 155;
@@ -823,22 +825,12 @@
             this.tmrGSA.Interval = 1000;
             this.tmrGSA.Tick += new System.EventHandler(this.tmrGSA_Tick);
             // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(6, 54);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(87, 37);
-            this.button1.TabIndex = 315;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // frmStart
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(603, 425);
+            this.ClientSize = new System.Drawing.Size(603, 514);
             this.Controls.Add(this.tabControl1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
@@ -925,7 +917,6 @@
         private System.Windows.Forms.RadioButton rbGP;
         private System.Windows.Forms.Timer tmrGSA;
         private System.Windows.Forms.Label lbSim;
-        private System.Windows.Forms.Button button1;
     }
 }
 

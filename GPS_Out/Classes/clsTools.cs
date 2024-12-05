@@ -43,7 +43,7 @@ namespace GPS_Out
         private string cPropertiesApp;
         private string cPropertiesFile;
         private string cSettingsDir;
-        private string cVersionDate = "27-Nov-2024";
+        private string cVersionDate = "04-Dec-2024";
         private frmStart mf;
         private int SentenceCount = 0;
 
@@ -319,6 +319,20 @@ namespace GPS_Out
             }
         }
 
+        public byte[] ReadByteFile(string DataName)
+        {
+            string FileName = cSettingsDir + "\\" + DataName;
+
+            if (File.Exists(FileName))
+            {
+                return File.ReadAllBytes(FileName);
+            }
+            else
+            {
+                throw new FileNotFoundException("The specified file does not exist.", FileName);
+            }
+        }
+
         public string ReadTextFile(string FileName)
         {
             string Result = "";
@@ -492,33 +506,7 @@ namespace GPS_Out
             return cVersionDate;
         }
 
-        public void WriteByteFile(byte[] Data,string DataName)
-        {
-            string FileName = cSettingsDir + "\\" + DataName;
-            if (SentenceCount < 20)
-            {
-                SentenceCount++;
-                using (var stream = new FileStream(FileName, FileMode.Append))
-                {
-                    stream.Write(Data, 0, Data.Length);
-                }
-            }
-        }
-        public byte[] ReadByteFile(string DataName)
-        {
-            string FileName = cSettingsDir + "\\" + DataName;
-
-            if (File.Exists(FileName))
-            {
-                return File.ReadAllBytes(FileName);
-            }
-            else
-            {
-                throw new FileNotFoundException("The specified file does not exist.", FileName);
-            }
-        }
-
-        public void WriteActivityLog(string Message, bool Newline = false,string DataName="Activity Log.txt")
+        public void WriteActivityLog(string Message, bool Newline = false, string DataName = "Activity Log.txt")
         {
             string Line = "";
             try
@@ -533,6 +521,19 @@ namespace GPS_Out
             catch (Exception ex)
             {
                 WriteErrorLog("Tools: WriteActivityLog: " + ex.Message);
+            }
+        }
+
+        public void WriteByteFile(byte[] Data, string DataName)
+        {
+            string FileName = cSettingsDir + "\\" + DataName;
+            if (SentenceCount < 20)
+            {
+                SentenceCount++;
+                using (var stream = new FileStream(FileName, FileMode.Append))
+                {
+                    stream.Write(Data, 0, Data.Length);
+                }
             }
         }
 
