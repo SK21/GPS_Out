@@ -93,6 +93,9 @@
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.tmrGSA = new System.Windows.Forms.Timer(this.components);
+            this.ckSimulate = new System.Windows.Forms.CheckBox();
+            this.cboPrecision = new System.Windows.Forms.ComboBox();
+            this.label12 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -194,9 +197,9 @@
             // 
             // btnZDA
             // 
-            this.btnZDA.Location = new System.Drawing.Point(6, 406);
+            this.btnZDA.Location = new System.Drawing.Point(6, 404);
             this.btnZDA.Name = "btnZDA";
-            this.btnZDA.Size = new System.Drawing.Size(75, 33);
+            this.btnZDA.Size = new System.Drawing.Size(75, 37);
             this.btnZDA.TabIndex = 316;
             this.btnZDA.Text = "ZDA";
             this.btnZDA.UseVisualStyleBackColor = true;
@@ -214,9 +217,9 @@
             // 
             // btnRMC
             // 
-            this.btnRMC.Location = new System.Drawing.Point(6, 348);
+            this.btnRMC.Location = new System.Drawing.Point(6, 346);
             this.btnRMC.Name = "btnRMC";
-            this.btnRMC.Size = new System.Drawing.Size(75, 33);
+            this.btnRMC.Size = new System.Drawing.Size(75, 37);
             this.btnRMC.TabIndex = 314;
             this.btnRMC.Text = "RMC";
             this.btnRMC.UseVisualStyleBackColor = true;
@@ -234,9 +237,9 @@
             // 
             // btnVTG
             // 
-            this.btnVTG.Location = new System.Drawing.Point(6, 290);
+            this.btnVTG.Location = new System.Drawing.Point(6, 288);
             this.btnVTG.Name = "btnVTG";
-            this.btnVTG.Size = new System.Drawing.Size(75, 33);
+            this.btnVTG.Size = new System.Drawing.Size(75, 37);
             this.btnVTG.TabIndex = 312;
             this.btnVTG.Text = "VTG";
             this.btnVTG.UseVisualStyleBackColor = true;
@@ -244,9 +247,9 @@
             // 
             // btnGGA
             // 
-            this.btnGGA.Location = new System.Drawing.Point(6, 232);
+            this.btnGGA.Location = new System.Drawing.Point(6, 230);
             this.btnGGA.Name = "btnGGA";
-            this.btnGGA.Size = new System.Drawing.Size(75, 33);
+            this.btnGGA.Size = new System.Drawing.Size(75, 37);
             this.btnGGA.TabIndex = 311;
             this.btnGGA.Text = "GGA";
             this.btnGGA.UseVisualStyleBackColor = true;
@@ -552,6 +555,9 @@
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.cboPrecision);
+            this.tabPage2.Controls.Add(this.label12);
+            this.tabPage2.Controls.Add(this.ckSimulate);
             this.tabPage2.Controls.Add(this.rbGP);
             this.tabPage2.Controls.Add(this.rbGN);
             this.tabPage2.Controls.Add(this.ckGSA);
@@ -573,9 +579,9 @@
             this.rbGP.Checked = true;
             this.rbGP.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.rbGP.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.rbGP.Location = new System.Drawing.Point(90, 278);
+            this.rbGP.Location = new System.Drawing.Point(74, 247);
             this.rbGP.Name = "rbGP";
-            this.rbGP.Size = new System.Drawing.Size(165, 34);
+            this.rbGP.Size = new System.Drawing.Size(165, 37);
             this.rbGP.TabIndex = 314;
             this.rbGP.TabStop = true;
             this.rbGP.Text = "Send $GP---";
@@ -587,9 +593,9 @@
             this.rbGN.Appearance = System.Windows.Forms.Appearance.Button;
             this.rbGN.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.rbGN.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.rbGN.Location = new System.Drawing.Point(321, 278);
+            this.rbGN.Location = new System.Drawing.Point(346, 247);
             this.rbGN.Name = "rbGN";
-            this.rbGN.Size = new System.Drawing.Size(165, 34);
+            this.rbGN.Size = new System.Drawing.Size(165, 37);
             this.rbGN.TabIndex = 313;
             this.rbGN.Text = "Send $GN---";
             this.rbGN.UseVisualStyleBackColor = true;
@@ -599,9 +605,9 @@
             this.ckGSA.Appearance = System.Windows.Forms.Appearance.Button;
             this.ckGSA.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.ckGSA.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ckGSA.Location = new System.Drawing.Point(321, 337);
+            this.ckGSA.Location = new System.Drawing.Point(346, 318);
             this.ckGSA.Name = "ckGSA";
-            this.ckGSA.Size = new System.Drawing.Size(165, 34);
+            this.ckGSA.Size = new System.Drawing.Size(165, 37);
             this.ckGSA.TabIndex = 312;
             this.ckGSA.Text = "Send empty GSA";
             this.ckGSA.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -613,9 +619,9 @@
             this.ckRoll.Appearance = System.Windows.Forms.Appearance.Button;
             this.ckRoll.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.ckRoll.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ckRoll.Location = new System.Drawing.Point(90, 337);
+            this.ckRoll.Location = new System.Drawing.Point(74, 318);
             this.ckRoll.Name = "ckRoll";
-            this.ckRoll.Size = new System.Drawing.Size(165, 34);
+            this.ckRoll.Size = new System.Drawing.Size(165, 37);
             this.ckRoll.TabIndex = 311;
             this.ckRoll.Text = "Roll Corrected";
             this.ckRoll.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -629,9 +635,9 @@
             this.ckAutoConnect.CheckState = System.Windows.Forms.CheckState.Checked;
             this.ckAutoConnect.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.ckAutoConnect.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ckAutoConnect.Location = new System.Drawing.Point(90, 219);
+            this.ckAutoConnect.Location = new System.Drawing.Point(74, 176);
             this.ckAutoConnect.Name = "ckAutoConnect";
-            this.ckAutoConnect.Size = new System.Drawing.Size(165, 34);
+            this.ckAutoConnect.Size = new System.Drawing.Size(165, 37);
             this.ckAutoConnect.TabIndex = 306;
             this.ckAutoConnect.Text = "Auto Connect";
             this.ckAutoConnect.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -645,9 +651,9 @@
             this.ckAutoHide.CheckState = System.Windows.Forms.CheckState.Checked;
             this.ckAutoHide.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
             this.ckAutoHide.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ckAutoHide.Location = new System.Drawing.Point(321, 219);
+            this.ckAutoHide.Location = new System.Drawing.Point(346, 176);
             this.ckAutoHide.Name = "ckAutoHide";
-            this.ckAutoHide.Size = new System.Drawing.Size(165, 34);
+            this.ckAutoHide.Size = new System.Drawing.Size(165, 37);
             this.ckAutoHide.TabIndex = 305;
             this.ckAutoHide.Text = "Auto Hide";
             this.ckAutoHide.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -668,7 +674,7 @@
             this.groupBox2.Controls.Add(this.cboGGA);
             this.groupBox2.Controls.Add(this.label10);
             this.groupBox2.Controls.Add(this.label9);
-            this.groupBox2.Location = new System.Drawing.Point(90, 55);
+            this.groupBox2.Location = new System.Drawing.Point(90, 27);
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.Size = new System.Drawing.Size(396, 131);
             this.groupBox2.TabIndex = 155;
@@ -825,6 +831,46 @@
             this.tmrGSA.Interval = 1000;
             this.tmrGSA.Tick += new System.EventHandler(this.tmrGSA_Tick);
             // 
+            // ckSimulate
+            // 
+            this.ckSimulate.Appearance = System.Windows.Forms.Appearance.Button;
+            this.ckSimulate.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.ckSimulate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ckSimulate.Location = new System.Drawing.Point(74, 389);
+            this.ckSimulate.Name = "ckSimulate";
+            this.ckSimulate.Size = new System.Drawing.Size(165, 37);
+            this.ckSimulate.TabIndex = 315;
+            this.ckSimulate.Text = "Simulate Data";
+            this.ckSimulate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.ckSimulate.UseVisualStyleBackColor = true;
+            this.ckSimulate.CheckedChanged += new System.EventHandler(this.ckSimulate_CheckedChanged);
+            // 
+            // cboPrecision
+            // 
+            this.cboPrecision.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboPrecision.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold);
+            this.cboPrecision.FormattingEnabled = true;
+            this.cboPrecision.Items.AddRange(new object[] {
+            "4",
+            "5",
+            "6",
+            "7"});
+            this.cboPrecision.Location = new System.Drawing.Point(451, 389);
+            this.cboPrecision.Name = "cboPrecision";
+            this.cboPrecision.Size = new System.Drawing.Size(60, 37);
+            this.cboPrecision.TabIndex = 317;
+            this.cboPrecision.SelectedIndexChanged += new System.EventHandler(this.cboPrecision_SelectedIndexChanged);
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(281, 395);
+            this.label12.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(161, 24);
+            this.label12.TabIndex = 316;
+            this.label12.Text = "Decimal Precision";
+            // 
             // frmStart
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(11F, 24F);
@@ -847,6 +893,7 @@
             this.tabPage1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
+            this.tabPage2.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
@@ -917,6 +964,9 @@
         private System.Windows.Forms.RadioButton rbGP;
         private System.Windows.Forms.Timer tmrGSA;
         private System.Windows.Forms.Label lbSim;
+        private System.Windows.Forms.ComboBox cboPrecision;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.CheckBox ckSimulate;
     }
 }
 
