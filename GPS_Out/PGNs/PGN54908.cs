@@ -270,32 +270,23 @@ namespace GPS_Out
         {
             get
             {
+                float Result = 0;
                 if (Connected())
                 {
-                    if (cSpeed < 100)
-                    {
-                        return cSpeed;
-                    }
-                    else
-                    {
-                        return 0;
-                    }
-                }
-                else if (Properties.Settings.Default.Simulate)
-                {
-                    if (mf.AutoSteerPGN.Connected())
-                    {
-                        return (float)mf.AutoSteerPGN.Speed_KMH();
-                    }
-                    else
-                    {
-                        return 4.8F;
-                    }
+                    if (cSpeed < 100) Result = cSpeed;
                 }
                 else
                 {
-                    return 0;
+                    if (mf.AutoSteerPGN.Connected())
+                    {
+                        Result = (float)mf.AutoSteerPGN.Speed_KMH();
+                    }
+                    else
+                    {
+                        if (Properties.Settings.Default.Simulate) Result = 4.8F;
+                    }
                 }
+                return Result;
             }
         }
 
