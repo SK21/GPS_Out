@@ -283,7 +283,14 @@ namespace GPS_Out
                 }
                 else if (Properties.Settings.Default.Simulate)
                 {
-                    return 4.8F;
+                    if (mf.AutoSteerPGN.Connected())
+                    {
+                        return (float)mf.AutoSteerPGN.Speed_KMH();
+                    }
+                    else
+                    {
+                        return 4.8F;
+                    }
                 }
                 else
                 {

@@ -81,6 +81,7 @@ namespace GPS_Out
         private string HeadingType;
         private Color SimColor = Color.Orange;
         private int Watchdog;
+        public PGN254 AutoSteerPGN;
 
         public frmStart()
         {
@@ -97,6 +98,7 @@ namespace GPS_Out
             backgroundWorker1.WorkerSupportsCancellation = true;
             ZDA = new PGN_ZDA(this);
             GSA = new PGN_GSA(this);
+            AutoSteerPGN = new PGN254(this);
         }
 
         public int CheckSum(string Data)
