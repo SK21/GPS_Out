@@ -628,7 +628,6 @@ namespace GPS_Out
                 lbHDOP.Text = AGIOdata.HDOP.ToString("N2");
                 lbSats.Text = AGIOdata.Satellites.ToString("");
                 lbElev.Text = AGIOdata.Altitude.ToString("N2");
-                lbAge.Text = AGIOdata.Age.ToString("N1");
 
                 ckRoll.Enabled = AOGdata.Connected();
 

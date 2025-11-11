@@ -73,6 +73,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.cboPrecision = new System.Windows.Forms.ComboBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.ckSimulate = new System.Windows.Forms.CheckBox();
             this.rbGP = new System.Windows.Forms.RadioButton();
             this.rbGN = new System.Windows.Forms.RadioButton();
             this.ckGSA = new System.Windows.Forms.CheckBox();
@@ -93,9 +96,6 @@
             this.label10 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.tmrGSA = new System.Windows.Forms.Timer(this.components);
-            this.ckSimulate = new System.Windows.Forms.CheckBox();
-            this.cboPrecision = new System.Windows.Forms.ComboBox();
-            this.label12 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -573,6 +573,47 @@
             this.tabPage2.Text = "Options";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // cboPrecision
+            // 
+            this.cboPrecision.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboPrecision.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold);
+            this.cboPrecision.FormattingEnabled = true;
+            this.cboPrecision.Items.AddRange(new object[] {
+            "4",
+            "5",
+            "6",
+            "7",
+            "8"});
+            this.cboPrecision.Location = new System.Drawing.Point(451, 389);
+            this.cboPrecision.Name = "cboPrecision";
+            this.cboPrecision.Size = new System.Drawing.Size(60, 37);
+            this.cboPrecision.TabIndex = 317;
+            this.cboPrecision.SelectedIndexChanged += new System.EventHandler(this.cboPrecision_SelectedIndexChanged);
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(281, 395);
+            this.label12.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(161, 24);
+            this.label12.TabIndex = 316;
+            this.label12.Text = "Decimal Precision";
+            // 
+            // ckSimulate
+            // 
+            this.ckSimulate.Appearance = System.Windows.Forms.Appearance.Button;
+            this.ckSimulate.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
+            this.ckSimulate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.ckSimulate.Location = new System.Drawing.Point(74, 389);
+            this.ckSimulate.Name = "ckSimulate";
+            this.ckSimulate.Size = new System.Drawing.Size(165, 37);
+            this.ckSimulate.TabIndex = 315;
+            this.ckSimulate.Text = "Simulate Data";
+            this.ckSimulate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.ckSimulate.UseVisualStyleBackColor = true;
+            this.ckSimulate.CheckedChanged += new System.EventHandler(this.ckSimulate_CheckedChanged);
+            // 
             // rbGP
             // 
             this.rbGP.Appearance = System.Windows.Forms.Appearance.Button;
@@ -830,46 +871,6 @@
             // 
             this.tmrGSA.Interval = 1000;
             this.tmrGSA.Tick += new System.EventHandler(this.tmrGSA_Tick);
-            // 
-            // ckSimulate
-            // 
-            this.ckSimulate.Appearance = System.Windows.Forms.Appearance.Button;
-            this.ckSimulate.FlatAppearance.CheckedBackColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(255)))), ((int)(((byte)(192)))));
-            this.ckSimulate.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.ckSimulate.Location = new System.Drawing.Point(74, 389);
-            this.ckSimulate.Name = "ckSimulate";
-            this.ckSimulate.Size = new System.Drawing.Size(165, 37);
-            this.ckSimulate.TabIndex = 315;
-            this.ckSimulate.Text = "Simulate Data";
-            this.ckSimulate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.ckSimulate.UseVisualStyleBackColor = true;
-            this.ckSimulate.CheckedChanged += new System.EventHandler(this.ckSimulate_CheckedChanged);
-            // 
-            // cboPrecision
-            // 
-            this.cboPrecision.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cboPrecision.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold);
-            this.cboPrecision.FormattingEnabled = true;
-            this.cboPrecision.Items.AddRange(new object[] {
-            "4",
-            "5",
-            "6",
-            "7"});
-            this.cboPrecision.Location = new System.Drawing.Point(451, 389);
-            this.cboPrecision.Name = "cboPrecision";
-            this.cboPrecision.Size = new System.Drawing.Size(60, 37);
-            this.cboPrecision.TabIndex = 317;
-            this.cboPrecision.SelectedIndexChanged += new System.EventHandler(this.cboPrecision_SelectedIndexChanged);
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(281, 395);
-            this.label12.Margin = new System.Windows.Forms.Padding(6, 0, 6, 0);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(161, 24);
-            this.label12.TabIndex = 316;
-            this.label12.Text = "Decimal Precision";
             // 
             // frmStart
             // 
