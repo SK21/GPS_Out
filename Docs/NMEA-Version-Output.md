@@ -3,7 +3,7 @@
 Analysis of [AgOpenGPS issue #1249](https://github.com/AgOpenGPS-Official/AgOpenGPS/issues/1249) —
 "GPS OUT needs to output NMEA v2.3 and above" — and what it means for this repo.
 
-Status: analysis only, nothing implemented.
+Status: Step 1 (populate the mode indicator) implemented. Version selector not implemented.
 
 ---
 
@@ -44,7 +44,7 @@ The requested feature is a selectable output version with three choices: `≤2.2
 
 I counted the fields each builder actually produces.
 
-### RMC and VTG are already v2.3-shaped, but the mode indicator is blank
+### Before Step 1: RMC and VTG were v2.3-shaped, but the mode indicator was blank
 
 `PGN_VTG.cs:40` appends a comma before the `*`:
 
@@ -56,7 +56,7 @@ cSentence += ",*";
 Producing:
 
 ```
-$GPVTG,000.0,T,000.0,M,000.0,N,000.0,K,*48
+$GPVTG,000.0,T,000.0,M,000.0,N,000.0,K,*62
                                        ^ field 9 exists but is empty
 ```
 
@@ -67,8 +67,9 @@ $GPRMC,123519.00,A,4807.0380000,N,01131.0000000,E,022.4,084.4,230394,0.0,W,*6A
                                                                           ^ field 12 empty
 ```
 
-**This is likely the real cause of the reported parse failures.** GPS_Out satisfies
-neither contract cleanly:
+**This is the confirmed cause for the reporter's Trimble display.** Adding `,D` before the
+`*` by hand made VTG parse (reported on Telegram, 2026-10-23). GPS_Out satisfies neither
+contract cleanly:
 
 - A strict v2.3 parser reads field 9 (VTG) / field 12 (RMC), finds an empty string where
   it expects `A` / `D` / `E` / `N`, and rejects the sentence.
@@ -95,7 +96,10 @@ Pre-2.3 devices do not recognise `4` (RTK) or `5` (Float RTK).
 **ZDA** (`PGN_ZDA.cs`) — 6 fields. Unchanged across versions. Nothing to do.
 
 **GSA** (`PGN_GSA.cs`) — 17 fields (mode, fix type, 12 satellite slots, PDOP, HDOP, VDOP).
-Correct. NMEA 4.10 adds a system ID field, which issue #1249 does not mention.
+The field count is correct, but most of the content is placeholder: the satellite IDs are
+hardcoded as `01,02,03` and PDOP and VDOP as `2` (`PGN_GSA.cs:48-50`). Only HDOP comes from
+AgIO. GSA is only sent when the GSA checkbox is on. NMEA 4.10 adds a system ID field, which
+issue #1249 does not mention.
 
 ## 4. What a full fix requires
 
@@ -103,47 +107,51 @@ One new setting, three branches.
 
 ### Setting
 
-Add `NmeaVersion` (int index) to `GPS_Out/Properties/Settings.Designer.cs` and
-`App.config`, alongside the existing `SentenceStart` and `SentencePrecisionFormat`.
+Add `NmeaVersion` (int index) to `GPS_Out/Properties/Settings.settings`, alongside the
+existing `SentenceStart` and `SentencePrecisionFormat`. Add it through the Visual Studio
+settings designer, which regenerates `Settings.Designer.cs` and updates `App.config`.
+Editing only `Settings.Designer.cs` doesn't last, because the next regeneration overwrites it.
 
 ### Per-version behaviour
 
 | | ≤2.2 | 2.3–3.01 | 4.00+ |
 |---|---|---|---|
-| **RMC** | 11 fields — drop the trailing comma at `PGN_RMC.cs:81` | 12 fields — **populate** the mode indicator | 13 fields — add navigational status (`A`/`V`/`S`) |
-| **VTG** | 8 fields — drop the trailing comma at `PGN_VTG.cs:40` | 9 fields — **populate** the mode indicator | same as 2.3 |
-| **GGA** | clamp Fix Quality `4`/`5` → `2` | pass through | pass through |
+| **RMC** | 11 fields — drop the mode indicator field at `PGN_RMC.cs:88` | 12 fields — mode indicator (done); status `V` when fix quality is 0 (done) | 13 fields — add navigational status (`S` safe / `C` caution / `U` unsafe / `V` not valid) |
+| **VTG** | 8 fields — drop the mode indicator field at `PGN_VTG.cs:40` | 9 fields — mode indicator (done) | same as 2.3 |
+| **GGA** | map Fix Quality `3` → `1`, `4`/`5` → `2`, `6`/`7`/`8` → `1` | pass through | pass through |
 | **ZDA** | no change | no change | no change |
 | **GSA** | no change | no change | no change |
 
 ### Mode indicator mapping
 
-Derive from `mf.AGIOdata.FixQuality`:
+Implemented in `ModeIndicator(byte)` in `Form1.cs`, next to the `FixQuality(byte)` display
+helper so the two stay in sync. Derived from `mf.AGIOdata.FixQuality`:
 
 | Fix Quality | Mode indicator |
 |---|---|
 | 0 (invalid) | `N` |
-| 1 (GPS SPS) | `A` |
+| 1 (GPS SPS), 3 (PPS) | `A` |
 | 2 (DGPS), 4 (RTK), 5 (Float RTK) | `D` |
 | 6 (dead reckoning) | `E` |
+| 7 (manual input) | `M` |
 | 8 (simulation) | `S` |
 
-There is already a `FixQuality(byte)` display helper at `Form1.cs:119` doing a comparable
-switch — the new mapping belongs next to it so the two stay in sync.
+RTK fix and float are reported as `D`, because the `R` and `F` values exist only in NMEA 4.x.
+Simulate mode with AgIO disconnected reports fix quality 4, so it sends `D`.
 
 ### UI
 
-A fourth combo box in the sentence-settings group, next to `cboPrecision` and the
+A new combo box in the sentence-settings group, next to `cboPrecision` and the
 `rbGP` / `rbGN` talker radio buttons. Follow the established pattern from
-`cboPrecision_SelectedIndexChanged` (`Form1.cs:329`): write to `Properties.Settings.Default`
-on change, restore from it in the load handler around `Form1.cs:443-451`.
+`cboPrecision_SelectedIndexChanged` (`Form1.cs:364`): write to `Properties.Settings.Default`
+on change, restore from it in the load handler around `Form1.cs:478-486`.
 
 ## 5. Recommended sequencing
 
-**Step 1 — populate the mode indicator (two lines).** Change the empty field in RMC and
-VTG to a real value. This keeps the current v2.3 field count and may unblock the Critical
-cases on its own, since a device failing on VTG today is failing on an empty field, not
-necessarily on the field count.
+**Step 1 — populate the mode indicator. Done.** `ModeIndicator(byte)` in `Form1.cs` maps
+fix quality to the mode value, and RMC and VTG now end with it instead of an empty field.
+RMC status is now `V` when fix quality is 0. This keeps the v2.3 field count and fixes the
+reporter's Trimble display.
 
 **Step 2 — add the version selector.** Still the right long-term answer for genuinely
 pre-2.3 monitors, which need the field actually removed rather than filled.
@@ -157,5 +165,6 @@ as one:
 1. Device rejects an empty mode indicator → fixed by Step 1.
 2. Device cannot handle the 9-field VTG / 12-field RMC at all → needs Step 2.
 
-Worth asking the reporter which device and which symptom, since that determines whether
-the quick fix is sufficient.
+The reporter's device is a Trimble display, and it falls under case 1. No pre-2.3 device has
+been reported yet, so Step 2 can wait until one is. The screenshots in the issue are AI
+output (per the reporter), and their example checksums are all invalid.

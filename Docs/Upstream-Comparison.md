@@ -6,6 +6,11 @@ Comparison of `SK21/GPS_Out` (this repo) against the vendored copy inside
 Compared on 2026-10-25. Upstream state: `develop` branch at `64984a3` (2026-10-05).
 Local state: `main` at `7114115`.
 
+Since this comparison, commit `73b760a` on `Development` has fixed the empty NMEA mode
+indicator (see §7) and bumped the app version to 1.2.5. That changes `PGN_VTG.cs`,
+`PGN_RMC.cs`, `Form1.cs` and `clsTools.cs`, so `PGN_VTG.cs` is no longer identical to
+upstream. Line numbers and file sizes in this document refer to `7114115`.
+
 Method: sparse checkout of `SourceCode/GPS_Out` from upstream, then file-by-file diff and
 blob-hash matching against local history.
 
@@ -20,6 +25,9 @@ blob-hash matching against local history.
 | Solution | standalone `GPS_Out.sln` | a project inside `AgOpenGPS.sln` |
 | Build output | `..\GPS_OutApp\` | `..\..\..\AgOpenGPS\` (`PublishDir`) |
 | App version | **1.2.4** | **1.2.2** |
+
+App version is `cAppVersion` in `Classes/clsTools.cs`, which is what the title bar shows.
+`Properties/AssemblyInfo.cs` still says `1.0.0.0` and has never been bumped.
 
 There is no standalone `GPS_Out` repository in the AgOpenGPS-Official organisation — all 13
 org repos were checked. Upstream's copy carries the **same `ProjectGuid`**
@@ -76,9 +84,13 @@ Supporting changes, all local-only:
 ### Other local-only changes
 
 - **8-decimal precision.** `cboPrecision` has a fifth item `"8"`; default index 4.
-  Upstream stops at `"7"` with default index 3. Both defaults are internally consistent
-  (each points at its own maximum), so upstream is not broken — it simply cannot output
-  8 decimal places. Needed for 20/20 compatibility.
+  Upstream stops at `"7"` with default index 3. Both default indexes point at their own
+  maximum, so upstream is not broken — it simply cannot output 8 decimal places. Needed
+  for 20/20 compatibility. Locally, the format defaults in `App.config`
+  (`SentencePrecisionFormat`, `DisplayPrecisionFormat`) are still 7 decimals. This has no
+  effect at runtime, because the load handler sets `cboPrecision.SelectedIndex` and its
+  change handler rewrites both formats to 8 decimals, but the defaults disagree with
+  index 4.
 - **`Classes/UDPcomm.cs:58`** — new `SendUDPMessage(byte[])` for outbound byte arrays.
   Absent upstream.
 - **`PGNs/PGN54908.cs:314`** — `Connected()` timeout widened from 4 s to **10 s**.
@@ -122,7 +134,7 @@ and `PackageReference` entries for `System.Memory` 4.6.0 and
 ### Dead-code removal in clsTools.cs
 
 Upstream cut the file from 22,135 to **14,374** bytes by deleting roughly 35 unused helpers
-that appear carried over from another project:
+that appear carried over from another project. Examples:
 
 `BitRead` · `BitSet` · `BitClear` · `StartWifi` · `StopWifi` · `ReadTextFile` ·
 `ReadByteFile` · `WriteActivityLog` · `PrevInstance` · `SaveFile` · `SaveProperty` ·
@@ -173,9 +185,10 @@ See [NMEA-Version-Output.md](NMEA-Version-Output.md) for the full analysis of
 only by one commented-out line (upstream retains `//cSentence += "*";` at line 82; local
 deleted it).
 
-The empty-mode-indicator defect therefore exists identically in both trees. Any fix has to
-land in both places — or this repo gets re-vendored upstream, which would carry the PGN254
-speed work across at the same time.
+The empty-mode-indicator defect therefore existed identically in both trees. It is now fixed
+here in `73b760a` (`ModeIndicator(byte)` in `Form1.cs`, used by RMC and VTG) and is still
+present upstream. The fix has to be ported, or this repo re-vendored upstream, which would
+carry the PGN254 speed work across at the same time.
 
 ## 8. Re-sync checklist
 
@@ -198,7 +211,8 @@ If the two copies are to be reconciled, the work splits cleanly:
 5. `UDPcomm.SendUDPMessage(byte[])`
 6. Duplicate `lbAge` assignment removal
 7. Simplified lat/lon display guard
-8. Version bump to 1.2.4
+8. NMEA mode indicator in RMC/VTG and RMC status `V` on no fix (fixes #1249)
+9. Version bump to 1.2.5
 
 `Form1.Designer.cs`, `Form1.resx`, and `Resources.resx` are the genuine conflict points —
 both sides edited the layout, and these files do not merge cleanly.
