@@ -209,15 +209,7 @@ namespace GPS_Out
                 }
                 else
                 {
-                    string EP = mf.Tls.LoadProperty("EndPoint_" + cConnectionName);
-                    if (IPAddress.TryParse(EP, out _))
-                    {
-                        NetworkEP = EP;
-                    }
-                    else
-                    {
-                        NetworkEP = "192.168.1.255";
-                    }
+                    NetworkEP = "192.168.1.255";
                 }
             }
             catch (Exception ex)

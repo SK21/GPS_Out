@@ -374,6 +374,11 @@ namespace GPS_Out
 
             Properties.Settings.Default.SentencePrecisionFormat = "00" + NewFormat;
             Properties.Settings.Default.DisplayPrecisionFormat = "0" + NewFormat;
+
+            tbGGA.Text = "";
+            tbVTG.Text = "";
+            tbRMC.Text = "";
+            tbZDA.Text = "";
         }
 
         private void cboRMC_SelectedIndexChanged(object sender, EventArgs e)

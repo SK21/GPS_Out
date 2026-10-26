@@ -11,6 +11,9 @@ indicator (see §7) and bumped the app version to 1.2.5. That changes `PGN_VTG.c
 `PGN_RMC.cs`, `Form1.cs` and `clsTools.cs`, so `PGN_VTG.cs` is no longer identical to
 upstream. Line numbers and file sizes in this document refer to `7114115`.
 
+Later work on `Development` brought in two upstream items: the `clsTools.cs` dead-code
+removal and the textbox clearing in the precision handler (see §5 and §8).
+
 Method: sparse checkout of `SourceCode/GPS_Out` from upstream, then file-by-file diff and
 blob-hash matching against local history.
 
@@ -140,15 +143,19 @@ that appear carried over from another project. Examples:
 `ReadByteFile` · `WriteActivityLog` · `PrevInstance` · `SaveFile` · `SaveProperty` ·
 `NoisyData` · `ParseModID` · `ParseSenID` · `BuildModSenID` · `StringToInt` · `VersionDate`
 
-Local `HEAD` is at 22,814 bytes and still carries all of it.
+Local was at 22,814 bytes at `7114115`. `Development` has since removed all of the helpers
+listed above except `VersionDate`, which is kept on purpose as the release date. It went
+further than upstream by also removing the per-file properties (`LoadProperty`, `HTfiles`,
+the `.rcs` file) and `UDPcomm`'s dead `EndPoint_` lookup, which could never run because
+both connections pass a valid endpoint. `clsTools.cs` is now 12,382 bytes.
 
 ### Behaviour local dropped
 
 `cbPrecision_SelectedIndexChanged` upstream (`Form1.cs:369`) clears `tbGGA`, `tbVTG`,
 `tbRMC`, and `tbZDA` after a precision change, so stale sentences at the old precision do
 not linger in the display. The local handler
-(`cboPrecision_SelectedIndexChanged`, `Form1.cs:329`) does not. **This is worth
-cherry-picking back.**
+(`cboPrecision_SelectedIndexChanged`, `Form1.cs:329`) did not. It now does on
+`Development`.
 
 Note the handler was also renamed (`cbPrecision` to `cboPrecision`). Both copies are
 internally consistent — each designer wires up its own spelling — so this is cosmetic.
@@ -196,8 +203,8 @@ If the two copies are to be reconciled, the work splits cleanly:
 
 **Bring upstream into here**
 
-1. `clsTools.cs` dead-code removal (low risk, large cleanup)
-2. Textbox clearing in the precision handler (small behaviour fix)
+1. ~~`clsTools.cs` dead-code removal~~ — done on `Development` (`VersionDate` kept)
+2. ~~Textbox clearing in the precision handler~~ — done on `Development`
 3. SDK-style csproj — but note this repo builds standalone to `..\GPS_OutApp\`, so
    `PublishDir` would need adjusting rather than copying
 4. UI/DPI layout pass — review before taking; it conflicts with local layout edits
@@ -212,7 +219,9 @@ If the two copies are to be reconciled, the work splits cleanly:
 6. Duplicate `lbAge` assignment removal
 7. Simplified lat/lon display guard
 8. NMEA mode indicator in RMC/VTG and RMC status `V` on no fix (fixes #1249)
-9. Version bump to 1.2.5
+9. Removal of the per-file properties (`LoadProperty`, `HTfiles`, the `.rcs` file) and
+   `UDPcomm`'s dead `EndPoint_` lookup. Upstream still carries both.
+10. Version bump to 1.2.5
 
 `Form1.Designer.cs`, `Form1.resx`, and `Resources.resx` are the genuine conflict points —
 both sides edited the layout, and these files do not merge cleanly.
