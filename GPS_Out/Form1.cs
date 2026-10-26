@@ -191,6 +191,12 @@ namespace GPS_Out
             return Result;
         }
 
+        public bool UseAOGposition()
+        {
+            // AOG position when Roll Corrected is on, or when AgIO has no position to give
+            return AOGdata.Connected() && (Properties.Settings.Default.UseRollCorrected || !AGIOdata.Connected());
+        }
+
         public double Heading()
         {
             double Result = 0;
@@ -651,7 +657,7 @@ namespace GPS_Out
         {
             if (this.WindowState != FormWindowState.Minimized)
             {
-                if (AOGdata.Connected())
+                if (UseAOGposition())
                 {
                     lbLon.Text = AOGdata.Longitude.ToString(Properties.Settings.Default.DisplayPrecisionFormat);
                     lbLat.Text = AOGdata.Latitude.ToString(Properties.Settings.Default.DisplayPrecisionFormat);
