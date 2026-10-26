@@ -94,8 +94,9 @@ Supporting changes, all local-only:
   effect at runtime, because the load handler sets `cboPrecision.SelectedIndex` and its
   change handler rewrites both formats to 8 decimals, but the defaults disagree with
   index 4.
-- **`Classes/UDPcomm.cs:58`** — new `SendUDPMessage(byte[])` for outbound byte arrays.
-  Absent upstream.
+- **`Classes/UDPcomm.cs:58`** — `SendUDPMessage(byte[])`. Not a local addition: it has been
+  here since the initial commit (`4f12a16`), and upstream removed it as dead code because
+  nothing calls it. `Development` has since removed it here too.
 - **`PGNs/PGN54908.cs:314`** — `Connected()` timeout widened from 4 s to **10 s**.
 - **`PGNs/PGN54908.cs:247`** — new `RollSource1` property.
 - **`PGNs/PGN_GSA.cs:43`** — new `Sentence` property. Upstream builds the GSA sentence but
@@ -215,7 +216,7 @@ If the two copies are to be reconciled, the work splits cleanly:
 2. 8-decimal precision (combo item + default index)
 3. `PGN54908` 10-second timeout and `RollSource1`
 4. `PGN_GSA.Sentence`
-5. `UDPcomm.SendUDPMessage(byte[])`
+5. ~~`UDPcomm.SendUDPMessage(byte[])`~~ — dropped: unused, and upstream had already removed it
 6. Duplicate `lbAge` assignment removal
 7. Simplified lat/lon display guard
 8. NMEA mode indicator in RMC/VTG and RMC status `V` on no fix (fixes #1249)

@@ -61,16 +61,6 @@ namespace GPS_Out.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized resource of type System.Byte[].
-        /// </summary>
-        internal static byte[] Example {
-            get {
-                object obj = ResourceManager.GetObject("Example", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
         internal static System.Drawing.Bitmap Off {
@@ -87,16 +77,6 @@ namespace GPS_Out.Properties {
             get {
                 object obj = ResourceManager.GetObject("On", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized resource of type System.Drawing.Icon similar to (Icon).
-        /// </summary>
-        internal static System.Drawing.Icon satellite {
-            get {
-                object obj = ResourceManager.GetObject("satellite", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
             }
         }
         

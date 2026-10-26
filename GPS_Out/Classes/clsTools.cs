@@ -18,7 +18,6 @@ namespace GPS_Out
         private string cSettingsDir;
         private string cVersionDate = "25-Oct-2026";
         private frmStart mf;
-        private int SentenceCount = 0;
 
         public clsTools(frmStart CallingForm)
         {
@@ -41,27 +40,6 @@ namespace GPS_Out
                 for (int i = Start; i < Length; i++)
                 {
                     CK += Data[i];
-                }
-                Result = (byte)CK;
-            }
-            return Result;
-        }
-
-        public byte CRC(string[] Data, int Length, byte Start = 0)
-        {
-            byte Result = 0;
-            if (Length <= Data.Length)
-            {
-                byte tmp;
-                byte[] BD = new byte[Length];
-                for (int i = 0; i < Length; i++)
-                {
-                    if (byte.TryParse(Data[i], out tmp)) BD[i] = tmp;
-                }
-                int CK = 0;
-                for (int i = Start; i < Length; i++)
-                {
-                    CK += BD[i];
                 }
                 Result = (byte)CK;
             }
@@ -115,21 +93,6 @@ namespace GPS_Out
             int Length = Data.Length;
             byte cr = CRC(Data, Length - 1, Start);
             Result = cr == Data[Length - 1];
-            return Result;
-        }
-
-        public bool GoodCRC(string[] Data, byte Start = 0)
-        {
-            bool Result = false;
-            byte tmp;
-            int Length = Data.Length;
-            byte[] BD = new byte[Length];
-            for (int i = 0; i < Length; i++)
-            {
-                if (byte.TryParse(Data[i], out tmp)) BD[i] = tmp;
-            }
-            byte cr = CRC(BD, Length - 1, Start);   // exclude existing crc
-            Result = cr == BD[Length - 1];
             return Result;
         }
 
@@ -242,19 +205,6 @@ namespace GPS_Out
             return cVersionDate;
         }
 
-        public void WriteByteFile(byte[] Data, string DataName)
-        {
-            string FileName = cSettingsDir + "\\" + DataName;
-            if (SentenceCount < 20)
-            {
-                SentenceCount++;
-                using (var stream = new FileStream(FileName, FileMode.Append))
-                {
-                    stream.Write(Data, 0, Data.Length);
-                }
-            }
-        }
-
         public void WriteErrorLog(string strErrorText)
         {
             try
@@ -276,7 +226,6 @@ namespace GPS_Out
                 cSettingsDir = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "\\" + cAppName;
 
                 if (!Directory.Exists(cSettingsDir)) Directory.CreateDirectory(cSettingsDir);
-                //if (!File.Exists(cSettingsDir + "\\Example.rcs")) File.WriteAllBytes(cSettingsDir + "\\Example.rcs", Properties.Resources.Example);
 
                 string FilesDir = Properties.Settings.Default.FilesDir;
                 if (!Directory.Exists(FilesDir)) Properties.Settings.Default.FilesDir = cSettingsDir;

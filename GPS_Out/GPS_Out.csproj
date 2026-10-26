@@ -33,7 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Resources\satellite.ico</ApplicationIcon>
+    <ApplicationIcon>satellite.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
@@ -100,8 +100,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <None Include="Resources\Example.rcs" />
-    <None Include="Resources\Example1.rcs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
@@ -116,8 +114,6 @@
     <None Include="Resources\ConS_SourcesRoll.png" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\satellite.ico" />
-    <None Include="Resources\satelliteSim.ico" />
     <Content Include="satellite.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
